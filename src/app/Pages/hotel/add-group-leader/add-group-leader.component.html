@@ -1,0 +1,178 @@
+<div class="content-div">
+  <mat-card>
+   
+    <mat-card-title>
+      <!-- <strong> <mat-icon>person</mat-icon> Add Group Leader </strong> -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+          <li class="breadcrumb-item " aria-current="page">Platform Setup</li>
+          <li class="breadcrumb-item active" aria-current="page">Add/Manage Group/Group Leader</li>
+        </ol>
+      </nav>
+    </mat-card-title>
+    <hr> <br>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-7" style="border-right:0.5px solid rgb(174, 172, 172)">
+          <h4>
+            <strong>
+              Add a group leader here.
+            </strong>
+          </h4>
+          <form [formGroup]="mngForm">
+            <div class="row mt-3">
+              <div class="col-12">
+                <label for="">Group Name</label>
+                <input type="text" class="form-control" formControlName="group_name" name="group_name">
+               
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12">
+                <div class="col-12">
+                  <label for="">Group Leader Name</label>
+                  <input type="text" class="form-control" formControlName="group_leader_name" name="group_leader_name">
+                 
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-6">
+                <label for="">Phone</label>
+                <input type="text" class="form-control" formControlName="phone" name="phone">
+              </div>
+              <div class="col-6">
+                <label for="">Email</label>
+                <input type="text" formControlName="g_email" name="g_email" class="form-control">
+              </div>
+              
+            </div>
+            <div class="row mt-3">
+              <div class="col-4">
+                <label for="">No. of members</label>
+              
+                <input type="number" class="form-control" formControlName="no_of_members" name="no_of_members">
+
+                 
+              </div>
+              <div class="col-4">
+                <label for="">Check In</label>
+                <input type="date" class="form-control" formControlName="check_in" name="check_in">
+              </div>
+              <div class="col-4">
+                <label for="">Check Out</label>
+              
+                <input type="date" class="form-control" formControlName="check_out" name="check_out">
+
+                 
+              </div>
+            </div>
+           <div class="row mt-3">
+            <div class="col-12 mt-3">
+              <label for="">Select language</label>
+              <select name="language" formControlName="language" class="form-control" id="">
+                <option value="">Select One</option>
+                <option value="E">English</option>
+              </select>
+            </div>
+           </div>
+          </form>
+          <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2 mt-3">
+              <button mat-raised-button class="btn btn-success" [disabled]="disableSave" (click)="add_leader()">Save</button>
+            </div>
+          </div>
+          </div>
+          <div class="col-5">
+            <h4>
+              <strong>
+                Send welcome email.
+              </strong>
+            </h4>
+            <form [formGroup]="letterForm">
+              <div class="row">
+                <div class="col-12">
+                  <label for="">Subject line</label>
+                  <input readonly type="text" [(ngModel)]="subjectLine" class="form-control" name="subject" formControlName="subject">
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <label for="">Email</label>
+  
+                  <textarea readonly name="email-text" id="" formControlName="email_text" [(ngModel)]="email_body"
+                    (input)="change()" class="form-control" cols="45" rows="10"></textarea>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div hidden class="col-12">
+                  <label for="">Preview</label>
+                  <textarea readonly name="preview" formControlName="preview" id="" cols="30" rows="10"
+                    class="form-control">
+            </textarea>
+                </div>
+              </div>
+            </form>
+            <div class="row mt-4">
+              <div class="col-12">
+                <button class="btn btn-danger col-12" [disabled]="disabledEmail" mat-raised-button (click)="gen_body()"> Generate Email</button>
+              </div>
+            </div>
+          
+            <div class="row mt-4">
+              <div class="col-6"></div>
+              <div class="col-1"></div>
+              <div class="col-4 float-end">
+                <!-- <button class="btn btn-danger col-12" mat-raised-button (click)="sendEmail()" >
+                  Send Email
+                </button> -->
+              </div>
+            </div>
+          </div>
+          </div>
+         
+            <div class="row mt-4">
+              <div class="col-12">
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource">
+                
+                    <!-- Position Column -->
+                   
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="group_name">
+                      <th mat-header-cell *matHeaderCellDef> Group </th>
+                      <td mat-cell *matCellDef="let element"> {{element.group_name}} </td>
+                    </ng-container>
+                
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="leader_name">
+                      <th mat-header-cell *matHeaderCellDef> Leader </th>
+                      <td mat-cell *matCellDef="let element"> {{element.leader_name}} </td>
+                    </ng-container>
+                
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="no_of_people">
+                      <th mat-header-cell *matHeaderCellDef> No. of members </th>
+                      <td mat-cell *matCellDef="let element"> {{element.no_of_people}} </td>
+                    </ng-container>
+                
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row;  columns: displayedColumns;" style="cursor:pointer" (click)="showLeader(row)"></tr>
+                  </table>
+                
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                </div>
+              </div>
+            </div>
+            
+      
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <div class="fab-main">
+  <button matTooltip="Back" mat-mini-fab (click)="go_prev_page()"> <mat-icon>arrow_back</mat-icon> </button>
+
+    </div> -->

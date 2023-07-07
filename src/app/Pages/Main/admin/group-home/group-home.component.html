@@ -1,0 +1,46 @@
+
+ <!-- <div class="float-end " style="padding-right:3%">
+  <mat-icon>exit_to_app</mat-icon>
+</div> -->
+<mat-toolbar style="color:#3f51b5"> Hello, {{dep_name}}
+  <span class="example-spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>settings</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="profile()"> <mat-icon>person</mat-icon> Profile</button>
+  <button mat-menu-item (click)="signout()"> <mat-icon>exit_to_app</mat-icon> Sign out</button>
+</mat-menu>
+</mat-toolbar>
+<div class="p-4">
+  <mat-card class="mt-4" style="background-color:#c03846; color:white" [hidden]="activity!='N'">
+    Your name is not in roster at the moment!
+  </mat-card>
+</div>
+
+<div class="content-div">
+  <mat-tab-group mat-stretch-tabs backgroundColor="primary" >
+    <mat-tab label="Add Member"> 
+      
+      <ng-template mat-tab-label>
+        <mat-icon> person_add</mat-icon> &nbsp;
+        Add member
+      </ng-template>
+    <mat-card>
+      <app-add-group-member></app-add-group-member>
+    </mat-card>
+    </mat-tab>
+    
+    <mat-tab label="Create Message">
+      <ng-template mat-tab-label>
+        <mat-icon> list</mat-icon> &nbsp;
+        Create Message
+      </ng-template>
+     <app-group-communications></app-group-communications>
+    
+    </mat-tab>
+    
+      
+   
+   
+  </mat-tab-group>
+
+</div>

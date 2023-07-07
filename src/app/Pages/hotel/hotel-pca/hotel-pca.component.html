@@ -1,0 +1,26 @@
+<div class="content-div">
+  <mat-card>
+    
+  <mat-card-title>
+    <div class="row">
+      <div class="col-11">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+            <li class="breadcrumb-item " aria-current="page">Platform Setup</li>
+            <li class="breadcrumb-item " aria-current="page">Personal Concierge</li>
+            <li class="breadcrumb-item active" aria-current="page">Avatar</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="col-1">
+        <mat-icon style="cursor:pointer;color:gray" (click)="viewInfo()"  matTooltip="Info.">info</mat-icon>
+      </div>
+    </div>
+      
+    <!-- <strong> <mat-icon style="vertical-align:-5px">face</mat-icon> Avatar</strong> -->
+  </mat-card-title> <hr>
+    <app-pca></app-pca>
+
+  </mat-card>
+</div>

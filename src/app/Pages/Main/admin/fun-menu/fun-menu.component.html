@@ -1,0 +1,296 @@
+<div class="content-div">
+  <mat-card>
+    <div class="d-flex flex-row justify-content-between align-items-center">
+      <h2>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a style="cursor: pointer; color: #3f51b5" (click)="go_to_home()">Home</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Fun Directory
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Menu Setup</li>
+        </ol>
+      </h2>
+
+      <button mat-mini-fab matTooltip="Preview" (click)="preview()">
+        <mat-icon> visibility </mat-icon>
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <label for="">Select Menu</label>
+        <select (change)="getFunDirectory()" [(ngModel)]="menuID" class="form-control">
+          <option value="">Select one</option>
+          <option *ngFor="let m of getMenus?.msg" value="{{ m.id }}" [hidden]="
+              m.id == 1 || m.id == 2 || m.id == 3 || m.active_flag == 'N'
+            ">
+            {{ m.menu_name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-7">
+        <label for="">Select Section</label>
+        <select (change)="getFunSecMenu()" [(ngModel)]="sectionID" class="form-control">
+          <option value="">Select one</option>
+          <option *ngFor="let f of getFun?.msg" value="{{ f.id }}">
+            {{ f.sec_name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <label for="">Select Restaurant</label>
+    <select (change)="getMenuData(); getMenuById()" [(ngModel)]="restID" class="form-control">
+      <option value="">Select one</option>
+      <option *ngFor="let f of getFunSec?.msg" value="{{ f.id }}">
+        {{ f.title }}
+      </option>
+    </select>
+  </mat-card>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Add Menus">
+      <mat-card>
+        <div class="row mt-2">
+          <div class="col-7">
+            <div class="row mt-5">
+              <div class="col-12">
+                <form [formGroup]="menuForm">
+                  <label for="">Menu name</label>
+                  <input type="text" class="form-control" formControlName="menuName" />
+                </form>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12 text-center">
+                <button (click)="refreshMenu()" mat-mini-fab color="warn">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+                &nbsp;
+                <button (click)="addMenu()" [disabled]="menuForm.invalid || menuForm.disabled" mat-mini-fab>
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <mat-form-field>
+              <mat-label appearance="outline">Search Menu...</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Home" #input />
+            </mat-form-field>
+
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef>#</th>
+                  <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Name</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.catg_name }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr (click)="edit(row)" style="cursor: pointer" mat-row *matRowDef="let row; columns: displayedColumns">
+                </tr>
+              </table>
+
+              <mat-paginator [pageSizeOptions]="[4, 8, 20, getMenus?.length]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Add Sections">
+      <mat-card>
+        <div class="row mt-2">
+          <div class="col-7">
+            <form [formGroup]="secForm">
+              <div class="row mt-5">
+                <div class="col-12">
+                  <label for="">Menu name</label>
+                  <select name="menuName" (change)="getSectionForItem1()" formControlName="menuName" id=""
+                    class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let m of getMenusById?.msg" value="{{ m.id }}">
+                      {{ m.catg_name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <label for="">Section name</label>
+                  <input type="text" class="form-control" formControlName="secName" />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <label for="">Add Image</label>
+                  <input type="file" (change)="getImg($event)" name="secImg" formControlName="secImg"
+                    class="form-control" id="" />
+                </div>
+              </div>
+              <div class="row mt-4" *ngIf="imgName">
+                <div class="col-12 text-center">
+                  <img [src]="url" height="200" width="200" alt="" />
+                </div>
+              </div>
+            </form>
+
+            <div class="row mt-3">
+              <div class="col-12 text-center">
+                <button (click)="refreshSec()" mat-mini-fab color="warn">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+                &nbsp;
+                <button (click)="addSection()" [disabled]="secForm.invalid || secForm.disabled" mat-mini-fab>
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <mat-form-field>
+              <mat-label appearance="outline">Search Menu...</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Home" #input />
+            </mat-form-field>
+
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource1">
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef>#</th>
+                  <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Name</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.sec_name }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                <tr (click)="section(row)" style="cursor: pointer" mat-row
+                  *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+
+              <mat-paginator [pageSizeOptions]="[4, 8, 20, getMenus?.length]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Add Items & Description">
+      <mat-card>
+        <div class="row mt-2">
+          <div class="col-12">
+            <form [formGroup]="itemForm">
+              <div class="row mt-5">
+                <div class="col-12">
+                  <label for="">Menu</label>
+                  <select name="menuName" (change)="getSectionForItem()" formControlName="menuName" id=""
+                    class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let m of getMenusItemById?.msg" value="{{ m.id }}">
+                      {{ m.catg_name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <label for="">Section</label>
+                  <select name="secName" formControlName="secName" id="" class="form-control" (change)="get_res_sec_item()">
+                    <option value=""></option>
+                    <option *ngFor="let i of getSectionItem?.msg" value="{{ i.id }}">
+                      {{ i.sec_name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <label for="">Item name</label>
+                  <input type="text" name="itemName" formControlName="itemName" class="form-control" id="" />
+                </div>
+                <div class="col-6">
+                  <label for="">Item price</label>
+                  <input type="text" name="itemPrice" formControlName="itemPrice" class="form-control" id="" />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <label for="">Description</label>
+                  <textarea class="form-control" name="itemDesc" formControlName="itemDesc" id="" cols="30"
+                    rows="10"></textarea>
+                </div>
+              </div>
+            </form>
+
+            <div class="row mt-3">
+              <div class="col-12 text-center">
+                <button (click)="refreshItem()" mat-mini-fab color="warn">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+                &nbsp;
+                <button (click)="postItem()" [disabled]="itemForm.invalid || itemForm.disabled" mat-mini-fab>
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="mt-3">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Home" #input />
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">#</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.id }}</td>
+          </ng-container>
+
+          <!-- Item Column -->
+          <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Item</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.item_name }}</td>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Price</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.item_price }}</td>
+          </ng-container>
+
+          <!--Description column-->
+          <ng-container matColumnDef="description">
+             <th mat-header-cell *matHeaderCellDef  style="text-align: center;">Description</th>
+             <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.item_desc }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr (click)="description(row)" style="cursor: pointer" mat-row
+            *matRowDef="let row; columns: displayedColumns2"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[4, 8, 20, getMenus?.length]" showFirstLastButtons
+          aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+</div>

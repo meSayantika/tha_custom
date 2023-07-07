@@ -1,0 +1,46 @@
+
+<mat-progress-bar *ngIf="loading"  mode="indeterminate" color="accent"></mat-progress-bar>
+
+<div class="mainContainer">
+<div class="container">
+
+  <div class="tile job" (click)="move(1)" >
+    <div class="header">
+      <div class="count">
+      </div>
+      <div class="title"> <mat-icon>admin_panel_settings</mat-icon>
+      </div>
+    </div>
+    <div class="body">
+      <div class="title">Admin</div>
+    </div>
+  </div>
+  <div class="tile job" (click)="move(2)">
+    <div class="header">
+      <!-- <div class="count">1</div> -->
+      <div class="title"> <mat-icon>room_service</mat-icon></div>
+    </div>
+    <div class="body">
+      <div class="title">Hotel Admin</div>
+    </div>
+  </div>
+  <div class="tile job" (click)="move(3)">
+    <div class="header">
+      <!-- <div class="count">1</div> -->
+      <div class="title"><mat-icon>real_estate_agent</mat-icon></div>
+    </div>
+    <div class="body">
+      <div class="title">Sales Agent</div>
+    </div>
+  </div>
+  <div class="tile job" (click)="move(4)">
+    <div class="header">
+      <!-- <div class="count">1</div> -->
+      <div class="title"><mat-icon>manage_accounts</mat-icon></div>
+    </div>
+    <div class="body">
+      <div class="title">Department Manager</div>
+    </div>
+  </div>
+</div>
+</div>

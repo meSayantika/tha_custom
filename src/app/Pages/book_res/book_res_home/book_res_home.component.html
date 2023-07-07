@@ -1,0 +1,261 @@
+<div class="mainContainer">
+  <div class="container">
+    <mat-card class="example-card card" *ngIf="showHome==0">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+          <!-- <mat-icon style="color:#f54335">local_activity</mat-icon> -->
+          <img style="border-radius: 8px;cursor: pointer;" src="./assets/images/favicon.png" alt="" height="30" width="30" routerLink="/directory/directory_home">
+        </div>
+        <span class="mt-2" style="text-align: center;"></span>
+        <mat-card-title color="warn">{{ resName}}</mat-card-title>
+        <mat-card-subtitle>Enter details here</mat-card-subtitle>
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content>
+          <!-- <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field appearance="fill" color="warn">
+              <mat-label> <mat-icon>category</mat-icon>Category</mat-label>
+              <mat-select  #catg class="categ" (selectionChange)="get_head_category(catg.value)">
+                <mat-option *ngFor="let s of getReserve" value="{{s.id}}" >{{s.catg_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div> -->
+        <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field appearance="fill" color="warn">
+              <mat-label> <mat-icon>person</mat-icon> No. of people</mat-label>
+              <mat-select #select_people>
+                <mat-option *ngFor="let dt of allHeads" [value]="dt.id">{{dt.value}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field appearance="fill" color="warn">
+              <mat-label> <mat-icon>calendar_month</mat-icon> Enter date</mat-label>
+              <input type="date" #select_date min="{{currDate | date: 'yyyy-MM-dd'}}" max="{{schedule_date | date: 'yyyy-MM-dd'}}"
+                [value]="currDate | date: 'yyyy-MM-dd'" matInput>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <!-- <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field appearance="fill" color="warn">
+              <mat-label> <mat-icon>schedule</mat-icon> Time slab</mat-label>
+              <mat-select >
+                <mat-option value="option1">10:00 - 11:00</mat-option>
+                <mat-option value="option2" >11:00 - 12:00</mat-option>
+                <mat-option value="option3">12:00 - 13:00</mat-option>
+                <mat-option value="option3">13:00 - 14:00</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+         </div> -->
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="showTimeSlots()">Surrounding time</button>
+        <!-- <button mat-button>SHARE</button> -->
+      </mat-card-actions>
+      <mat-card-actions *ngIf="submitted">
+        <mat-chip-list id="timeSlots" aria-label="Fish selection" >
+          <mat-chip color="warn"  (click)="openBottomSheet(t.start, t.end, select_date.value,select_people.value)" *ngFor="let t of allTimes"
+            selected>{{t.start}}:00 - {{t.end}}:00</mat-chip>
+          <!-- <mat-chip color="warn" (click)="openBottomSheet('null')" selected>12:00</mat-chip>
+          <mat-chip color="warn" (click)="openBottomSheet('null')" selected>12:15</mat-chip>
+          <mat-chip color="warn" (click)="openBottomSheet('null')" selected>12:30</mat-chip> -->
+
+        </mat-chip-list>
+      </mat-card-actions>
+      <mat-card-actions>
+        <mat-card class="notAvailabletxt" hidden>
+          <mat-icon style="vertical-align: -8px;">error</mat-icon> Unfortunately, we don't have enough time
+          slots</mat-card>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="example-card card" *ngIf="showHome==1">
+      <mat-card-header class="matHead">
+        <div mat-card-avatar class="example-header-image">
+          <!-- <mat-icon style="color:#f54335">verified</mat-icon> -->
+        </div>
+        <mat-card-title color="warn">{{ resName}}</mat-card-title>
+        <mat-card-subtitle color="warn" style="font-size:12px">
+          <!-- <b> 15th May '23, 11:45, 15 Persons</b>  -->
+          <!-- <b>{{currDate | date: 'MMMM d, y'}}</b>&nbsp; -->
+          <b>{{select_date | date: 'MMMM d, y'}}</b>&nbsp;
+          <b>{{selected_st_time}}:00 - {{selected_end_time}}:00</b>
+
+
+
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          Your reservation is locked for <b>{{timeLeft}} </b> seconds
+          please answer the following questions
+
+
+        </mat-card-subtitle>
+
+
+
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field class="example-full-width" appearance="fill" color="warn">
+              <mat-label>Name</mat-label>
+              <input matInput readonly placeholder="Ex. Pizza" value="Steven Smith">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field class="example-full-width" appearance="fill" color="warn">
+              <mat-label>Email</mat-label>
+              <input matInput readonly placeholder="Ex. Pizza" value="smithsteven96@gmail.com">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field class="example-full-width" appearance="fill" color="warn">
+              <mat-label>Phone</mat-label>
+              <span matPrefix>+1 &nbsp;</span>
+              <input type="tel" matInput readonly placeholder="8583949565" value="555-555-1234">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field appearance="fill" color="warn">
+              <mat-label> Occasion</mat-label>
+              <mat-select #occasion>
+                <mat-option value="Birthday">Birthday</mat-option>
+                <mat-option value="Anniversary">Anniversary</mat-option>
+                <mat-option value="Business Meal">Business Meal</mat-option>
+                <mat-option value="Date">Date</mat-option>
+                <!-- <mat-option value="option3">6</mat-option>
+                <mat-option value="option3">7</mat-option>
+                <mat-option value="option3">8</mat-option>
+                <mat-option value="option3">9</mat-option>
+                <mat-option value="option3">10</mat-option> -->
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <mat-form-field appearance="fill" color="warn">
+              <mat-label>Special requests</mat-label>
+              <textarea matInput #sp_req></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- <div class="row mt-5">
+          <div class="col-12">
+            <mat-checkbox color="warn" class="example-margin"  style="color:#f54335">
+              Email confirmation</mat-checkbox>
+          </div>
+         </div>
+         <div class="row mt-2">
+          <div class="col-12">
+            <mat-checkbox color="warn" class="example-margin" style="color:#f54335">Push notification</mat-checkbox>
+          </div>
+         </div> -->
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="openBottomConfirm(occasion.value,sp_req.value)">Confirm Reservation</button>
+        <!-- <button mat-button>SHARE</button> -->
+      </mat-card-actions>
+
+      <mat-card-actions>
+        <mat-card class="notAvailabletxt" hidden>
+          <mat-icon style="vertical-align: -8px;">error</mat-icon> Unfortunately, we don't have enough time
+          slots</mat-card>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card class="example-card card" *ngIf="showHome==2">
+      <mat-card-header class="matHead">
+        <div mat-card-avatar class="example-header-image">
+        </div>
+        <div mat-card-avatar class="example-header-image">
+          <!-- <mat-icon style="color:#f54335">local_activity</mat-icon> -->
+          <img style="border-radius: 8px;cursor: pointer;" src="./assets/images/favicon.png" alt=""  routerLink="/directory/directory_home">
+        </div>
+        <mat-card-title color="warn" style="font-size: 14px; ">Hi, Steven Smith!!</mat-card-title><br>
+        <mat-card-title color="warn" style="font-size: 14px; margin-left: 15px;">Welcome to {{resName}}</mat-card-title><br>
+
+
+        <mat-card-subtitle>
+          <b>You have booked {{select_people}} seats at <br>
+            {{selected_st_time}}:00 - {{selected_end_time}}:00</b>
+        </mat-card-subtitle>
+
+        
+
+        <mat-card-actions style="display:flex">
+          <button mat-button color="warn" style="font-size:12px"> <mat-icon style="vertical-align:-8px">close</mat-icon>
+            Cancel Booking</button>
+          <button mat-button color="warn" style="font-size:12px"> <mat-icon style="vertical-align:-8px">event</mat-icon>
+            Add to calendar</button>
+        </mat-card-actions>
+
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content class="fitIcons ">
+
+        <div class="tile job pb-2" (click)="display_menu(resId)">
+          <div class="header">
+            <div class="count">
+            </div>
+            <div class="title"> <mat-icon style="font-size:100px">restaurant_menu</mat-icon>
+            </div>
+          </div>
+          <div class="body">
+            <div class="title" >Menu</div>
+          </div>
+        </div><br>
+        <div class="tile job pb-2" (click)="Calendar(flag,resId)">
+          <div class="header">
+            <div class="count">
+            </div>
+            <div class="title"> <mat-icon style="font-size:100px;align-items: center;">calendar_month</mat-icon>
+            </div>
+          </div>
+          <div class="body">
+            <div class="title">Entertainment Calendar</div>
+          </div>
+        </div>
+        <div class="tile job">
+          <div class="header">
+            <div class="count">
+            </div>
+            <div class="title"> <mat-icon style="font-size:100px">video_chat</mat-icon>
+            </div>
+          </div>
+          <div class="body">
+            <div class="title">Room</div>
+          </div>
+        </div>
+
+      </mat-card-content>
+
+
+      <mat-card-actions>
+        <mat-card class="notAvailabletxt" hidden>
+          <mat-icon style="vertical-align: -8px;">error</mat-icon> Unfortunately, we don't have enough time
+          slots</mat-card>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>

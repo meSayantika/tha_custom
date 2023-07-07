@@ -1,0 +1,58 @@
+<div class="content-div">
+  <mat-card >
+   
+ <mat-card-title> 
+  <div class="row">
+    <div class="col-11">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page">Platform Setup</li>
+          <li class="breadcrumb-item active" aria-current="page">Promotions</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-1 mt-3">
+      <mat-icon style="cursor:pointer;color:gray" (click)="viewInfo()"  matTooltip="Info.">info</mat-icon>
+  
+    </div>
+  </div>
+  
+<!-- <strong> <mat-icon style="vertical-align:-6px">local_phone</mat-icon> Communications</strong> -->
+ </mat-card-title> <hr>
+ <!-- <app-communications></app-communications> -->
+ <div class="row mt-4">
+  <div class="col-12">
+    <ul>
+      <li>
+       <label class="text-muted" for="">MARKETING: </label>  The Hotel Assistant provides you with several ways to "get the word out!" and to generate additional revenue streams. Click one of the three options/tabs below to learn more, and to SEND A GUEST NOTIFICATION.
+PROMOTIONS: Hotel promotions and upsells.
+      </li> <br>
+      <li>
+ <label class="text-muted" for=""> PHOTO OPS:</label>  Hotel experiences and photo opportunities to be shared by your guests, on their own social media.
+      </li> <br>
+      <li>
+ <label class="text-muted" for=""> YOUR VACATION FLIP BOOK:</label>  A guest's own custom designed Vacation Photo Album, to be shared by your guests, on their own social media.
+
+      </li>
+    </ul>
+    
+  </div>
+  
+ </div>
+ <div class="row mt-5 mb-4">
+  <div class="col-3"></div>
+  <div class="col-3">
+    <button mat-raised-button class="btn btn-success" (click)="go_to_pages('promo')">Promotions</button>
+  </div>
+  <div class="col-6">
+    <button mat-raised-button class="btn btn-success" (click)="go_to_pages('photo')">Photo OPS</button>
+
+  </div>
+  <!-- <div class="col-3">
+    <button mat-raised-button class="btn btn-success" (click)="go_to_pages('flip')">Flip Book</button>
+
+  </div> -->
+ </div>
+  </mat-card>
+</div>

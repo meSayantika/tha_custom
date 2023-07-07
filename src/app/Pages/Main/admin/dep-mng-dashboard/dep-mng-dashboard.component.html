@@ -1,0 +1,77 @@
+
+ <!-- <div class="float-end " style="padding-right:3%">
+  <mat-icon>exit_to_app</mat-icon>
+</div> -->
+<mat-toolbar style="color:#3f51b5"> Hello, {{dep_name}}
+  <span class="example-spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>settings</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="profile()"> <mat-icon>person</mat-icon> Profile</button>
+  <button mat-menu-item (click)="signout()"> <mat-icon>exit_to_app</mat-icon> Sign out</button>
+</mat-menu>
+</mat-toolbar>
+<div class="p-4">
+  <mat-card class="mt-4" style="background-color:#c03846; color:white" [hidden]="activity!='N'">
+    Your name is not in roster at the moment!
+  </mat-card>
+</div>
+
+<div class="content-div">
+  <mat-tab-group mat-stretch-tabs backgroundColor="primary" >
+    <mat-tab label="Add & manage employee" [disabled]="activity=='N'"> 
+      
+      <ng-template mat-tab-label>
+        <mat-icon> person_add</mat-icon> &nbsp;
+        Add & manage employee
+      </ng-template>
+    <mat-card [hidden]="activity=='N'">
+      <app-add-deptemp></app-add-deptemp>
+    </mat-card>
+    </mat-tab>
+    
+    <mat-tab label="Add & manage own schedule" [disabled]="activity=='N'">
+      <ng-template mat-tab-label>
+        <mat-icon> list</mat-icon> &nbsp;
+        Add & manage own schedule
+      </ng-template>
+      <!-- <mat-card> -->
+        <app-dept-schedule></app-dept-schedule>
+
+      <!-- </mat-card> -->
+    
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label [disabled]="activity=='N'">
+        <mat-icon> list</mat-icon> &nbsp;
+        Add & manage employee schedule
+      </ng-template>
+      <app-change-emp-sch></app-change-emp-sch>
+    </mat-tab>
+    <!-- <mat-tab label="Profile"> Content 3 </mat-tab> -->
+    
+     
+     
+      <mat-tab label="Employee Messages" [disabled]="activity=='N'" *ngIf="msg_type=='M'" (click)="setFlag('E')">
+        <ng-template mat-tab-label>
+          <mat-icon> message</mat-icon> &nbsp;
+          Employee Messages
+        </ng-template>
+        <app-mng-communications *ngIf="msg_type=='M'"></app-mng-communications>
+       <mat-card class="alert alert-danger" style="background-color: #f5c6cb; color:#c03846" *ngIf="msg_type!='M'">You are not eligible to access employee messages</mat-card>
+      </mat-tab>
+      <mat-tab label="Guest Messages" *ngIf="msg_type!='M'" (click)="setFlag('G')">
+        <ng-template mat-tab-label>
+          <mat-icon> message</mat-icon> &nbsp;
+          Guest Messages
+        </ng-template>
+       
+        <app-mng-communications *ngIf="msg_type!='M'"></app-mng-communications>
+        <mat-card class="alert alert-danger" style="background-color: #f5c6cb; color:#c03846" *ngIf="msg_type=='M'">You are not eligible to access guest messages</mat-card>
+
+      </mat-tab>
+      
+   
+   
+  </mat-tab-group>
+
+</div>

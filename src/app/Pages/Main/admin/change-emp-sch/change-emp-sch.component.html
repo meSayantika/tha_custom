@@ -1,0 +1,56 @@
+
+<div class="row mt-4">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <select #emp (change)="getSchedule(emp.value)" name="" class="form-select" id="">
+      <option value="">Select Employee</option>
+      <option *ngFor="let emp of this.getEmpData?.msg" [(ngModel)]="getEmpID"  value="{{emp.id}}">{{emp.user_name}} </option>
+    </select>
+  </div>
+  <div class="col-1"></div>
+  
+</div>
+
+<table class="mt-4 ml-5 mb-3" style="margin-left:5%">
+  <tr>
+   <th>Day</th>
+   <th>Start</th>
+   <th>End</th>
+  </tr>
+  <tr *ngFor="let dayField of dayFields; let i=index;" class="border-bottom">
+   <td > 
+     <div class="row mb-2">
+       <div class="col-1">
+         <input type="checkbox" name="" id="check_{{i}}" (click)="checkDay($event,i)" [(ngModel)]="dayField.active_flag" > 
+       </div>
+       <div class="col-6">
+         {{dayField.day}} 
+ 
+       </div>
+     </div>
+     </td>
+     <td>
+       <input type="time" [readOnly]="!dayField.active_flag" name="" [(ngModel)]="dayField.start" id="start_{{i}}"  style="width:50%" class="form-control">
+     </td>
+     <td>
+       <input type="time" name="" [readOnly]="!dayField.active_flag" [(ngModel)]="dayField.end" id="end_{{i}}"  style="width:50%" class="form-control">
+ 
+     </td>
+  </tr>
+ </table>
+ <div class="row mt-4" *ngIf="this.getEmpID">
+  <div class="col-5"></div>
+  <div class="col-4">
+    <input type="checkbox" id="permission" [(ngModel)]="isChecked" (change)="revokePerm()"> &nbsp;<label for="">Revoke/Invoke Permission</label>
+
+  </div>
+  <div class="col-4"></div>
+ </div>
+ <div class="row mt-5">
+ <div class="col-4"></div>
+ <div class="col-4 mt-5">
+  <button mat-raised-button class="btn btn-success col-12" (click)="updateSchedule()"> Update </button> 
+ </div>
+ <div class="col-4"></div>
+ </div>
+ 

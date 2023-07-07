@@ -1,0 +1,32 @@
+<div class="text-align-right mt-2">
+<mat-icon style="cursor:pointer;color:gray;float:right" (click)="viewInfo()"  matTooltip="Info.">info</mat-icon>
+</div> <br>
+  <form [formGroup]="configForm">
+
+    <div class="row mt-5">
+    <div class="col-4">
+      <label for=""> Image</label>
+      <input type="file" name="sideImg" (change)="getImg($event)" formControlName="sideImg" class="form-control" id="">
+    </div>
+    <div class="col-4">
+      <label for=""> Text Color</label>
+      <input type="color" name="sideCol" formControlName="sideCol" class="form-control" id="">
+    </div>
+    <div class="col-4">
+      <label for=""> Background Color</label>
+      <input type="color" name="sideCol" formControlName="sideBgCol" class="form-control" id="">
+    </div>
+    
+  </div>
+  <div class="row mt-5">
+    <div class="col text-center">
+      <img [src]="url" height="100" width="200" alt="">
+    </div>
+  </div>
+  <div class="row mt-3 pt-3">
+    <div class="col-12 text-center">
+      <button mat-raised-button class="btn btn-success" (click)="saveConfig()">Save</button>
+    </div>
+  </div>
+  </form>
+

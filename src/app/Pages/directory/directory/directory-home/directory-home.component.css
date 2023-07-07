@@ -1,0 +1,56 @@
+.btn-danger{
+    color:white;
+    background-color:#f44336
+}
+
+.btn-warning{
+    background-color: #ff9800
+}
+
+.mkUpper{
+    text-transform: uppercase;
+}
+
+.btn-light{
+    background-color: gray;
+    color:white
+}
+.containerBanner {
+    position: relative;
+    text-align: center;
+    color: white;
+    height:130px;
+  }
+.containerCollapse {
+    position: relative;
+    text-align: center;
+    color: white;
+    height:170px;
+    width:85%;
+    margin-left:7%!important;
+    margin-top:2%!important;
+  }
+.imgImpaired {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+  }
+  .setCol{
+    background-color:white; 
+    border:#ff9800 1px solid;
+    height:100%;
+    padding-bottom: 2%;
+
+}
+.setDim{
+    height:100%;
+    width:500px;
+    background-color: white;
+    border-color: #ff9800;
+}
+
+.dividerPad{
+    padding:10px 10px
+  }
+  ::ng-deep .mat-expansion-panel-body {
+    padding:0 !important
+  }

@@ -1,0 +1,82 @@
+<div class="content-div">
+  <mat-card>
+    
+    <mat-card-title>
+      <!-- <strong> <mat-icon>person</mat-icon> Add Group Leader </strong> -->
+      <div class="fab-main">
+        <button matTooltip="Back" mat-mini-fab (click)="go_prev_page()"  style="top:45px;"> <mat-icon>arrow_back</mat-icon> </button>
+      </div>
+      <nav aria-label="breadcrumb" style="margin-left: 31px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+          <li class="breadcrumb-item " aria-current="page">Add Ticket</li>
+
+        </ol>
+      </nav>
+    </mat-card-title>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <div class="container text-center">
+          <span style="color:#3f51b5; font-size: 23px;text-transform: uppercase; margin-right: 69px;"><b>{{hotel_name}}</b></span>
+        </div>
+        <form [formGroup]="ticketform">
+          <div class="row mt-3">
+            <div class="col-12">
+              <label for=""> Date</label>
+              <input type="text" class="form-control" name="date" readonly formControlName="date">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <label for=""> Name</label>
+              <input type="text" class="form-control" formControlName="person_name" name="person_name">
+            </div>
+            <div class="col-6">
+              <label for="">Designation</label>
+              <input type="text" class="form-control" formControlName="designation" name="designation">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <label for="">Phone no.</label>
+              <input type="text" class="form-control" formControlName="phone" name="phone">
+            </div>
+            <div class="col-6">
+              <label for="">Email</label>
+              <input type="text" class="form-control" formControlName="email" name="email">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <label>Issue</label>
+              <textarea  name="" id="" cols="6" rows="6" maxlength="1000" formControlName="issue" class="form-control"></textarea>
+            </div>
+          </div>
+        <!-- <div class="row mt-3">
+          <div class="col-12">
+            <label>Remarks </label>
+            <textarea matInput name="" id="" cols="6" rows="6" maxlength="1000" formControlName="remarks" class="form-control"></textarea>
+          </div>
+        </div> -->
+        <div class="row mt-3">
+          <div class="col-12">
+            <label>Upload &nbsp;<small class="text-muted">(File Types:JPEG/JPG/PNG. Maximum Size: 8MB)</small></label>
+            <input type="file" name="file" class="form-control" name="upload" accept="image/*" (change)="onSelectFile($event)">
+          </div>
+        </div>
+        <div class="row mt-3" *ngIf="imgPath">
+          <div class="col-md-6">
+            <img [src]="imgPath" (click)="previewImage()" height="100" width="100" alt="" style="cursor:pointer">
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <button mat-raised-button (click)="submit()" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </mat-card>
+</div>

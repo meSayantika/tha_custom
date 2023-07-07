@@ -1,0 +1,101 @@
+<div class="content-div">
+  <mat-card>
+    <div class="row">
+   
+      <div class="col-3">
+        <input type="radio" (change)="getFilterData()" [(ngModel)]="filterDat" value="C"> <label for="" class="ml-2">Currently staying</label>
+      </div>
+      <div class="col-3">
+        <input type="radio" (change)="getFilterData()" [(ngModel)]="filterDat" value="P"> <label for="" class="ml-2">Previously staying</label>
+  
+      </div>
+      <div class="col-4"></div>
+      <div class="col-2 float-left">
+          <button mat-raised-button class="btn btn-success" (click)="openSearch()">
+             Search by date
+        </button>
+      </div>
+    </div>
+    <mat-form-field appearance="outline" class="float-end mt-3">
+      <mat-label>Search by name, type, phone, email and language</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, type, phone, email and language" #input>
+    </mat-form-field>
+    <!-- datatable containting restaurant record -->
+    <!-- <div [hidden]="show_spinner" class="loader"></div> -->
+    <table id="salesTable" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  
+      <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell *matCellDef="let element">{{element.id}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="check">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="check"> <input id="checkAllDiv" type="checkbox" (change)="selectAll($event)" name="" id="">&nbsp; Select 
+         
+        </th>
+        <td mat-cell  *matCellDef="let element;let i=index">
+          <p><input type="checkbox" name="" id="check_{{i}}" (change)="checkAll($event)"></p>
+        </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="user_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="user_name"> Name </th>
+        <td mat-cell *matCellDef="let element">{{element.user_name }} </td>
+      </ng-container>
+      <ng-container matColumnDef="user_type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="user_type"> Type </th>
+        <td mat-cell *matCellDef="let element">{{element.user_type }} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="mobile_no">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="mobile_no"> Phone </th>
+        <td mat-cell *matCellDef="let element">{{element.mobile_no }} </td>
+      </ng-container>
+     
+      <ng-container matColumnDef="email_id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="email_id"> Email </th>
+        <td mat-cell *matCellDef="let element">{{element.email_id }} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="check_in">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="check_in"> Check In </th>
+        <td mat-cell *matCellDef="let element">{{element.check_in | date:'dd/MM/yyyy' }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="check_out">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="check_out"> Check Out </th>
+        <td mat-cell *matCellDef="let element">{{element.check_out | date:'dd/MM/yyyy' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="language">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="language"> Language </th>
+        <td mat-cell *matCellDef="let element">{{element.pref_lang }} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100, this.userData?.length]" showFirstLastButtons
+      aria-label="Select page of users"></mat-paginator>
+
+      <div class="row mt-2 pb-2">
+        <div class="col-8"></div>
+       <div class="col-2">
+
+       </div>
+     
+        <div class="col-2">
+          <button mat-raised-button class="btn btn-success" (click)="download_dat()">Download</button>
+        </div>
+        
+      </div>
+  </mat-card>
+ 
+</div>

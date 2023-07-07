@@ -1,0 +1,106 @@
+<div class="content-div">
+  <mat-card>
+    
+    <mat-card-title>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Proposal</li>
+        </ol>
+        </nav>
+    </mat-card-title> <hr>
+    <ng-container *ngIf="!nosale">
+    <form [formGroup]="propForm">
+      <!-- <div class="float-end">
+        <button mat-mini-fab matTooltip="Create proposal draft" class="btn btn-success" (click)="go_to_proposal('S')" [disabled]="this.proposalData?.msg[0]?.send_dt"><mat-icon>add</mat-icon></button>
+  
+      </div> <br> <br> -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <section class="example-section">
+          <mat-checkbox class="example-margin" #saleCheck formControlName="checkbox">No Sale</mat-checkbox>
+          </section><br>
+          </div>
+          </div><br>
+      <div class="row mt-4">
+       
+        <div class="col-12 ">
+          <label for="">Proposal send date</label>
+  
+          <input readonly class="form-control p-2" type="date" formControlName="send_date" name="send_date">
+        </div>
+       
+      </div> <br>
+     
+      <div class="row mt-4">
+        <div class="col-12">
+          <label for="">Proposal follow up notes/dates and hotel questions</label>
+        <textarea class="form-control" name="hotel_qsns" formControlName="hotel_qsns" id="" cols="30" rows="5"></textarea>
+        </div>
+      </div> <br>
+      <div class="row mt-4">
+        
+        <div class="col-12">
+          <label for="">Proposal edited date</label>
+  
+          <input readonly class="form-control p-2" type="date" formControlName="edited_send_date" name="edited_send_date">
+        </div>
+      </div> <br>
+      <div class="row mt-4">
+        <div class="col-6">
+          <label for="">Status</label>
+          <select name="status" class="form-control p-2" formControlName="status" id="">
+            <option value="">Select status</option>
+            <option value="D">Declined</option>
+            <option value="A">Accepted</option>
+            <option value="P">Pending</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="">Status date</label>
+  
+          <input readonly class="form-control p-2" type="date" formControlName="accepted_date" name="accepted_date">
+        </div>
+      </div> <br>
+     
+      <div class="row mt-4">
+        <div class="col-12">
+          <label for="">Admin/Sales Remarks</label>
+  
+          <textarea name="declined_comments" class="form-control" formControlName="declined_comments" id="" cols="30" rows="5"></textarea>
+        </div>
+      </div> <br>
+      <!-- <div class="row mt-4">
+        <div class="col-4 mt-4">
+          <button [disabled]="true" mat-raised-button class="btn btn-danger btn-lg col-12 p-1" (click)="send_proposal_email()">
+      Send proposal
+        </button>
+  
+        </div>
+        <div class="col-4 mt-4">
+          <button [disabled]="true" mat-raised-button class="btn btn-danger btn-lg col-12 p-1" (click)="go_to_proposal('E')">
+        View proposal
+          </button>
+        </div>
+          <div class="col-4 mt-4">
+            <button [disabled]="true" mat-raised-button class="btn btn-danger  btn-lg col-12 p-1" (click)="go_to_proposal('EE')"> 
+            View edited proposal  
+            </button>
+          </div>
+        
+        
+      </div><br> <br>  -->
+      <div class="row mt-4 text-center">
+       
+        <div class="col-12">
+          <button  mat-raised-button class="btn btn-success" [disabled]="user_type!='A' || saleCheck.checked" (click)="openDialogForStatus()">Submit</button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+  <ng-container *ngIf="nosale">
+    <h3>First fill Proposal Section</h3>
+  </ng-container>
+  </mat-card>
+  
+ </div>

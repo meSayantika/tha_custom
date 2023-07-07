@@ -1,0 +1,68 @@
+.btn-danger{
+    color:white;
+    background-color:#f44336
+}
+
+.btn-warning{
+    background-color: #ff9800
+}
+
+.mkUpper{
+    text-transform: uppercase;
+}
+#dirRow{
+    /* width:100vw; */
+    height:110%;
+    margin-right:0px !important;
+    margin-left:0px !important;
+  }
+  #perCon{
+    text-wrap: wrap;
+    line-height: normal;
+  }
+::ng-deep mat-expansion-panel{
+    box-shadow:none!important;
+  }
+  ::ng-deep .mat-expansion-panel-body {
+    padding:0 !important
+  }
+  .containerBanner {
+    position: relative;
+    text-align: center;
+    color: white;
+    height:130px;
+  }
+.containerCollapse {
+    position: relative;
+    text-align: center;
+    color: white;
+    height:170px;
+    width:85%;
+    margin-left:7%!important;
+    margin-top:2%!important;
+  }
+.setDim{
+    height:100%;
+    width:500px;
+    background-color: white;
+    /* border-color: #ff9800;  */
+} 
+.setCol{
+    background-color:white; 
+    /* border:#ff9800 1px solid; */
+    height:100%;
+    padding-bottom: 2%;
+
+}
+.setIcon{
+    cursor: pointer;
+    font-size:20px;vertical-align:-2px; 
+}
+.dividerPad{
+    padding:20px 10px
+  }
+  .toggle {
+    flex: 0 0 100%;
+    left: 84%;
+    /* max-width: 50%; */
+}

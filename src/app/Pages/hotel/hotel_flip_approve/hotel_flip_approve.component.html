@@ -1,0 +1,67 @@
+<div class="content-div">
+  <mat-card >
+   
+ <mat-card-title> 
+  <div class="row">
+    <div class="col-11">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+      <li class="breadcrumb-item" aria-current="page">Platform Setup</li>
+      <li class="breadcrumb-item " aria-current="page">Promotions</li>
+      <li class="breadcrumb-item "  aria-current="page">
+        <a style="cursor:pointer;color:#3F51B5" (click)="go_to_previous()"> Flip Book </a>
+      </li>
+    </ol>
+  </nav>
+  </div>
+  <!-- {{getFlipData?.approval_flag}} -->
+ <div class="col-1 float-end">
+  <button matTooltip="Preview flip book" (click)="preview()" mat-mini-fab *ngIf="getFlipData?.approve_flag=='A'" >
+    <mat-icon>visibility</mat-icon>
+  </button>
+ </div>
+  </div>
+<!-- <strong> <mat-icon style="vertical-align:-6px">local_phone</mat-icon> Communications</strong> -->
+ </mat-card-title> <hr>
+ <div class="row mb-4">
+  <div class="col-4"></div>
+  <div class="col-4 text-center">
+    <img [src]="url+'/'+getFlipImg[0]?.img_path" height="400" width="400" alt="">
+    <label for="">{{getFlipImg[0]?.img_title}}</label>
+  </div>
+  <div class="col-4"></div>
+ </div>
+
+ <div class="row mb-5">
+  <div class="col-3 text-center" *ngFor="let i of getFlipImg.slice(1)">
+    <ng-container >
+    <img class="mb-2" [src]="url+'/'+i.img_path" alt=""> 
+    <label for="">{{i.img_title}}</label>
+  </ng-container>
+    
+  </div>
+ </div>
+ 
+ <!-- <ul id="demo">
+	<li  *ngFor="let i of getFlipImg" >
+    
+    <img class="mb-2" [src]="url+'/'+i.img_path" alt=""> 
+	  <label for="">{{i.img_title}}</label>
+  </li>
+</ul> -->
+
+<mat-card-actions class="text-center pb-3">
+			
+  <button mat-raised-button class="btn btn-success" *ngIf="getFlipData.approve_flag=='P'" (click)="approve('A')">Create FlipBook  </button>
+  <button mat-raised-button class="btn btn-success" *ngIf="getFlipData.send_flag=='N'" (click)="send_email()"  >Send   </button>
+
+</mat-card-actions>
+   
+ 
+ </mat-card>
+
+ <div class="fab-main">
+  <button matTooltip="Back" mat-mini-fab (click)="go_to_previous()"> <mat-icon>arrow_back</mat-icon> </button>
+
+    </div>

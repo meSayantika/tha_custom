@@ -1,0 +1,54 @@
+
+<div class="content-div">
+  <mat-card>
+    <mat-card-title>
+      <strong> <mat-icon>date_range</mat-icon> Change Schedule </strong>
+    <hr> 
+
+    </mat-card-title>
+    <mat-card-content>
+      <table class="mt-4 ml-5 mb-3" style="margin-left:5%">
+        <tr>
+         <th>Day</th>
+         <th>Start</th>
+         <th>End</th>
+         <th>Status</th>
+        </tr>
+        <tr *ngFor="let dayField of dayFields; let i=index;" class="border-bottom">
+         <td > 
+           <div class="row mb-2">
+             <div class="col-1">
+               <input type="checkbox" name="" id="check_{{i}}" (click)="checkDay($event,i)" [(ngModel)]="dayField.active_flag" > 
+             </div>
+             <div class="col-6">
+               {{dayField.day}} 
+       
+             </div>
+           </div>
+           </td>
+           <td>
+             <input type="time" [readOnly]="!dayField.active_flag" name="" [(ngModel)]="dayField.start" id="start_{{i}}"  style="width:50%" class="form-control">
+           </td>
+           <td>
+             <input type="time" name="" [readOnly]="!dayField.active_flag" [(ngModel)]="dayField.end" id="end_{{i}}"  style="width:50%" class="form-control">
+       
+           </td>
+           <td>
+            <mat-slide-toggle  id="status_{{i}}" [(ngModel)]="dayField.status" (change)="changeStatus(i,$event)"></mat-slide-toggle>
+           </td>
+        </tr>
+       </table>
+       <div class="row mt-5">
+       <div class="col-4"></div>
+       <div class="col-4 mt-5">
+        <button mat-raised-button class="btn btn-success col-12" (click)="updateSchedule()"> Approve all</button> 
+       </div>
+       <div class="col-4"></div>
+       </div>
+    </mat-card-content>
+   
+  </mat-card>
+  
+</div>
+
+ 

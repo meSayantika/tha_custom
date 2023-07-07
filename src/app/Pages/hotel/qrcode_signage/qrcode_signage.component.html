@@ -1,0 +1,96 @@
+<div class="content-div" >
+  <mat-card >
+   
+ <mat-card-title> 
+  <div class="row">
+
+  <div class="col-11">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page">Platform Setup</li>
+        <li class="breadcrumb-item active" aria-current="page">QR Code-Signage-Holder </li>
+      </ol>
+    </nav>
+  </div>
+ 
+
+  <!-- <div class="col-1 mt-3">
+    <mat-icon style="cursor:pointer;color:gray" (click)="viewInfo()"  matTooltip="Info.">info</mat-icon>
+
+  </div> -->
+</div> 
+</mat-card-title> <hr>
+<div class="row">
+  <div class="col-4">
+    <label class="titleCustom">Select category </label>
+    <select (change)="getCat()" [(ngModel)]="category" class="form-select" >
+        <option value="">Select one</option>
+        <option value="R">Restaurant</option>
+        <option value="S">Service</option>
+    
+      </select>
+  </div>
+  <div class="col-8">
+    <label class="titleCustom">Select Restaurant / Service </label>
+    <select #select_venue (change)="open_venue(select_venue.value)" class="form-select" >
+        <option value="">Select one</option>
+        <option *ngFor="let x of getVenues let i=index;" value="{{x.id}}" >{{x.name}}</option>
+    
+      </select>
+  </div>
+</div> <hr>
+<div class="row">
+  <div class="col-6">
+    <label class="titleCustom">QR Code for Dynamic Menu</label><br><br>
+    <a href="{{getimageDynamic}}" target="_blank" download><img src="{{getimageDynamic}}" onerror="this.onerror=null;this.src='./assets/images/noqr.jpg';" width="60%"
+        height="auto"></a><br><br>
+    This points to the redirect URL.<br><br>
+<button mat-raised-button clas="btn btn-success"> Download</button>
+    <!-- <label>To replace the QR Code upload your image file</label> -->
+    <!-- <form action="">
+      <input type="file" id="myFile" class="form-control" name="filename" (change)="change_qr($event,0)"><br><br>
+      <button mat-raised-button class="btn btn-danger"  type="submit" (click)="upload_qr(0)">Submit </button>
+    </form><br> -->
+    <!-- <em>Click image to download for printing purposes</em><br> -->
+  </div>
+  <div class="col-6">
+
+    <label class="titleCustom">QR Code Landing Page</label><br><br>
+    <a href="{{getimageVCard}}" target="_blank" download><img src="{{getimageVCard}}" onerror="this.onerror=null;this.src='./assets/images/noqr.jpg';" width="60%"
+        height="auto"></a><br><br>
+    This points to the landing page URL.<br><br>
+    <button mat-raised-button clas="btn btn-success"> Download</button>
+
+    <!-- <label>To replace the QR Code upload your image file</label> -->
+    <!-- <form action="">
+      <input type="file" class="form-control" id="myFile" name="filename" (change)="change_qr($event,1)"><br><br>
+      <button mat-raised-button class="btn btn-danger"  type="submit" (click)="upload_qr(1)">Submit</button>
+    </form><br> -->
+    <!-- <em>Click image to download for printing purposes</em><br> -->
+   
+
+
+
+  </div>
+  <!-- <div class="col-6">
+    <label class="titleCustom"> <small> QR Code for Laguna Beach Fun Directory </small> </label><br><br>
+
+    <a href="{{getimageLagunaFun}}" target="_blank" download><img src="{{getimageLagunaFun}}" onerror="this.onerror=null;this.src='./assets/images/noqr.jpg';" width="60%"
+        height="auto"></a><br><br>
+    This points to the Laguna Fun Map URL.<br><br>
+
+    <label>To replace the QR Code upload your image file</label>
+    <form action="">
+      <input type="file" id="myFile" name="filename" class="form-control" (change)="change_qr($event,2)"><br><br>
+      <button mat-raised-button class="btn btn-danger" type="submit" (click)="upload_qr(2)">Submit</button>
+    </form><br>
+    <em>Click image to download for printing purposes</em><br>
+    
+
+
+
+  </div> -->
+</div>
+</mat-card>
+</div>

@@ -1,0 +1,74 @@
+<div class="mainContainer">
+  <div class="content-div">
+    <mat-card>
+     <mat-card-title>
+      <strong> Pre-registration form</strong>  
+     
+     </mat-card-title>
+     <hr>
+     <div class="container mt-2 text-center">
+      <span style="color:#3f51b5; font-size: 20px;text-transform: uppercase;"><b>{{hotel_name}}</b></span>
+    </div>
+     <form [formGroup]="preRegForm">
+      <div class="row">
+        <div class="col-12">
+          <label for="">Phone</label>
+          <input type="text" name="" class="form-control" formControlName="reg_phone" (change)="showTimer()" id="">
+        </div>
+      </div>
+      <ng-container *ngIf="otpShow">
+        <div class="row mt-3">
+          <div class="col-12">
+            <label for="">OTP</label>
+            <!-- <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:5}"></ng-otp-input> -->
+            <input type="text" name="otp" class="form-control" #otp id="otp">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12" style="text-align: right;"  [hidden]="!tiShow">
+          <label>{{timeLeft}}</label>
+          </div>
+          <div class="col-12 text-right" [hidden]="!reShow">
+            <label for="" (click)="resendOtp()">Resend OTP</label>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+             <button mat-raised-button class="btn btn-success" (click)="verifyOtp(otp.value)" [disabled]="otp.value == ''">Verify</button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!othField">
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="">Name</label>
+            <input type="text" name="" class="form-control" formControlName="reg_name" id="">
+          </div>
+          <div class="col-6">
+            <label for="">Email</label>
+            <input type="text" name="" class="form-control" formControlName="reg_email" id="">
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="">Check In</label>
+            <input type="datetime-local" name="" class="form-control" formControlName="reg_check_in" id="">
+          </div>
+          <div class="col-6">
+            <label for="">Check Out</label>
+            <input type="datetime-local" name="" class="form-control" formControlName="reg_check_out" id="">
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+             <button mat-raised-button class="btn btn-success" (click)="preRegSubmit()" [disabled]="preRegForm.invalid">Submit</button>
+          </div>
+        </div>
+      </ng-container>
+       </form>
+   
+    </mat-card>
+  </div>
+</div>
+
+

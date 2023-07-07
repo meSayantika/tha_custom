@@ -1,0 +1,51 @@
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  background-color: rgb(225, 225, 225,0.92);
+  overflow-x: hidden;
+  background-blend-mode:darken;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.show{
+  /* padding: 8px 8px 8px 32px; */
+  font-size: 14px;
+  
+  color: #5e5e5e;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  border-width: 20%;
+  text-decoration: underline;
+  font-size: 30px;
+  color: #3F51B5;
+  display: block;
+  transition: 0.3s;
+  opacity:1
+}
+
+.sidenav a:hover {
+  color: #3F51B5;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 56px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.example-spacer{
+  font-size: 17px;
+}

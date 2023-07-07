@@ -1,0 +1,215 @@
+<div class="content-div">
+  <mat-card> 
+  <div  class="d-flex flex-row justify-content-between align-items-center">
+    <h2>  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a style="cursor:pointer;color:#3f51b5" (click)="go_to_home()">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Fun Directory </li>
+      <li class="breadcrumb-item active" aria-current="page">Directory Setup </li>
+    </ol> </h2>  
+    
+   <button mat-mini-fab  matTooltip="Preview" (click)="preview()">
+   <mat-icon> visibility </mat-icon> 
+  </button>
+  </div>
+
+ 
+  <hr>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Add Menus"> 
+      <app-add-side-menu></app-add-side-menu>
+    </mat-tab>
+    <mat-tab label="Add Sections">
+      <app-add-side-menu-section></app-add-side-menu-section>
+    </mat-tab>
+    <mat-tab label="Configure Sidebar"> 
+      <app-configure-funmenu></app-configure-funmenu> 
+
+       </mat-tab>
+    <mat-tab label="Page Details"> 
+      <form [formGroup]="homedirectoryForm">
+  <mat-icon style="cursor:pointer;color:gray;float:right" class="mt-2" (click)="viewInfo('P')"  matTooltip="Info.">info</mat-icon>
+ <br>
+  <div class="row mt-4">
+    <div class="col-12">
+      <select name="menu_id" class="form-control" formControlName="menu_id" (change)="getData()" [(ngModel)]="menuID" id="">
+        <option value="">Select Menu</option>
+        <option *ngFor="let menu of getMenus?.msg" value="{{menu.id}}" [hidden]="menu.active_flag=='N' || menu.id==2 || menu.id==3">{{menu.menu_name}}</option>
+      </select>
+    </div>
+   
+  </div>
+    <div class="row mt-4">
+      <div class="col-6">
+        <input type="file" accept="image/*" name="" (change)="getImg($event)" [multiple]="menuID!='1'?'true':'false'" formControlName="img" id="">
+      </div>
+    </div> 
+    <div class="row mt-3" *ngIf="this.menuID=='1'">
+      <div class="col text-center">
+        
+        <img [src]="url" height="100" width="200" alt="">
+      </div>
+    </div> 
+    <div class="row mt-3" *ngIf="this.menuID!='1'">
+      
+      <div class="col-3 text-center" *ngFor="let url1 of urlList">
+        <img [src]="url1" height="100" width="200" alt="">
+      </div>
+    </div>
+  </form>
+  <div class="row mt-4">
+    <div class="col-6">
+      <label for="">Introduction</label>
+      <angular-editor [(ngModel)]="editorTextTitle" [config]="configTitle"></angular-editor>
+
+
+    </div>
+   
+      <div class="col-6">
+      <label for="">Subtitle</label>
+
+        <angular-editor [(ngModel)]="editorTextSubtitle" [config]="configSubtitle"></angular-editor>
+
+
+      </div>
+      </div>
+    <div class="row mt-4">
+      <div class="col-12">
+      <label for="">Body</label>
+
+        <angular-editor [(ngModel)]="editorTextDesc" [config]="configDesc"></angular-editor>
+
+
+      </div>
+    </div>
+   
+    <div class="row mt-4">
+      <div class="col-12 float-right">
+        <button class="btn btn-success" mat-raised-button (click)="submit()"> Save</button>
+      </div>
+    </div>
+    
+    </mat-tab>
+    <mat-tab label="Section Details"> 
+      <form [formGroup]="secDetailsForm">
+  <mat-icon style="cursor:pointer;color:gray;float:right" class="mt-2" (click)="viewInfo('D')"  matTooltip="Info.">info</mat-icon>
+ <br>
+  <div class="row mt-4">
+    <div class="col-12">
+      <select name="menu_id" class="form-control" formControlName="menu_id" (change)="getSectionData()" [(ngModel)]="selectID" id="">
+        <option value="">Select Menu</option>
+        <option *ngFor="let menu of getMenus?.msg" value="{{menu.id}}" [hidden]="menu.active_flag=='N' || menu.id==1 || menu.id==2 || menu.id==3">{{menu.menu_name}}</option>
+      </select>
+    </div>
+   
+  </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <input type="file" name="img" (change)="getSectionImg($event)" formControlName="img" id="">
+      </div>
+    </div>
+    <div class="row mt-3" >
+      <div class="col text-center">
+        <img [src]="url2" height="100" width="200" alt="">
+      </div>
+    </div> 
+    <span >
+ 
+    <div class="row mt-4">
+      <div class="col-12">
+        <label for="">Select section</label>
+        <select class="form-control"  formControlName="section_name" name="section_name" [(ngModel)]="sectionID">
+      <option value=""></option>
+      <option *ngFor="let sec of getSections?.msg" value="{{sec.id}}">{{sec.sec_name}}</option>
+        </select>
+
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-6">
+        <label for="">Title</label>
+        <input type="text" name="sec_title" class="form-control" formControlName="sec_title" id="">
+      </div>
+      <div class="col-6">
+        <label for="">Sub title</label>
+        <input type="text" name="sec_sub_title" class="form-control" formControlName="sec_sub_title" id="">
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <label for="">About</label>
+        <textarea cols="30" rows="5" class="form-control" formControlName="sec_about" id=""></textarea>
+      </div>
+   
+    </div>
+   
+    <div class="row mt-4">
+      <div class="col-12">
+        <label for="">Special Offer</label>
+        <textarea cols="30" rows="5" class="form-control" formControlName="sec_special" id=""></textarea>
+      </div>
+   
+    </div>
+  
+    <div class="row mt-4">
+      <div class="col-6">
+        <label for="">Website</label>
+        <input type="text" name="sec_website" class="form-control" formControlName="sec_website" id="">
+      </div>
+      <div class="col-6">
+        <label for="">Phone</label>
+        <input type="text" name="sec_phone" class="form-control" formControlName="sec_phone" id="">
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+       <label for="">  Map URL </label>
+       <input type="text" name="maps" formControlName="maps" class="form-control" id=""> 
+      </div>
+    </div>
+
+  </span>
+    <div class="row mt-4">
+      <div class="col-12 float-right">
+        <button class="btn btn-success" mat-raised-button (click)="submitSection()"> Save</button>
+      </div>
+    </div>
+    </form>
+    <hr>
+    <mat-form-field>
+      <mat-label appearance="outline">Search Menu...</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Home" #input>
+    </mat-form-field>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource1">
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> # </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+     
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr (click)="edit(row)" style="cursor: pointer;" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[4, 8, 20,getMenus?.length]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+    </mat-tab>
+    <mat-tab label="Entertainment/Event">
+      <app-entertainment-fun style="width:90%"></app-entertainment-fun>
+    </mat-tab>
+  </mat-tab-group>
+
+  </mat-card>
+</div>

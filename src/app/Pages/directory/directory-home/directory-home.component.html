@@ -1,0 +1,1474 @@
+
+ 
+ 
+ <!-- <a routerLink="/directory/directory_home" fragment="r_3"> R 3</a> -->
+ <div id="google_translate_element"></div>
+
+ <div class="row" id="dirRow" *ngIf="showRegular" [ngStyle]="{'background-color':bgCol,'color':txtCol,'border':'solid '+bordCol+' '+thick}">
+    <div class="col-12 setCol" [ngStyle]="{'background-color':bgCol,'color':txtCol,'border':'solid 2px '+txtCol}">
+      <div class="dividerPad">
+        <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+      </div>
+      <img [src]="cover" class="image" width="100%"
+        height="18%" />
+        <div class="row" style="cursor:pointer" (click)="getStyleData();showRegular=false">
+          <div class="col-12 mt-3 text-end px-5" [ngStyle]="{'color':txtCol}">
+            Vision Impaired
+          </div>
+        </div>
+      <div  class="row text-center mt-4">
+        <div class="col-12">
+          <span [ngStyle]="{'font-size':headerSize}">PERSONAL CONCIERGE
+          </span>
+        </div>
+        <div class="col-12 mt-2">
+          <span class="mkUpper" [ngStyle]="{'font-size':headerSize}"> {{getAvatarData?.msg[0]?.avt_name}} </span>
+        </div>
+        <div class="col-12 mt-2">
+          <span id="divCom" [ngStyle]="{'font-size':subHeaderSize}">COMMUNICATIONS & RESERVATION CENTER!</span>
+        </div> 
+      </div>
+      <div class="text-center mt-4">
+        <img src="{{spstockImg}}"  class="image1" width="150"
+          height="150" style="border-radius:50%"/>
+      </div>
+      <div class="text-center mt-3">
+        <button mat-button id="perCon" (click)="openAbout()" [ngStyle]="{'color':txtCol}">
+         <span>Find out more about your Personal Concierge</span> 
+        </button>
+      </div>
+      <div class="text-center mt-4">
+        <button mat-raised-button type="button" class="btn btn-danger btn-lg" (click)="openEmergencyMessages()">
+          EMERGENCY MESSAGES
+        </button>
+      </div>
+      <div class="text-center mt-4">
+        <button mat-button [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">REPORT AN EMERGENCY</button>
+      </div>
+      <div class="text-center mt-4">
+        <button mat-raised-button type="button" style="cursor:pointer"
+         (click)="openMessageCenter()"  [ngStyle]="{'background-color':buttonCol,'color':txtCol}">MESSAGE CENTER</button>
+      </div>
+      <div class="text-center mt-5" *ngIf="getVIPFlag=='V'">
+        <button *ngIf="count" mat-raised-button type="button" matBadge="{{count}}" matBadgeColor="warn" class="btn btn-light btn-lg" style="color:rgb(2, 119, 2)" (click)="getVIPMessages()">VIP MESSAGES</button>
+        <button *ngIf="!count" mat-raised-button type="button" class="btn btn-light btn-lg" style="color:rgb(2, 119, 2)" (click)="getVIPMessages()">VIP MESSAGES</button>
+
+      </div>
+      <div class="text-center mt-5">
+        <button *ngIf="count" mat-raised-button type="button" matBadge="{{count}}" matBadgeColor="warn" class="btn btn-light btn-lg" style="color:rgb(2, 119, 2)" (click)="getGroupMessages()">GROUP MESSAGES</button>
+
+      </div>
+      <div class="dividerPad">
+        <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+      </div>
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col-12">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle  #panelFD [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}"> 
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                    FRONT DESK
+                  </mat-panel-title>
+                  <mat-icon>{{panelFD.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description class="ml-5 float-end">
+                 
+                 
+
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}"> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="fd_img"  class="containerCollapse">
+                        <img  class="mt-2 "  [src]="fd_img"  style="width: 100%;height:100%" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <img [src]="styleData.fdCall" height="60" width="60" alt="">
+                    </div>
+                    <div class="col-6 mt-3 fw-bold text-end" [ngStyle]="{'font-size':othStyle}">CALL</div>
+                  </div>
+                
+                </div>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel hideToggle  #panelWIFI [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}"> 
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                    WIFI 
+                  </mat-panel-title>
+                  <mat-icon>{{panelWIFI.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description class="ml-5 float-end">
+                 
+                 
+
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}"> 
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-5 fw-bold text-start">
+                      <img [src]="styleData.wifiCall" height="60" width="60" alt="">
+                    </div>
+                    <div class="col-7 fw-bold ">
+                    <div class="input-group">
+                      <input  class="form-control" style="margin-left: -36%;" [type]="!showText?'password':'text'" readonly
+                        [(ngModel)]="wifi_pass" aria-label=""
+                        aria-describedby="basic-addon1">
+                      <div class="input-group-append">
+                        <span class="input-group-text" style="height:38px; margin-right: -7px;">
+                          <button [matTooltip]="showText?'hide':'show'" mat-button
+                            class="btn visible_button border-black" (click)="showWifi()">
+                            <mat-icon style="margin-bottom: 4px;" *ngIf="showText">visibility_off</mat-icon>
+                            <mat-icon style="margin-bottom: 4px;" *ngIf="!showText">visibility</mat-icon>
+                          </button>
+                        </span>
+
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                
+                </div>
+              </mat-expansion-panel>
+              
+              <mat-expansion-panel  #panelRS hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                 <span class="mkUpper">  {{guestRoomService?.name}} </span> 
+                  </mat-panel-title>
+                  <mat-icon>{{panelRS.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}"> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="rs_img"  class="containerCollapse">
+                        <img  class="mt-2 " [src]="rs_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-4">
+                    <div class="col-6 fw-bold text-start">
+                      <img [src]="styleData.rsMenu" height="50" width="50" alt="">
+                    </div>
+                    <div class="col-6  fw-bold text-end" style="cursor:pointer" (click)="open_popup_window(guestRoomService?.id)">MENU & INFO</div>
+                  </div>
+                  <div class="row pb-3 px-3">
+                    <div class="col-6 text-start">
+                      <img [src]="styleData.rsCall" height="50" width="50" alt="">
+                    </div>
+                    <div class="col-6  fw-bold text-end" [ngStyle]="{'font-size':othStyle}">CALL / CHAT</div>
+                  </div>
+                  <div class="row pb-3 px-3">
+                    <div class="col-6 text-start">
+                      <img [src]="styleData.rsOrder" height="50" width="50" alt="">
+                    </div>
+                    <div class="col-6  fw-bold text-end" [ngStyle]="{'font-size':othStyle}">ORDER</div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle #panelEnt *ngIf="ent_cal=='Y'" [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                  ENTERTAINMENT
+                  </mat-panel-title>
+                  <mat-icon>{{panelEnt.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}"> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="entertainment_img"  class="containerCollapse">
+                        <img  class="mt-2 "  [src]="entertainment_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <img [src]="styleData.entView" height="50" width="50" alt="">
+                    </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" (click)="openCalendar(null,'null')" [ngStyle]="{'font-size':othStyle}">
+                      VIEW
+                    </div>
+
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="fun_dir=='Y'" #panelFD [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                    FUN DIRECTORY
+                  </mat-panel-title>
+                  <mat-icon>{{panelFD.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-expansion-panel-content" [ngStyle]="{'background-color':expCol,'color':txtCol}"> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="fun_directory_img"  class="containerCollapse">
+                        <img  class="mt-2 " [src]="fun_directory_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <!-- <div class="col-12 mt-3">CONCIERGE FAQ's</div> -->
+                        <div class="col-12 ">
+                      <img [src]="styleData.funDirIcon" height="50" width="50" alt="">
+                          
+                        </div>
+                        <!-- <div class="col-12 mt-3">Need to ask Lucia a question?</div> -->
+                      </div>
+                    </div>
+            
+                    <!-- <div class="row"> -->
+                    <div class="col-6 fw-bold text-end">
+                      <div class="row mt-3">
+                        <!-- <div class="col-12 mt-3">VIEW INFO.</div> -->
+                        <div class="col-12 " (click)="preview_fun()" style="cursor:pointer">
+                          VIEW
+                        </div>
+                        <!-- <div class="col-12 mt-3">CHAT/CALL</div> -->
+                      </div>
+                    </div>
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="con_faq=='Y'" #panelConf [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                 CONCIERGE FAQs
+                  </mat-panel-title>
+                  <mat-icon>{{panelConf.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="con_faq_img" class="containerCollapse">
+                        <img  class="mt-2 " [src]="con_faq_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <div class="col-12 " [ngStyle]="{'font-size':othStyle}">
+                      <img [src]="styleData.conFaqIcon" height="50" width="50" alt="">
+                          
+                        </div>
+                        <!-- <div class="col-12 mt-3">FUN DIRECTORY</div> -->
+                        <!-- <div class="col-12 mt-3">Need to ask Lucia a question?</div> -->
+                      </div>
+                    </div>
+            
+                    <!-- <div class="row"> -->
+                    <div class="col-6 fw-bold text-end">
+                      <div class="row mt-3">
+                        <div class="col-12" style="cursor:pointer" (click)="getConciergeFaq()">VIEW INFO.</div>
+                        <!-- <div class="col-12 mt-3">VIEW</div> -->
+                        <!-- <div class="col-12 mt-3">CHAT/CALL</div> -->
+                      </div>
+                    </div>
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="photo_ops=='Y'" #panelPO [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                  PHOTO OPS
+                  </mat-panel-title>
+                  <mat-icon>{{panelPO.expanded ? 'north' : 'south' }}</mat-icon>
+
+
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-expansion-panel-content" [ngStyle]="{'background-color':expCol,'color':txtCol}"> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="photo_ops_img"  class="containerCollapse">
+                        <img  class="mt-2 " [src]="photo_ops_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start" [ngStyle]="{'font-size':othStyle}">
+                      <img [src]="styleData.photoOps" height="50" width="50" alt="">
+
+                  </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="openPhotoOps()" [ngStyle]="{'font-size':othStyle}">VIEW</div>
+
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              
+              
+             
+              <mat-expansion-panel hideToggle *ngIf="promo=='Y'" #panelProm [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                
+                  <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                    PROMOTIONS
+                  </mat-panel-title>
+                  <mat-icon>{{panelProm.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-expansion-panel-content" [ngStyle]="{'background-color':expCol,'color':txtCol}"> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="promotions_img"  class="containerCollapse">
+                        <img  class="mt-2 "  [src]="promotions_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <!-- <div class="col-12 mt-3">CONCIERGE FAQ's</div> -->
+                        <!-- <div class="col-12 ">FUN DIRECTORY</div> -->
+                        <div class="col-12" [ngStyle]="{'font-size':othStyle}">
+                      <img [src]="styleData.promoIcon" height="50" width="50" alt="">
+                          
+                        </div>
+                      </div>
+                    </div>
+            
+                    <!-- <div class="row"> -->
+                    <div class="col-6 fw-bold text-end mt-3">
+                      <div class="row">
+                        <!-- <div class="col-12 mt-3">VIEW INFO.</div> -->
+                        <!-- <div class="col-12 ">VIEW</div> -->
+                        <div class="col-12" style="cursor:pointer;" (click)="openPromotions()">VIEW</div>
+                      </div>
+                    </div>
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              </mat-accordion>
+              
+          </div>
+        </div>
+     
+      </div>
+      <div *ngIf="banner1_url" class="containerBanner" style="margin-top: 9px;">
+        <img  class="mt-2 "  [src]="banner1_url"  style="width: 91%;height:107%" alt="">
+      </div>
+      <div class="dividerPad" style="margin-top: 8px;">
+        <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+      </div>
+      <div class="container mt-4 text-center">
+        <div class="text-center mt-4 text-light" >
+          <span [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">RESTAURANTS</span>
+        </div>
+        <mat-accordion>
+        <div *ngFor="let r of getVenuesRest;let i=index">
+        
+            <mat-expansion-panel #restPanel hideToggle *ngIf="r.hotel_type!='S'" [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+              <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+              <span class="mkUpper">{{r.name}} </span>    
+                </mat-panel-title>
+                <mat-icon>{{restPanel.expanded ? 'north' : 'south' }}</mat-icon>
+               
+              </mat-expansion-panel-header>
+              <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+               
+                <div class="row text-center">
+                  <div class="col-12">
+                    
+                  </div>
+                </div> 
+                <div class="row pb-3 px-3" style="text-transform: uppercase">
+                 <div class="col-12">
+                      <div class="containerCollapse">
+                        <img  class="mt-2"  src="{{url+styleData['restaurant_img_'+i]}}" style="width: 100%;height:100%" alt="">
+                      </div>
+                    </div>
+                  <div class="col-12 mt-2 fw-bold">
+                    <div class="row mt-3">
+                      <div class="col-6 pb-3"><img [src]="styleData[r.name.split(' ').join('')+'_menu_icon']" height="50" width="50" alt="" class="float-left">
+                  </div>
+                      <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="open_popup_window(r.id)">MENU & INFO</div>
+                      <div class="col-6 pb-3"><img [src]="styleData[r.name.split(' ').join('')+'_reserve_icon']" height="50" width="50" alt="" class="float-left">
+                      </div>
+                      <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer"  routerLink="/book_res/home">RESERVATION</div>
+                      <div class="col-6 pb-3"><img [src]="styleData[r.name.split(' ').join('')+'_ent_icon']" height="50" width="50" alt="" class="float-left">
+                      </div>
+                      <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" (click)="openCalendar('R',r.id)">ENTERTAINMENT</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+        
+      </div>
+      <div class="dividerPad">
+        <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+      </div>
+    </mat-accordion>
+
+        <div class="text-center mt-4 text-light">
+          <span [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">SERVICES</span>
+        </div>
+        <mat-accordion>
+       
+        <div *ngFor="let s of getVenuesServe">
+          <mat-expansion-panel #servePanel hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+            <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+              <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+              <span class="mkUpper"> {{s.name}} </span>  
+              </mat-panel-title>
+              <mat-icon>{{servePanel.expanded ? 'north' : 'south' }}</mat-icon>
+             
+            </mat-expansion-panel-header>
+            <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+              <div class="row pb-3 px-3" style="text-transform: uppercase">
+                <!-- <div id="s_{{s.id}}" class="col-6 fw-bold text-start mkUpper">{{s.name}}</div> -->
+                <div class="col-12  fw-bold text-end">
+                  <!-- <div class="row">
+                    <div class="col-12 pb-3">CHAT/CALL</div>
+                    <div class="col-12 pb-3" style="cursor:pointer" routerLink="/book_res/home">{{s.name}} SERVICES</div>
+                    <div class="col-12  pb-3" (click)="openCalendar('S',s.id)">CLASSES/CALENDAR</div>
+                  </div> -->
+                  <div class="row mt-3">
+                    <div class="col-6 pb-3"><img [src]="styleData[s.name.split(' ').join('')+'_menu_icon']" height="50" width="50" alt="" class="float-left">
+                </div>
+                    <div class="col-6 fw-bold justify-content-end d-flex align-items-center" style="cursor:pointer">
+                      CHAT/CALL
+                    </div>
+                    <div class="col-6 pb-3"><img [src]="styleData[s.name.split(' ').join('')+'_services_icon']" height="50" width="50" alt="" class="float-left">
+                    </div>
+                    <div class="col-6  fw-bold justify-content-end d-flex align-items-center" style="cursor:pointer"  routerLink="/book_res/home">SERVICES</div>
+                    <div class="col-6 pb-3"><img [src]="styleData[s.name.split(' ').join('')+'_cal_icon']" height="50" width="50" alt="" class="float-left">
+                    </div>
+                    <div class="col-6  fw-bold justify-content-end d-flex align-items-center" (click)="openCalendar('S',s.id)">CLASSES/CALENDAR</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+         
+       
+      </div>
+      </mat-accordion> <br>
+      <div *ngIf="banner2_url"  class="containerBanner">
+        <img  class="mt-2 "  [src]="banner2_url"  style="width: 100%;height:100%" alt="">
+       
+      </div><br> 
+      <mat-accordion class="mt-5">
+        <mat-expansion-panel #panelSaf *ngIf="saf_faq=='Y'" hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+          <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+            <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+              SAFETY FAQ's
+            </mat-panel-title>
+            <mat-icon>{{panelSaf.expanded ? 'north' : 'south' }}</mat-icon>
+       
+          </mat-expansion-panel-header>
+          <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+            <div class="row text-center">
+              <div class="col-12">
+                <div *ngIf="safety_img"  class="containerCollapse">
+                  <img  class="mt-2 "  [src]="safety_img"  style="width: 100%;height:100%" alt="">
+                 
+                </div>
+              </div>
+            </div> 
+            <div class="row pb-3 px-3 mt-3">
+              <div class="col-6 fw-bold text-start">
+                <div class="row">
+                  <div class="col-12">
+                    <img [src]="styleData.safetyIcon" height="50" width="50" alt="">
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 fw-bold text-end mt-3">
+                <div class="row">
+                  <div class="col-12" style="cursor:pointer" (click)="getSafetyFaq()">VIEW INFO.</div>
+                 
+                </div>
+              </div>
+          </div>
+      
+      </div>
+        </mat-expansion-panel>
+       
+        </mat-accordion>
+  
+    <br> 
+    <mat-accordion>
+      <mat-expansion-panel #panelHotelF *ngIf="hot_faq=='Y'" hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+        <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+          <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+            HOTEL FAQ's
+          </mat-panel-title>
+          <mat-icon>{{panelHotelF.expanded ? 'north' : 'south' }}</mat-icon>
+
+          <!-- <mat-panel-description>
+            This is a summary of the content
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+          <div class="row text-center">
+            <div class="col-12">
+              <div *ngIf="hotelf_img"  class="containerCollapse">
+                <img  class="mt-2 "  [src]="hotelf_img"  style="width: 100%;height:100%" alt="">
+               
+              </div>
+            </div>
+          </div> 
+         <div class="row pb-3 px-3 mt-3">
+
+          <div class="col-6 fw-bold text-start">
+            <div class="row">
+              <div class="col-12" >
+                <img [src]="styleData.hotelFaqIcon" height="50" width="50" alt="">
+                
+              </div>
+              <!-- <div class="col-12">Need to ask Lucia a question?</div> -->
+            </div>
+          </div>
+          <div class="col-6 fw-bold text-end mt-3">
+            <div class="row">
+              <!-- <div class="col-6"></div> -->
+              <div class="col-12" style="cursor:pointer" (click)="getHotelFaq()">VIEW INFO.</div>
+              <!-- <div class="col-12">CHAT LUCIA</div> -->
+            </div>
+          </div>
+          </div>
+    
+    </div>
+      </mat-expansion-panel>
+     
+    </mat-accordion> <br> 
+    <div class="dividerPad">
+      <img  *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel #panelHotelLF *ngIf="lost_found=='Y'" hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+        <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+          <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+            LOST & FOUND
+          </mat-panel-title>
+          <mat-icon>{{panelHotelLF.expanded ? 'north' : 'south' }}</mat-icon>
+
+          <!-- <mat-panel-description>
+            This is a summary of the content
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+          <div class="row text-center">
+            <div class="col-12">
+              <div *ngIf="lost_found_img"  class="containerCollapse">
+                <img  class="mt-2 "  [src]="lost_found_img"  style="width: 100%;height:100%" alt="">
+               
+              </div>
+            </div>
+          </div> 
+          <div class="row pb-3 px-3 mt-3">
+            <div class="col-6 fw-bold text-start">
+              <div class="row">
+                <div class="col-6"> 
+                  <img [src]="styleData.lostFoundCall" height="50" width="50" alt="">
+
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-6">
+
+                  <img [src]="styleData.lostFoundView" height="50" width="50" alt="">
+                </div>
+
+              </div>
+              
+            </div>
+            <div class="col-6  fw-bold text-end">
+              <div class="row mt-3">
+                <div class="col-12" style="cursor:pointer" (click)="itemLost()">CHAT/CALL</div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12" style="cursor:pointer" (click)="viewLost()">VIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      </mat-accordion> <br> 
+      <mat-accordion>
+        <mat-expansion-panel hideToggle *ngIf="sug_box1=='Y'" #panelHotelSB [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+          <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+            <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+              SUGGESTION BOX
+            </mat-panel-title>
+            <mat-icon>{{panelHotelSB.expanded ? 'north' : 'south' }}</mat-icon>
+
+            <!-- <mat-panel-description>
+              This is a summary of the content
+            </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+            <div class="row text-center">
+              <div class="col-12">
+                <div *ngIf="suggestion_img"  class="containerCollapse">
+                  <img  class="mt-2 "  [src]="suggestion_img"  style="width: 100%;height:100%" alt="">
+                 
+                </div>
+              </div>
+            </div> 
+            <div class="row pb-3 px-3 mt-3">
+              <div class="col-6 fw-bold text-start">
+                <div class="row">
+                  <div class="col-6">
+
+                    <img [src]="styleData.SuggBoxIcon" height="50" width="50" alt="">
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-6  fw-bold text-end mt-3">
+                <div class="row">
+                  <div class="col-12" style="cursor:pointer" (click)="sug_box()">MESSAGE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        </mat-accordion>
+  
+    <br>
+      <mat-accordion>
+        <mat-expansion-panel #panelHotelVB *ngIf="flip_book=='Y'" hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+          <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+            <mat-panel-title [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+             FREE VACATION BOOK
+            </mat-panel-title>
+            <mat-icon>{{panelHotelVB.expanded ? 'north' : 'south' }}</mat-icon>
+           
+          </mat-expansion-panel-header>
+          <div class="mat-expansion-panel-content"  [ngStyle]="{'background-color':expCol,'color':txtCol}">
+            <div class="row text-center">
+              <div class="col-12">
+                <div *ngIf="vacation_img"  class="containerCollapse">
+                  <img  class="mt-2 "  [src]="vacation_img"  style="width: 100%;height:100%" alt="">
+                 
+                </div>
+              </div>
+            </div> 
+            <div class="row pb-3 px-3 mt-3">
+              <div class="col-6 fw-bold text-start">
+                <div class="row">
+                  <div class="col-6">
+
+                    <img [src]="styleData.VacBookIcon" height="50" width="50" alt="">
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="start_design()">START DESIGN</div>
+              <div class="col-12 mt-2">
+                Build your own Vacation Flip Book and post to your friends & family on social media.One Vacation Flip Book per stay.
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        </mat-accordion>
+        <div class="dividerPad">
+          <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+        </div>
+    </div>
+    </div>
+  </div>
+  <!-- Vision impaired -->
+
+  <div class="row" id="dirRow" *ngIf="!showRegular" [ngStyle]="{'border':'solid gray'+' '+thick}">
+    <div class="col-12 setCol" style="border:solid 2px white">
+      <div class="dividerPad">
+        <img *ngIf="imgSrc" class="imgImpaired" [src]="imgSrc" height="30" width="100%" alt="">
+
+      </div>
+      <img [src]="cover" class="image imgImpaired" width="100%"
+        height="13%" />
+        <div class="row" style="cursor:pointer" (click)="getStyleData();showRegular=true">
+          <div class="col-12 mt-3 text-muted text-end px-5">
+            Colored Vision
+
+          </div>
+        </div>
+       <div class=" row text-center mt-4">
+        <div class="col-12">
+          <span id="divAv" [ngStyle]="{'font-size':headerSize}">PERSONAL CONCIERGE </span>
+          </div>
+          <div class="col-12 mt-2">
+            <span class="mkUpper" > {{getAvatarData?.msg[0]?.avt_name}}  </span>
+        </div>
+        
+        <div class="col-12 mt-2">
+          <span id="divCom" [ngStyle]="{'font-size':subHeaderSize}">COMMUNICATIONS & RESERVATION CENTER!</span>
+        </div>
+       </div>
+
+      <div class="text-center mt-4">
+        <img src="{{spstockImg}}"  class="image1 imgImpaired" width="150"
+          height="150" style="border-radius:50%"/>
+      </div>
+      <div class="text-center mt-3">
+        <button  mat-button id="perCon" (click)="openAbout()" class="text-dark" [ngStyle]="{'color':txtCol}">
+         <span>Find out more about your Personal Concierge</span> 
+        </button>
+      </div>
+      <div class="text-center mt-4">
+        <button mat-raised-button type="button" class="btn btn-light btn-lg" (click)="openEmergencyMessages()">
+          EMERGENCY MESSAGES
+        </button>
+      </div>
+      <div class="text-center mt-4">
+        <span [ngStyle]="{'font-size':subHeaderSize}">REPORT AN EMERGENCY</span>
+      </div>
+      <div class="text-center mt-4">
+        <button mat-raised-button type="button" class="btn btn-light btn-lg text-light" (click)="openMessageCenter()" [ngStyle]="{'color':bgCol}">MESSAGE CENTER</button>
+      </div>
+      <div class="text-center mt-5" *ngIf="getVIPFlag=='V'">
+        <button *ngIf="count" mat-raised-button type="button" matBadge="{{count}}" matBadgeColor="warn" class="btn btn-light btn-lg" style="color:rgb(2, 119, 2)" (click)="getVIPMessages()">VIP MESSAGES</button>
+        <button *ngIf="!count" mat-raised-button type="button" class="btn btn-light btn-lg" style="color:rgb(2, 119, 2)" (click)="getVIPMessages()">VIP MESSAGES</button>
+
+      </div>
+      <div class="text-center mt-5">
+        <button *ngIf="count" mat-raised-button type="button" matBadge="{{count}}" matBadgeColor="warn" class="btn btn-light btn-lg" style="color:rgb(255, 255, 255)" (click)="getGroupMessages()">GROUP MESSAGES</button>
+
+      </div>
+      <div class="dividerPad">
+        <img *ngIf="imgSrc" class="imgImpaired" [src]="imgSrc" height="30" width="100%" alt="">
+
+      </div>
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col-12">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle #panelFD>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                      FRONT DESK 
+                  </mat-panel-title>
+                  <mat-icon>{{panelFD.expanded ? 'north' : 'south' }}</mat-icon>
+                  <mat-panel-description class="ml-5 float-end">
+                 
+                  <!-- <mat-icon>{{panel.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon> -->
+
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="fd_img"  class="containerCollapse">
+                        <img  class="mt-2 imgImpaired" [src]="fd_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <img [src]="styleData.fdCall" height="60" width="60" alt="">
+                    </div>
+                    <div class="col-6 mt-3 fw-bold text-end" [ngStyle]="{'font-size':othStyle}">CALL</div>
+                  </div> -->
+                  <div class="row pb-3 px-3 mt-3">
+                
+                    <div class="col-6 fw-bold text-start">
+                     
+                    <img [src]="this.styleData.fdCall" class="imgImpaired" height="60" width="60" alt="">  
+                    </div>
+                    <div class="col-6 mt-3 fw-bold text-end" [ngStyle]="{'font-size':othStyle}">CALL</div>
+                  </div>
+                
+                </div>
+              </mat-expansion-panel>
+              
+              <mat-expansion-panel hideToggle #panelWIFI>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                      WIFI
+                  </mat-panel-title>
+                  <mat-icon>{{panelWIFI.expanded ? 'north' : 'south' }}</mat-icon>
+                  <mat-panel-description class="ml-5 float-end">
+
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-expansion-panel-content"> 
+                  <div class="row pb-3 px-3 mt-3">
+                
+                    <div class="col-5 fw-bold text-start">
+                     
+                    <img [src]="this.styleData.wifiCall" class="imgImpaired" height="60" width="60" alt="">  
+                    </div>
+                    <div class="col-7 fw-bold text-start">
+                      <div class="input-group">
+                        <input  class="form-control"  style="margin-left: -36%;" [type]="!showText?'password':'text'" readonly
+                          [(ngModel)]="wifi_pass" aria-label=""
+                          aria-describedby="basic-addon1">
+                        <div class="input-group-append">
+                          <span class="input-group-text" style="height:38px;margin-right: -7px;">
+                            <button [matTooltip]="showText?'hide':'show'" mat-button
+                              class="btn visible_button border-black" (click)="showText = !showText">
+                              <mat-icon style="margin-bottom: 4px;" *ngIf="showText">visibility_off</mat-icon>
+                              <mat-icon style="margin-bottom: 4px;" *ngIf="!showText">visibility</mat-icon>
+                            </button>
+                          </span>
+  
+                        </div>
+                      </div>
+                    </div>
+                   
+                  </div>
+                
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle #panelrs>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                 <span class="mkUpper">  {{guestRoomService?.name}} </span> 
+                  </mat-panel-title>
+                  <mat-icon>{{panelrs.expanded ? 'north' : 'south' }}</mat-icon>
+                  <mat-panel-description>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="rs_img"  class="containerCollapse">
+                        <img  class="mt-2 imgImpaired"  [src]="rs_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-4">
+                    <div class="col-6 fw-bold text-start">
+                      <img [src]="styleData.rsMenu" class="imgImpaired" height="50" width="50" alt="">
+
+                    </div>
+                    <div class="col-6  fw-bold text-end" style="cursor:pointer" (click)="open_popup_window(guestRoomService?.id)">MENU & INFO</div>
+                  </div>
+                  <div class="row pb-4 px-3">
+                    <div class="col-6 text-start">
+                      <img [src]="styleData.rsCall" height="50" width="50" alt="" class="imgImpaired">
+
+                    </div>
+                    <div class="col-6  fw-bold text-end">CALL / CHAT</div>
+                  </div>
+                  <div class="row pb-4 px-3">
+                    <div class="col-6 text-start">
+                      <img [src]="styleData.rsOrder" class="imgImpaired" height="50" width="50" alt="">
+
+                    </div>
+                    <div class="col-6  fw-bold text-end">ORDER</div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="ent_cal=='Y'" #panelent>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                  ENTERTAINMENT
+                  </mat-panel-title>
+                  <mat-icon>{{panelent.expanded ? 'north' : 'south' }}</mat-icon>
+                  
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="entertainment_img"  class="containerCollapse">
+                        <img  class="mt-2 imgImpaired"  [src]="entertainment_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <img [src]="styleData.entView" class="imgImpaired" height="50" width="50" alt="">
+
+                    </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" (click)="openCalendar(null,'null')">VIEW</div>
+
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="fun_dir=='Y'" #panelfun>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                    FUN DIRECTORY
+                  </mat-panel-title>
+                  <mat-icon>{{panelfun.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="fun_directory_img"  class="containerCollapse">
+                        <img  class="mt-2 imgImpaired"  [src]="fun_directory_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <!-- <div class="col-12 mt-3">CONCIERGE FAQ's</div> -->
+                        <div class="col-12 ">
+                          
+                      <img [src]="styleData.funDirIcon" class="imgImpaired" height="50" width="50" alt="">
+
+                        </div>
+                        <!-- <div class="col-12 mt-3">Need to ask Lucia a question?</div> -->
+                      </div>
+                    </div>
+            
+                    <!-- <div class="row"> -->
+                    <div class="col-6 fw-bold text-end">
+                      <div class="row mt-3">
+                        <!-- <div class="col-12 mt-3">VIEW INFO.</div> -->
+                        <div class="col-12" (click)="preview_fun()" style="cursor:pointer">VIEW</div>
+                        <!-- <div class="col-12 mt-3">CHAT/CALL</div> -->
+                      </div>
+                    </div>
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="con_faq=='Y'" #panelconfaq>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                 CONCIERGE FAQs
+                  </mat-panel-title>
+                  <mat-icon>{{panelconfaq.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="con_faq_img"  class="containerCollapse">
+                        <img  class="mt-2 imgImpaired"  [src]="con_faq_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div> 
+                  
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <div class="col-12 ">
+                      <img [src]="styleData.conFaqIcon" class="imgImpaired" height="50" width="50" alt="">
+                        
+                        </div>
+                        <!-- <div class="col-12 mt-3">FUN DIRECTORY</div> -->
+                        <!-- <div class="col-12 mt-3">Need to ask Lucia a question?</div> -->
+                      </div>
+                    </div>
+            
+                    <!-- <div class="row"> -->
+                    <div class="col-6 fw-bold text-end">
+                      <div class="row mt-3">
+                        <div class="col-12" style="cursor:pointer" (click)="getConciergeFaq()">VIEW INFO.</div>
+                        <!-- <div class="col-12 mt-3">VIEW</div> -->
+                        <!-- <div class="col-12 mt-3">CHAT/CALL</div> -->
+                      </div>
+                    </div>
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="photo_ops=='Y'" #panelphoto>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                  PHOTO OPS
+                  </mat-panel-title>
+                  <mat-icon>{{panelphoto.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                   
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div> 
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="photo_ops_img"  class="containerCollapse">
+                        <img  class="mt-2 imgImpaired"  [src]="photo_ops_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <img [src]="styleData.photoOps" class="imgImpaired" height="50" width="50" alt="">
+
+                  </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="openPhotoOps()">VIEW</div>
+
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel hideToggle *ngIf="promo=='Y'" #panelpromo>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+                    PROMOTIONS
+                  </mat-panel-title>
+                  <mat-icon>{{panelpromo.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <mat-panel-description>
+                    <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                    <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <div *ngIf="promotions_img"  class="containerCollapse">
+                        <img  class="mt-2 imgImpaired"  [src]="promotions_img"  style="width: 100%;height:100%" alt="">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pb-3 px-3 mt-3">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <!-- <div class="col-12 mt-3">CONCIERGE FAQ's</div> -->
+                        <!-- <div class="col-12 ">FUN DIRECTORY</div> -->
+                        <div class="col-12">
+                      <img [src]="styleData.promoIcon" class="imgImpaired" height="50" width="50" alt="">
+                          
+                        </div>
+                      </div>
+                    </div>
+            
+                    <!-- <div class="row"> -->
+                    <div class="col-6 fw-bold text-end">
+                      <div class="row mt-3">
+                        <!-- <div class="col-12 mt-3">VIEW INFO.</div> -->
+                        <!-- <div class="col-12 ">VIEW</div> -->
+                        <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer;" (click)="openPromotions()">VIEW</div>
+                      </div>
+                    </div>
+                  </div>
+               
+                </div>
+              </mat-expansion-panel>
+              </mat-accordion>
+              
+          </div>
+        </div>
+     
+      </div>
+      
+      <div *ngIf="banner1_url" class="containerBanner"  style="margin-top: 9px;">
+        <img  class="mt-2 imgImpaired"  [src]="banner1_url"  style="width: 91%;height:107%" alt="">
+       
+      </div>
+      <div class="dividerPad" style="margin-top: 8px;">
+        <img *ngIf="imgSrc" class="imgImpaired" [src]="imgSrc" height="30" width="100%" alt="">
+
+      </div>
+      <div class="container mt-4">
+        <div class="text-center mt-4 text-dark">
+          <span [ngStyle]="{'font-size':subHeaderSize}">RESTAURANTS</span>
+        </div>
+        <!-- <mat-accordion>
+        <div *ngFor="let r of getVenuesRest">
+        
+            <mat-expansion-panel hideToggle *ngIf="r.hotel_type!='S'" #panelrest>
+              <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+              <span class="mkUpper">{{r.name}} </span>    
+                </mat-panel-title>
+                <mat-icon>{{panelrest.expanded ? 'north' : 'south' }}</mat-icon>
+               
+              </mat-expansion-panel-header>
+              <div>
+                <div class="row pb-3 px-3" style="text-transform: uppercase">
+                  <div id="r_{{r.id}}" class="col-6 fw-bold text-start" style="text-transform: uppercase">{{r.name}}</div>
+                  <div class="col-6  fw-bold text-end">
+                    <div class="row">
+                      <div class="col-12 pb-3" style="cursor:pointer" (click)="open_popup_window(r.id)">MENU & INFO</div>
+                      <div class="col-12  pb-3" style="cursor:pointer"  routerLink="/book_res/home">RESERVATION</div>
+                      <div class="col-12  pb-3" (click)="openCalendar('R',r.id)">ENTERTAINMENT</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+        
+      </div>
+    </mat-accordion> -->
+    <mat-accordion>
+      <div *ngFor="let r of getVenuesRest;let i=index">
+      
+          <mat-expansion-panel  hideToggle *ngIf="r.hotel_type!='S'" #panelrest>
+            <mat-expansion-panel-header>
+              <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+            <span class="mkUpper">{{r.name}} </span>    
+              </mat-panel-title>
+              <mat-icon>{{panelrest.expanded ? 'north' : 'south' }}</mat-icon>
+             
+            </mat-expansion-panel-header>
+            <div class="mat-expansion-panel-content imgImpaired text-dark"  [ngStyle]="{'color':txtCol}">
+             
+              <div class="row text-center">
+                <div class="col-12">
+                  
+                </div>
+              </div> 
+              <div class="row pb-3 px-3" style="text-transform: uppercase">
+                <div class="col-12">
+                  <div class="containerCollapse">
+                    <img  class="mt-2 "  src="{{url+styleData['restaurant_img_'+i]}}" style="width: 100%;height:100%" alt="">
+                  </div>
+                </div>
+               
+                
+                
+                <!-- <div id="r_{{r.id}}" class="col-6 fw-bold text-start" style="text-transform: uppercase">{{r.name}}</div> -->
+                
+                <div class="col-12 mt-2 fw-bold">
+                  <div class="row">
+                    <div class="col-6 pb-3"><img [src]="styleData[r.name.split(' ').join('')+'_menu_icon']" height="50" width="50" alt="" class="float-left">
+                </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="open_popup_window(r.id)">MENU & INFO</div>
+                    <div class="col-6 pb-3"><img [src]="styleData[r.name.split(' ').join('')+'_reserve_icon']" height="50" width="50" alt="" class="float-left">
+                    </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer"  routerLink="/book_res/home">RESERVATION</div>
+                    <div class="col-6 pb-3"><img [src]="styleData[r.name.split(' ').join('')+'_ent_icon']" height="50" width="50" alt="" class="float-left">
+                    </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" (click)="openCalendar('R',r.id)">ENTERTAINMENT</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+      
+    </div>
+    <!-- <div class="dividerPad">
+      <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+    </div> -->
+  </mat-accordion>
+    <div class="dividerPad">
+      <img *ngIf="imgSrc" class="imgImpaired" [src]="imgSrc" height="30" width="100%" alt="">
+
+    </div>
+        <div class="text-center mt-4 text-dark">
+          <span [ngStyle]="{'font-size':subHeaderSize}">SERVICES</span>
+        </div>
+        <mat-accordion>
+       
+        <div *ngFor="let s of getVenuesServe">
+          <mat-expansion-panel hideToggle #panelserve>
+            <mat-expansion-panel-header>
+              <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+              <span class="mkUpper"> {{s.name}} </span>  
+              </mat-panel-title>
+              <mat-icon>{{panelserve.expanded ? 'north' : 'south' }}</mat-icon>
+             
+            </mat-expansion-panel-header>
+            <div>
+              <div class="row pb-3 px-3 imgImpaired" style="text-transform: uppercase">
+                <!-- <div id="s_{{s.id}}" class="col-6 fw-bold text-start mkUpper">{{s.name}}</div> -->
+                <div class="col-12  fw-bold text-end">
+                  <div class="row mt-3">
+                    <div class="col-6 pb-3"><img [src]="styleData[s.name.split(' ').join('')+'_menu_icon']" height="50" width="50" alt="" class="float-left">
+                    </div>
+                    <div class="col-6 fw-bold justify-content-end d-flex align-items-center" style="cursor:pointer">
+                      CHAT/CALL
+                    </div>
+                    <div class="col-6 pb-3"><img [src]="styleData[s.name.split(' ').join('')+'_services_icon']" height="50" width="50" alt="" class="float-left">
+                    </div>
+                    <div class="col-6  fw-bold justify-content-end d-flex align-items-center" style="cursor:pointer"  routerLink="/book_res/home">SERVICES</div>
+                    <div class="col-6 pb-3"><img [src]="styleData[s.name.split(' ').join('')+'_cal_icon']" height="50" width="50" alt="" class="float-left">
+                    </div>
+                    <div class="col-6  fw-bold justify-content-end d-flex align-items-center" (click)="openCalendar('S',s.id)">CLASSES/CALENDAR</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+         
+       
+      </div>
+      </mat-accordion> <br> 
+      <div *ngIf="banner2_url"  class="containerBanner">
+        <img  class="mt-2 imgImpaired"  [src]="banner2_url"  style="width: 100%;height:100%" alt="">
+       
+      </div><br> 
+      <mat-accordion class="mt-5">
+        <mat-expansion-panel hideToggle *ngIf="saf_faq=='Y'" #panelsafety>
+          <mat-expansion-panel-header>
+            <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+              SAFETY FAQ's
+            </mat-panel-title>
+            <mat-icon>{{panelsafety.expanded ? 'north' : 'south' }}</mat-icon>
+       
+          </mat-expansion-panel-header>
+          <div>
+            <div class="row text-center">
+              <div class="col-12">
+                <div *ngIf="safety_img"  class="containerCollapse">
+                  <img  class="mt-2 imgImpaired"  [src]="safety_img"  style="width: 100%;height:100%" alt="">
+                 
+                </div>
+              </div>
+            </div> 
+            <div class="row pb-3 px-3 mt-3">
+              <div class="col-6 fw-bold text-start">
+                <div class="row">
+                  <div class="col-12">
+                    <img [src]="styleData.safetyIcon" class="imgImpaired" height="50" width="50" alt="">
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 fw-bold text-end">
+                <div class="row mt-3">
+                  <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="getSafetyFaq()">VIEW INFO.</div>
+                 
+                </div>
+              </div>
+          </div>
+      
+      </div>
+        </mat-expansion-panel>
+       
+        </mat-accordion>
+  
+    <br> 
+    <mat-accordion>
+      <mat-expansion-panel hideToggle *ngIf="hot_faq=='Y'" #panelhotelf>
+        <mat-expansion-panel-header>
+          <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+            HOTEL FAQ's
+          </mat-panel-title>
+          <mat-icon>{{panelhotelf.expanded ? 'north' : 'south' }}</mat-icon>
+
+          <!-- <mat-panel-description>
+            This is a summary of the content
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <div>
+
+          <div class="row text-center">
+            <div class="col-12">
+              <div *ngIf="hotelf_img"  class="containerCollapse">
+                <img  class="mt-2 imgImpaired"  [src]="hotelf_img"  style="width: 100%;height:100%" alt="">
+               
+              </div>
+            </div>
+          </div> 
+            <div class="row pb-3 px-3 mt-3">
+              <div class="col-6" >
+                
+                <img [src]="styleData.hotelFaqIcon" class="imgImpaired" height="50" width="50" alt="">
+
+              </div>
+              <!-- <div class="col-12">Need to ask Lucia a question?</div> -->
+           
+          <div class="col-6 fw-bold text-end">
+           
+              <!-- <div class="col-6"></div> -->
+              <div class="row mt-3">
+                <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="getHotelFaq()">VIEW INFO.</div>
+              </div>
+              <!-- <div class="col-12">CHAT LUCIA</div> -->
+            
+          </div>
+          </div>
+    
+    </div>
+      </mat-expansion-panel>
+     
+    </mat-accordion> <br>
+    <div class="dividerPad">
+      <img *ngIf="imgSrc" class="imgImpaired" [src]="imgSrc" height="30" width="100%" alt="">
+
+    </div> <br> 
+    <mat-accordion>
+      <mat-expansion-panel hideToggle *ngIf="lost_found=='Y'" #panellostfound>
+        <mat-expansion-panel-header>
+          <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+            LOST & FOUND
+          </mat-panel-title>
+          <mat-icon>{{panellostfound.expanded ? 'north' : 'south' }}</mat-icon>
+
+          <!-- <mat-panel-description>
+            This is a summary of the content
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <div>
+           <div class="row text-center">
+            <div class="col-12">
+              <div *ngIf="lost_found_img"  class="containerCollapse">
+                <img  class="mt-2 imgImpaired"  [src]="lost_found_img"  style="width: 100%;height:100%" alt="">
+               
+              </div>
+            </div>
+          </div> 
+          <div class="row pb-3 px-3 mt-3">
+            <div class="col-6 fw-bold text-start">
+              <div class="row">
+                <div class="col-6">
+                  <img [src]="styleData.lostFoundCall" class="imgImpaired" height="50" width="50" alt="">
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <img [src]="styleData.lostFoundView" class="imgImpaired" height="50" width="50" alt="">
+                </div>
+
+              </div>
+              
+            </div>
+            <div class="col-6  fw-bold text-end">
+              <div class="row mt-3">
+                <div class="col-12" style="cursor:pointer" (click)="itemLost()">CHAT/CALL</div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12" style="cursor:pointer" (click)="viewLost()">VIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      </mat-accordion> <br> 
+      <mat-accordion>
+        <mat-expansion-panel hideToggle *ngIf="sug_box1=='Y'" #hotelsuggestion>
+          <mat-expansion-panel-header>
+            <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+              SUGGESTION BOX
+            </mat-panel-title>
+            <mat-icon>{{hotelsuggestion.expanded ? 'north' : 'south' }}</mat-icon>
+
+            <!-- <mat-panel-description>
+              This is a summary of the content
+            </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <div>
+            <div class="row text-center">
+              <div class="col-12">
+                <div *ngIf="suggestion_img"  class="containerCollapse">
+                  <img  class="mt-2 imgImpaired"  [src]="suggestion_img"  style="width: 100%;height:100%" alt="">
+                 
+                </div>
+              </div>
+            </div> 
+            <div class="row pb-3 px-3 mt-3">
+              <div class="col-6 fw-bold text-start">
+                <img [src]="styleData.SuggBoxIcon" class="imgImpaired" height="50" width="50" alt="">
+                
+              </div>
+              <div class="col-6  fw-bold text-end">
+                <div class="row mt-3">
+                  <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="sug_box()">MESSAGE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        </mat-accordion>
+  
+    <br> 
+      <mat-accordion>
+        <mat-expansion-panel hideToggle *ngIf="flip_book=='Y'" #panelvacation>
+          <mat-expansion-panel-header>
+            <mat-panel-title [ngStyle]="{'font-size':subHeaderSize}">
+              FREE VACATION BOOK
+            </mat-panel-title>
+            <mat-icon>{{panelvacation.expanded ? 'north' : 'south' }}</mat-icon>
+           
+          </mat-expansion-panel-header>
+          <div>
+            <div class="row text-center">
+              <div class="col-12">
+                <div *ngIf="vacation_img"  class="containerCollapse">
+                  <img  class="mt-2 imgImpaired"  [src]="vacation_img"  style="width: 100%;height:100%" alt="">
+                 
+                </div>
+              </div>
+            </div> 
+            <div class="row pb-3 px-3 mt-3">
+              <div class="col-6 fw-bold text-start">
+                <img [src]="styleData.VacBookIcon" class="imgImpaired" height="50" width="50" alt="">
+
+                
+              </div>
+              <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center" style="cursor:pointer" (click)="start_design()">START DESIGN</div>
+              <div class="col-12 mt-2">
+                Build your own Vacation Flip Book and post to your friends & family on social media.One Vacation Flip Book per stay.
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        </mat-accordion>
+        <div class="dividerPad">
+          <img *ngIf="imgSrc" class="imgImpaired" [src]="imgSrc" height="30" width="100%" alt="">
+    
+        </div>
+    </div>
+    </div>
+  </div>
+

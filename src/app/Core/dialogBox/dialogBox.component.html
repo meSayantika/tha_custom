@@ -1,0 +1,1228 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="makeBorder">
+  <!-- <div class="row"> -->
+    <!-- <div class="col-11"></div> -->
+    <div class="topright">
+      <button mat-icon-button (click)="onClose(0)" aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon style="color:rgb(255, 181, 42)">highlight_off</mat-icon> </button>
+    </div>
+  <!-- </div> -->
+ 
+  <div mat-dialog-content [hidden]="data?.flag!='imgPrev'">
+    <h2 mat-dialog-title style="text-align:center">Preview</h2>
+    <div *ngIf="isImg">
+    <img src="{{data?.content}}" style="height:80%;width:80%" alt="">
+
+    </div>
+    <div *ngIf="!isImg"> 
+    <video controls style="margin-top:-5%;padding-bottom:2%; width:500;height:500px" mute="false">
+        <source [src]="data.content" type="video/mp4" />
+        Browser not supported
+      </video>
+
+      </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='signout'">
+    <h2 mat-dialog-title> Are you sure you want to sign out? </h2>
+    <div class="float-end">
+      <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> Cancel</button> &nbsp;
+      <button mat-raised-button class="btn btn-success" (click)="onClose(1)"> Yes</button>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='paid'">
+    <h2 mat-dialog-title> You have already made the payment! </h2>
+    <div class="float-end">
+      <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> Cancel</button> &nbsp;
+      <button mat-raised-button class="btn btn-success" (click)="onClose(1)"> Yes</button>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='sendQ'">
+    <h2 mat-dialog-title> Enter email </h2>
+    <input type="text" class="form-control" id="mailQ" #emailQ> <br>
+    <div class="text-center">
+      <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> Cancel</button> &nbsp;
+      <button mat-raised-button class="btn btn-success" (click)="sendmail()"> Yes</button>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='delete'">
+
+    <h2 mat-dialog-title> Are you sure you want to delete? </h2>
+    <div class="float-end">
+      <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> Cancel</button> &nbsp;
+      <button mat-raised-button class="btn btn-success" (click)="onClose(1)"> Yes</button>
+    </div>
+  </div>
+  <!-- <div mat-dialog-content [hidden]="data.flag!='registration'" style="width:100%">
+
+    <h2 mat-dialog-title> Add Hotel </h2>
+    <form [formGroup]="regForm" (ngSubmit)="regSubmit()">
+       <form (ngSubmit)="regSubmit()">
+      <div class="row mt-4">
+        <div class="col-6">
+          <input class="form-control p-3" type="text" placeholder="Restaurant Name" formControlName="name">
+          <mat-label *ngIf="f?.name?.errors?.required && (f?.name?.dirty || f?.name?.touched)" class="text-danger">* Name is
+            required</mat-label>
+        </div>
+        <div class="col-6"><input class="form-control p-3" type="text" placeholder="Contact Name"
+            formControlName="contact" name="contact">
+          <mat-label *ngIf="f?.contact?.errors?.required && (f?.contact?.dirty || f?.contact?.touched)" class="text-danger">*
+            Contact is required</mat-label>
+        </div>
+      </div>
+      <div class="row mt-4">
+      <div class="col-6"><input  class="form-control p-3" id="tel" type="text"  placeholder="Telephone" required name="Telephone"   (change)="check_mail($event)"> 
+        <div class="col-6"><input class="form-control p-3" id="tel" type="text" placeholder="Telephone" required
+            formControlName="phone" name="phone" (change)="check_mail($event)">
+          <mat-label *ngIf="f?.phone?.errors?.required && (f?.phone?.dirty || f?.phone?.touched)" class="text-danger">*
+            Telephone is required</mat-label>
+          validation messages
+        </div>
+
+         <div class="col-6"><input class="form-control p-3" id="em" type="text" placeholder="Email" formControlName="mail" name="mail" (change)="check_mail($event)">
+        <div class="col-6"><input class="form-control p-3" id="em" type="text" placeholder="Email"
+            formControlName="mail" name="mail" (change)="check_mail($event)">
+          <div *ngIf="f?.mail?.errors?.required  && (f?.mail?.dirty || f?.mail?.touched)" class="text-danger">
+            <mat-label class="text-danger" [hidden]="!f?.mail?.errors?.required">
+              * Email is required
+            </mat-label>
+           </div>
+            <div *ngIf="f?.mail?.touched">
+              <mat-label class="text-danger" *ngIf="f?.mail?.errors?.pattern">
+                * Not a valid email
+              </mat-label>
+            </div>
+          <div *ngIf="show_msg==true" class="text-danger">Email already exists</div> 
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-6"><input class="form-control p-3" type="text" placeholder="Address 1" name="addr1"
+            formControlName="addr1">
+
+          <mat-label *ngIf="f?.addr1?.errors?.required && (f?.addr1?.dirty || f?.addr1?.touched)" class="text-danger">*
+            Address is required</mat-label>
+        </div>
+        <div class="col-6"><input class="form-control p-3" type="text" placeholder="Address 2" name="addr2"
+            formControlName="addr2"></div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-6"><input class="form-control p-3" type="text" placeholder="City/State" required
+            name="cityState" formControlName="cityState">
+          <mat-label *ngIf="f?.cityState?.errors?.required && (f?.cityState?.dirty || f?.cityState?.touched)"
+            class="text-danger">* City/State is required</mat-label>
+
+        </div>
+        <div class="col-6"><input class="form-control p-3" type="text" placeholder="Zip/Postal code*" name="zip"
+            formControlName="zip">
+          <mat-label *ngIf="f?.zip?.errors?.required && (f?.zip?.dirty || f?.zip?.touched)" class="text-danger">* Zip code is
+            required</mat-label>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-6">
+          <select class="form-select p-3" name="country" formControlName="country">
+            <option value="">Select Country</option>
+            <option *ngFor="let c of countryData" value="{{c.id}}">{{c.name}}</option>
+          </select>
+
+          <mat-label *ngIf="f?.country?.errors?.required && (f?.country?.dirty || f?.country?.touched)" class="text-danger">*
+            Country is required</mat-label>
+
+        </div>
+
+        <div class="col-6"><input class="form-control p-3" type="text" placeholder="Website" formControlName="website"
+            name="Website">
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <select class="form-select p-3" formControlName="timeZone">
+            <option value="">Select Timezone</option>
+            <option *ngFor="let d of timezone" value="{{d.name}}">{{d.time_zone}}</option>
+          </select>
+
+
+          <mat-label *ngIf="f?.timeZone?.errors?.required && (f?.timeZone?.dirty || f?.timeZone?.touched)"
+            class="text-danger">* Timezone is required</mat-label>
+
+        </div>
+      </div>
+      <div class="form-row">
+      <div class="fieldFull"><button class="w3-button w3-highway-blue" [disabled]="regForm.invalid">SUBMIT</button></div>
+        <div class="col-12 pt-3">
+          <button style="width:100%" mat-raised-button class="btn btn-success"
+            [disabled]="regForm?.invalid">Submit</button>
+        </div>
+      </div>
+    </form>
+
+
+
+
+  </div> -->
+  <div mat-dialog-content [hidden]="data?.flag!='status'">
+
+    <h2 mat-dialog-title> Are you sure you want to {{data?.content}} proposal? </h2>
+    <div class="float-end">
+      <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> Cancel</button> &nbsp;
+      <button mat-raised-button class="btn btn-success" (click)="onClose(1)"> Yes</button>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='msgPrev'" class="dialouge">
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-12" *ngIf="urlSet?.includes('jpg') || urlSet?.includes('jpeg') || urlSet?.includes('png')">
+          <img [src]="urlSet" alt="Avatar"  height="100" style="padding-bottom:2%; width:100%">
+
+        </div>
+        <div class="col-12" *ngIf="urlSet?.includes('mp3') || urlSet?.includes('mp4') || urlSet?.includes('wav')">
+         <video controls style="padding-bottom:2%; width:100%;height:150px" mute="false">
+        <source [src]="urlSet" type="video/mp4" />
+        Browser not supported
+      </video>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h2><b> {{data.content?.title}} </b> </h2>
+
+        </div>
+      </div>
+      <div class="row mt-3 mb-3">
+        <div class="col-12">
+          <h4><b>
+              {{data.content?.subtitle}}
+            </b></h4>
+        </div>
+      </div>
+ <br>
+      <div class="row mt-4">
+        <div class="col-12">
+          <p class="container-text">
+            {{data.content?.body}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='singleVIP'">
+    <div class="row">
+      <div class="col-12">
+        <ng-multiselect-dropdown [placeholder]="'Add VIP'" [settings]="dropdownSettings"
+          [data]="allVIP?.msg" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+
+    <div class="row float-end mt-5">
+      <div class="col-12">
+        <button mat-raised-button class="btn btn-success" (click)="showVipList()"> Update </button>
+
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='singleGuest'">
+    <div class="row">
+      <div class="col-12">
+        <ng-multiselect-dropdown style="width:100%" [placeholder]="'Add Guest'" [settings]="dropdownSettings"
+          [data]="getUserData" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+
+    <div class="row float-end mt-5">
+      <div class="col-12">
+        <button mat-raised-button class="btn btn-success" (click)="showVipList()"> Update </button>
+
+      </div>
+    </div>
+  </div>
+  <div  mat-dialog-content [hidden]="data?.flag!='emPrev'">
+
+    <div class="container-text">
+      <div class="row mt-3">
+        <div class="col-5 mt-4">
+          <h2 mat-dialog-title> Report
+
+
+          </h2>
+        </div>
+        <div class="col-7 mt-4">
+          <div class="float-end text-muted">
+            <i> <small>{{data.content?.record_date?.substr(0,10)}} </small> </i>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <b class="text-muted">Reported By:</b> <br>
+          <i>{{data.content?.group_name}},{{data.content?.user_name}},{{data.content?.mobile_no}},{{data.content?.room_no}} </i>
+
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12">
+          <b class="text-muted">Emergency:</b> <br>
+          <i>{{data.content?.message_body}} </i>
+
+        </div>
+      </div>
+      <hr>
+      <div class="row mt-2">
+        <!-- <div class="col-6">
+            <b  class="text-muted">  
+            <small>Date: </small>   
+            </b> 
+            </div> -->
+        <div class="col-12">
+          <b class="text-muted">
+            Status:
+          </b> <span
+            [ngClass]="data.content?.repo_status=='P'?'text-danger':data.content?.repo_status=='S'?'text-success':'text-warning'">
+            {{data.content?.repo_status=='P'? 'Pending':(data.content?.repo_status=='S'?'Solved':'Forwarded')}}
+
+          </span>
+
+        </div>
+
+      </div>
+      <hr>
+      <div class="row mt-2">
+        <div class="col-12">
+          <b class="text-muted">Action:</b> <br>
+          <i>{{data.content?.action_taken}} </i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+ 
+  <div mat-dialog-content [hidden]="data.flag!='searchDt'">
+
+    <h2 mat-dialog-title> Enter Dates: </h2>
+    <form [formGroup]="searchForm">
+      <small class="text-danger" *ngIf="showError"> <i>Invalid date range</i> </small>
+      <div class="row">
+        <div class="col-5">
+          <input type="date" formControlName="from" name="from" class="form-control">
+        </div>
+        <div class="col-2 mt-2 text-center"> to</div>
+        <div class="col-5">
+          <input type="date" formControlName="to" name="to" class="form-control">
+
+        </div>
+      </div>
+    </form>
+
+
+    <br>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4 text-center">
+        <button mat-mini-fab class="btn btn-success" [disabled]="searchForm?.invalid" (click)="search_dates()">
+          <mat-icon>keyboard_arrow_right</mat-icon> </button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data.flag!='searchDt_db'">
+
+    <h2 mat-dialog-title> Enter Dates: </h2>
+    <form [formGroup]="searchForm">
+      <small class="text-danger" *ngIf="showError"> <i>Invalid date range</i> </small>
+      <div class="row">
+        <div class="col-5">
+      <label for="">Check In:</label>    <input type="date" formControlName="from" name="from" class="form-control">
+        </div>
+        <div class="col-2 mt-2 text-center"> </div>
+        <div class="col-5">
+          <label for="">Check Out:</label>   <input type="date" formControlName="to" name="to" class="form-control">
+
+        </div>
+      </div>
+    </form>
+
+
+    <br>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4 text-center">
+        <button mat-mini-fab class="btn btn-success" [disabled]="searchForm?.invalid" (click)="search_dates()">
+          <mat-icon>keyboard_arrow_right</mat-icon> </button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data.flag!='menuPrev'">
+
+    <div *ngFor="let sec of sectionData">
+      <!-- {{urlSet+this.data.content.arr[this.data.content.key][sec].sec_img}} -->
+      <div class="container mt-2">
+        <img src="{{urlSet+this.data?.content.arr[this.data?.content?.key][sec]?.sec_img}}" height="200" width="252" alt="">
+      </div>
+      <h3 class="sectionName">{{sec}} </h3>
+      <div *ngFor="let r of this.data?.content.arr[this.data?.content?.key][sec]?.res">
+
+        <div class="row mt-2">
+          <div class="col-9">
+            {{r?.item_name}}
+
+          </div>
+          <div class="col-3">
+            {{r?.item_price | currency}}
+
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-12 text-muted text-italic">
+              {{r?.item_desc}}
+
+            </div>
+          </div>
+        </div>
+
+
+        <hr>
+
+      </div>
+
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data.flag!='dynamicMenuPrev'">
+
+    <div *ngFor="let sect of sectionData1">
+      <!-- {{urlSet+this.data.content.arr[this.data.content.key][sec].sec_img}} -->
+      <div class="container">
+        <img src="{{urlSet+this.data?.content.arr[sect].sec_img}}" height="200" width="252" alt="">
+      </div>
+      <h3 class="sectionName">{{sect}} </h3>
+      <div *ngFor="let r of this.data?.content.arr[sect].res">
+
+        <div class="row mt-2">
+          <div class="col-9">
+            {{r?.item_name}}
+
+          </div>
+          <div class="col-3">
+            {{r?.item_price | currency}}
+
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-12 text-muted text-italic">
+              {{r?.item_desc}}
+
+            </div>
+          </div>
+        </div>
+
+
+        <hr>
+
+      </div>
+
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='msgCenter'">
+    <!-- <mat-dialog-content> -->
+
+      <ng-container>
+        <div *ngFor="let msg of messages let i=index">
+          <mat-accordion>
+            <mat-expansion-panel hideToggle #panel [expanded]="i==0">
+              <mat-expansion-panel-header style="background-color:black; color:white"  >
+                <mat-panel-title style="color:white">
+                  {{msg | date:'mediumDate'}}
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+                  This is a summary of the content
+                </mat-panel-description> -->
+              </mat-expansion-panel-header>
+              <div>
+                <div *ngFor="let d of this.data.content[msg]" clas="mb-4">
+  
+                  <div class="container mb-3">
+                    <div class="row mt-3">
+                      <div class="col-12 mt-5"
+                        *ngIf="d.img_path?.includes('jpg') || d.img_path?.includes('png') || d.img_path?.includes('jpeg')">
+                        <img [src]="urlSet+d?.img_path" alt="Avatar" height="150"
+                          style="margin-top:-5%;padding-bottom:2%; width:100%">
+            
+                      </div>
+                      <div class="col-12 mt-5"
+                        *ngIf="d.img_path?.includes('mp3') || d.img_path?.includes('mp4') || d.img_path?.includes('wav')">
+                        <!-- <img [src]="urlSet+d?.img_path" alt="Avatar" height="150" style="margin-top:-5%;padding-bottom:2%; width:100%"> -->
+                        <video controls style="margin-top:-5%;padding-bottom:2%; width:100%;height:150px" mute="false">
+                          <source [src]="urlSet+d?.img_path" type="video/mp4" />
+                          Browser not supported
+                        </video>
+                        <!-- <video controls style="margin-top:-5%;padding-bottom:2%; width:100%;height:150px" mute="false">
+                          <source src="https://www.bigbuckbunny.org/" type="video/mp4" />
+                          Browser not supported
+                        </video> -->
+            
+                      </div>
+            
+                    </div>
+            
+                    <div class="row mt-3">
+                      <div class="col-9">
+                        <h4>
+                          <b> {{d?.msg_title}} </b>
+                        </h4>
+            
+                      </div>
+                      <!-- <div class="col-3">
+            
+                      </div> -->
+                      <div class="col-1"></div>
+                      <div class="col-2 float-end">
+                        <b>{{d?.send_time?.substr(0,5)}} </b>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-10" >
+                        <h6 style="font-weight:500">
+                          <!-- <h5> -->
+                        <a routerLink="/directory/directory_home" fragment="r_3" (click)="onClose(1)">{{d?.dept_link}} </a> 
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-10" >
+                        <h6 (click)="openBottomSheet(d)" style="font-weight:500">
+                          <!-- <h5> -->
+                          {{d?.msg_subtitle}}
+                        </h6>
+                      </div>
+                    </div>
+            
+                    <!-- <div class="container-text">
+                      {{d?.msg_body}}
+                    
+                    </div> -->
+                    <div class="row mt-3 mb-3">
+                      <div class="col-12">
+                        <p class="mt-2 mb-4">
+                          View Calendar
+                        </p>
+                      </div>
+                    </div>
+            
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </mat-expansion-panel>
+            </mat-accordion>
+         
+        </div>
+      </ng-container>
+      <!-- <ng-container [hidden]="messages.length!=0">
+       <p class="text-center text-danger text-bold">  No messages! </p>
+      </ng-container> -->
+    
+   
+    <!-- </mat-dialog-content> -->
+
+
+  </div>
+
+  <div mat-dialog-content [hidden]="data?.flag!='emergencyMessage'">
+    <div *ngFor="let d of this.data.content">
+      <div class="container-text">
+        <div class="row">
+          <div class="col-5">
+            <!-- <h2 mat-dialog-title> Report 
+      
+           
+          </h2> -->
+          </div>
+          <div class="col-7">
+            <div class="float-end text-muted">
+              <i> <small>{{d?.record_date?.substr(0,10)}} </small> </i>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <img src="https://www.mifrends.com/hotel-lucia-mv/images/important.png" style="width:100%" alt="">
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <b class="text-muted">Emergency:</b> <br>
+            <i>{{d?.message_body}} </i>
+
+          </div>
+        </div>
+        <hr>
+        <div class="row mt-2">
+          <!-- <div class="col-6">
+            <b  class="text-muted">  
+            <small>Date: </small>   
+            </b> 
+            </div> -->
+          <div class="col-12">
+            <b class="text-muted">
+              Status:
+            </b> <span [ngClass]="d?.repo_status=='P'?'text-danger':d?.repo_status=='S'?'text-success':'text-warning'">
+              {{d?.repo_status=='P'? 'Pending':(d?.repo_status=='S'?'Solved':'Forwarded')}}
+
+            </span>
+
+          </div>
+
+        </div>
+        <hr>
+        <div class="row mb-5 mt-2">
+          <div class="col-12">
+            <b class="text-muted">Action:</b> <br>
+            <i>{{d?.action_taken}} </i>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-content [hidden]="data?.flag!='aboutAVT'">
+    {{data.content}}
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='specialMenuPrev'">
+    <!-- {{data.content}} -->
+  </div>
+
+  <div mat-dialog-content [hidden]="data?.flag!='aboutPCA'">
+    <img src="https://mifrends.com/hotel-lucia/images/directory-header-smart.png" class="image" width="100%"
+      height="18%" />
+    <div class="row  mt-4 mb-4">
+      <div class="col-12 text-center">
+        <img src="{{this.data?.content?.image}}" height="100" width="100" style="border-radius:50%" alt="">
+      </div>
+    </div>
+    <div class="row mt-3 mb-3 text-center">
+      <div class="col-3"></div>
+      <div class="col-4">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button mat-fab class="btn" style="background-color:black;color:white"
+            (click)="playAudio()"><mat-icon>play_arrow</mat-icon></button>
+
+          <button mat-fab class="btn" style="background-color:black;color:white"
+            (click)="stopAudio()"><mat-icon>stop</mat-icon></button>
+        </div>
+      </div>
+      <div class="col-4"></div>
+    </div>
+
+    {{data.content?.data?.msg_text}}
+    <div class="row mt-4">
+      <div class="col-4"></div>
+      <div class="col-4 ml-2"> <button mat-raised-button style="background-color:#ff9800;color:white"
+          (click)="onClose(0)">Go to directory</button> </div>
+      <div class="col-4"></div>
+    </div>
+    <!-- aboutPCA -->
+  </div>
+
+  <div mat-dialog-content [hidden]="data?.flag!='voiceChange'">
+    <h2 mat-dialog-title> Do you want to keep the voice? </h2>
+    <div class="float-end">
+      <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> Cancel</button> &nbsp;
+      <button mat-raised-button class="btn btn-success" (click)="onClose(1)"> Yes</button>
+    </div>
+  </div>
+  <div mat-dialog-content [hidden]="data?.flag!='addVIP'">
+    <h2 mat-dialog-title> Add VIPs </h2>
+    <form [formGroup]="addVipForm">
+      <div formArrayName="vipStruct">
+        <div *ngFor="let v of vip?.controls; let i=index">
+          <div formGroupName="{{i}}">
+            <div class="row mt-2" *ngIf="vip.length>1">
+              <div class="col-10"></div>
+              <div class="col-1">
+                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"
+                  (click)="addVip()">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              </div>
+              <div class="col-1">
+                <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon"
+                  (click)="removeVip(i)">
+                  <mat-icon>remove_circle</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row" *ngIf="vip.length<=1">
+              <div class="col-11"></div>
+              <div class="col-1">
+                <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"
+                  (click)="addVip()">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label>Name</label>
+                <input type="text" name="name" formControlName="name" class="form-control" />
+              </div>
+              <div class="col-6">
+                <label>Phone</label>
+                <input type="text" name="phone" formControlName="phone" class="form-control" />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-6">
+                <label>Check In</label>
+                <input type="datetime-local" name="check_in" formControlName="check_in" class="form-control" />
+              </div>
+              <div class="col-6">
+                <label>Check Out</label>
+                <input type="datetime-local" name="check_out" formControlName="check_out" class="form-control" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    <div class="float-end mt-3">
+      <!-- <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> C</button> &nbsp; -->
+      <button mat-raised-button class="btn btn-success" (click)="updateVip()"> Update</button>
+    </div>
+  </div>
+ <div mat-dialog-content [hidden]="data?.flag!='profile'">
+  <mat-tab-group mat-stretch-tabs color="accent">
+    <mat-tab label="First">
+      <ng-template mat-tab-label>
+        <mat-icon> info</mat-icon> &nbsp;
+        Basic Information
+      </ng-template>
+     <form [formGroup]="profileForm">
+   <div class="row mt-3">
+    <div class="col-12">
+      <label style="color:#3f51b5" for="">Name</label>
+      <input type="text" formControlName="name" class="form-control">
+    </div>
+    <div class="col-12">
+      <label style="color:#3f51b5" for="">Department</label>
+      <input readonly type="text" formControlName="dept" class="form-control">
+    </div>
+    <div class="col-12">
+      <label style="color:#3f51b5">Phone</label>
+      <input type="text" formControlName="phone" class="form-control">
+    </div>
+    <div class="col-12">
+      <label style="color:#3f51b5" for="">Email</label>
+      <input type="text" formControlName="mail" class="form-control">
+    </div>
+   </div>
+
+     </form>
+     <div class="row mt-3 mb-2">
+      <!-- <div class="col-9"></div> -->
+      <div class="col-12">
+        <button class="btn btn-success col-12" mat-raised-button>Update</button>
+      </div>
+      <!-- <div class="col-4"></div> -->
+     </div>
+    </mat-tab>
+    <mat-tab label="Second">
+      <ng-template mat-tab-label>
+        <mat-icon> lock</mat-icon> &nbsp;
+        Password
+      </ng-template>
+      <form [formGroup]="passForm">
+        <div class="row mt-3">
+         <div class="col-12">
+           <label style="color:#3f51b5" for="">Old Password</label>
+           <div class="input-group">
+            <input [type]="showOld?'text':'password'" formControlName="oldPass" class="form-control">
+            <div class="input-group-append">
+            <button class="input-group-text btn btn-light" (click)="showOld=!showOld" mat-icon-button>
+              <mat-icon *ngIf="!showOld">visibility</mat-icon>
+              <mat-icon *ngIf="showOld">visibility_off</mat-icon>
+            </button>
+            </div>
+           </div>
+          
+         </div>
+         <div class="col-12">
+           <label style="color:#3f51b5">New Password</label>
+           <div class="input-group">
+           <input [type]="showNew?'text':'password'" formControlName="newPass" class="form-control"> 
+
+               <div class="input-group-append">
+               <button class="input-group-text btn btn-light" (click)="showNew=!showNew" mat-icon-button>
+                <mat-icon *ngIf="!showNew">visibility</mat-icon>
+                <mat-icon *ngIf="showNew">visibility_off</mat-icon>
+              </button>
+               </div>
+           </div>
+         </div>
+         <div class="col-12">
+           <label style="color:#3f51b5" for="">Confirm Password</label>
+          <div class="input-group">
+           <input [type]="showConf?'text':'password'" formControlName="confirmPass" class="form-control">
+
+            <div class="input-group-append">
+  <button class="input-group-text btn btn-light" (click)="showConf=!showConf" mat-icon-button>
+    <mat-icon *ngIf="!showConf">visibility</mat-icon>
+    <mat-icon *ngIf="showConf">visibility_off</mat-icon>
+  </button>
+            </div>
+          </div>
+         </div>
+        </div>
+     
+          </form>
+          <div class="row mt-3 mb-2">
+           <!-- <div class="col-9"></div> -->
+           <div class="col-12">
+             <button class="btn btn-success col-12" mat-raised-button>Update</button>
+           </div>
+           <!-- <div class="col-4"></div> -->
+          </div>
+    </mat-tab>
+    
+  </mat-tab-group>
+
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='singleGroup'">
+  <select name="groupList"  [(ngModel)]="selectedLeader" id="list" class="form-control" >
+    <option value="">Select group</option>
+    <option *ngFor="let g of this.data?.content" value="{{g.id}}">{{g.group_name}} - {{g.leader_name}}</option>
+  </select>
+  <div class="row mt-3">
+    <div class="col-8"></div>
+    <div class="col-2">
+      <button class="btn btn-success" mat-raised-button (click)="onClose(selectedLeader)">Add</button>
+    </div>
+  </div>
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='singleMember'">
+
+  <select #leaderID (change)="selectMember(leaderID.value)"  name="groupList" id="list" class="form-control">
+    <option value="">Select group</option>
+    <option *ngFor="let g of this.data?.content?.leader" value="{{g.id}}"> {{g.group_name}} - {{g.user_name}}</option>
+  </select>
+  <select name="groupList" [(ngModel)]="selectedMember" id="list" class="form-control mt-2">
+    <option value="">Select member</option>
+    <option *ngFor="let m of this.memberList" value="{{m.id}}"> {{m.user_name}}</option>
+  </select>
+  <div class="row mt-3">
+    <div class="col-8"></div>
+    <div class="col-2">
+      <button class="btn btn-success" (click)="onClose(selectedMember)" mat-raised-button>Add</button>
+    </div>
+  </div>
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='progress'">
+ 
+  <table class="table table-hover">
+    <thead>
+      <tr style="background-color:#3f51b5;color:white">
+        <th scope="col">#</th>
+        <th scope="col">Component</th>
+        <th class="text-center" scope="col">Status</th>
+        <!-- <th scope="col">Handle</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prog of data?.content; let i=index;">
+        <ng-container *ngIf="prog.title!='Menu Setup'">
+          <td [ngClass]="prog.count_dt>0?'text-muted':''" scope="row">{{i+1}}</td>
+          <td [ngClass]="prog.count_dt>0?'text-muted':''">
+            {{prog.title}}
+          </td>
+          <td class="text-center"> <mat-icon matTooltip="Pending!" *ngIf="prog.count_dt==0" style="color:rgb(179, 141, 3);vertical-align:-6px; font-size:20px">error</mat-icon> <mat-icon matTooltip="Provisionally completed." *ngIf="prog.count_dt>0" style="color:green;vertical-align:-6px; font-size:20px">check_circle</mat-icon> </td>
+          <!-- <td>@mdo</td> -->
+        </ng-container>
+        <ng-container *ngIf="prog.title=='Menu Setup'">
+         <td colspan="3">
+        <div [ngClass]="prog.count_dt>0?'text-muted':''" > {{i+1}} </div>  
+          <mat-accordion>
+            <mat-expansion-panel hideToggle style="width:93%;margin-left:3%;margin-top:-3%">
+              <mat-expansion-panel-header >
+               
+                <!-- <mat-panel-title >
+                  This is the 
+                </mat-panel-title> -->
+                <mat-panel-description style="margin-left:9.5%;width:100%">
+                  
+                    <!-- <div class="col-2">{{i+1}}</div> -->
+                    <small>Menu Setup</small>
+                    <!-- <div class="col-2">8</div> -->
+                  
+                </mat-panel-description>
+                <circle-progress
+                [percent]="quant"
+                [radius]="10"
+                [outerStrokeWidth]="2"
+                [innerStrokeWidth]="2"
+                [outerStrokeColor]="'#FFFFFF'"
+                [innerStrokeColor]="'#FFFFFF'"
+                [animation]="true"
+                [animationDuration]="300"
+                titleFontSize="8"
+                [titleColor]="'#FFFFFF'"
+            unitsFontSize="0"
+            
+            subtitleFontSize="8"
+            [backgroundColor]="quant>25?(quant>50?(quant>75?'#78C000':'#0bdce0'):'#FDB900'):'#FF6347'"
+            style="cursor:pointer;"
+               
+                matTooltip="{{quant | number: '1.0-0'}}% complete. Click to check progress details..."
+              ></circle-progress>
+              </mat-expansion-panel-header>
+             
+                <table class="table table-hover">
+                  <thead>
+                    <tr style="background-color:#3f51b5;color:white">
+                      <th scope="col">#</th>
+                      <th scope="col">Component</th>
+                      <th class="text-center" scope="col">Status</th>
+                      <!-- <th scope="col">Handle</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let menu of prog.menu_list; let j=index;">
+                      <td [ngClass]="menu.count_dt>0?'text-muted':''">{{j+1}}</td>
+                      <td [ngClass]="menu.count_dt>0?'text-muted':''">{{menu.title}}</td>
+                      <td class="text-center"> <mat-icon matTooltip="Pending!" *ngIf="menu.count_dt==0" style="color:rgb(179, 141, 3);vertical-align:-6px; font-size:20px">error</mat-icon> <mat-icon matTooltip="Provisionally completed." *ngIf="menu.count_dt>0" style="color:green;vertical-align:-6px; font-size:20px">check_circle</mat-icon> </td>
+
+                      </tr>
+                      </tbody>
+                    </table>
+                
+               
+            </mat-expansion-panel>
+            </mat-accordion>
+         </td>
+        </ng-container>
+      
+      </tr>
+    
+    </tbody>
+  </table>
+  
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='showAud'">
+  <h2 style="background-color:#3f51b5;color:white ;">Audience</h2>
+  <br>
+  {{data.content}}
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='sug_box'">
+  <h2 style="color:#ff9800">Write suggestion</h2>
+  <br>
+  <form [formGroup]="suggForm" class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label><h2>Write suggestion...({{this.suggForm.controls.sugg_text.value.length}}/1000)</h2></mat-label>
+      <textarea matInput name="" id="" cols="6" rows="6" maxlength="1000" formControlName="sugg_text" class="form-control"></textarea>
+
+    </mat-form-field>
+
+  </form >
+  <!-- {{data.content}} -->
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-6">
+     
+    </div>
+    <div class="col-2 mt-2 float-end">
+      <button style="background-color:#ff9800;color:white" [disabled]="suggForm.invalid" (click)="sendSugg()" mat-mini-fab>
+        <mat-icon>navigate_next</mat-icon>
+       </button>
+    </div>
+  </div>
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='lost'">
+    <h2 style="color:#ff9800">Report Items</h2> 
+  <div class="row">
+   
+    <div class="col-12">
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="category" >
+        <mat-radio-button value="L" >Lost</mat-radio-button> &nbsp;
+
+        <mat-radio-button value="F" >Found</mat-radio-button>
+
+    </mat-radio-group>
+    </div>
+    </div>
+    <form [formGroup]="lostFoundForm" class="example-form">
+      <div class="row mt-2">
+        <div class="col-12">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Choose a date</mat-label>
+            <input formControlName="dateReported" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        </div>
+      <div class="row mt-2">
+        <div class="col-12">
+          <mat-form-field class="example-full-width" >
+            <mat-label>Item name</mat-label>
+            <input  matInput formControlName="item_name" placeholder="Name..." value="Sushi">
+          </mat-form-field>
+        </div>
+      </div>
+     <div class="row mt-2">
+      <div class="col-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="Leave a description"></textarea>
+        </mat-form-field>
+      </div>
+     </div>
+     <div class="row mt-2">
+      <div class="col-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>Remarks</mat-label>
+          <textarea matInput formControlName="remarks" placeholder="Leave remarks"></textarea>
+        </mat-form-field>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-4"></div>
+      <div class="col-6">
+       
+      </div>
+      <div class="col-2 mt-2 float-end">
+        <button style="background-color:#ff9800;color:white" (click)="report()" mat-mini-fab>
+          <mat-icon>navigate_next</mat-icon>
+         </button>
+      </div>
+    </div>
+    </form>
+  </div>
+ <div mat-dialog-content [hidden]="data?.flag!='faqFlag'">
+  <ng-container *ngFor="let q of data.content">
+   <h3  class="px-2 faq"> <b> Q: {{q.quest}} </b> </h3>
+   <p class="ans px-2"> <b> A: {{q.ans}} </b> </p>
+  </ng-container>
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='lostDash'">
+  <div class="row">
+   
+    <div class="col-12 float-end">
+    <mat-radio-group aria-label="Select an option" (change)="filterData()" [(ngModel)]="category1" >
+        <mat-radio-button value="L" >Lost</mat-radio-button> &nbsp;&nbsp;&nbsp;
+
+        <mat-radio-button value="F" >Found</mat-radio-button>
+
+    </mat-radio-group>
+    </div>
+    </div>
+  <table class="table mt-2">
+    <thead style="background-color:#ff9800;color:white">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Reported On</th>
+        <th scope="col">Item(s) {{category1=='L'?'lost':'found'}}</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let lost of lostFoundFilterData;let i=index">
+      <tr>
+        <td >{{i+1}}</td>
+        <td>{{lost.lf_date.substr(0,10)}}</td>
+        <td>{{lost.item_name}}</td>
+        <td>
+          <mat-icon class="text-muted" (click)="openBottomSheetLost(lost)">info</mat-icon>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='calendar'">
+  
+ 
+    <!-- <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>TOAST UI Calendar App DEMO</title>
+       
+    </head> -->
+    <section class="app-column">
+      <nav class="navbar">
+        <div class="dropdown">
+          <!-- <div class="dropdown-trigger">
+            <button class="button is-rounded" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span class="button-text"></span>
+              <span class="dropdown-icon toastui-calendar-icon toastui-calendar-ic-dropdown-arrow"></span>
+            </button>
+          </div> -->
+          <div >
+            <!-- <select class="form-control" (change)="changeView($event)">
+              <option value="W">Weekly</option>
+              <option value="M">Monthly</option>
+              <option value="D">Day</option>
+    
+            </select> -->
+            <!-- <div class="dropdown-content">
+              <a  class="dropdown-item" data-view-name="month">Monthly</a>
+              <a  class="dropdown-item" data-view-name="week">Weekly</a>
+              <a  class="dropdown-item" data-view-name="day">Daily</a>
+            </div> -->
+            <mat-form-field appearance="fill">
+              <mat-label></mat-label>
+              <mat-select (selectionChange)="changeView($event)">
+                <mat-option value="W" selected="true">
+                  Weekly
+                </mat-option>
+                <mat-option value="M">
+                  Monthly
+                </mat-option>
+                <mat-option value="D">
+                  Daily
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <button class="button is-rounded today btn btn-warning" (click)="today()">Today</button>
+        <h2>
+          {{todayDt}}
+        </h2>
+        <button mat-mini-fab color="warn" class="button is-rounded prev btn btn-warning" (click)="previous()">
+          <img alt="prev" src="../../../assets/images/ic-arrow-line-left.png" srcset="
+          ../../../assets/images/ic-arrow-line-left@2x.png 2x,
+          ../../../assets/images/ic-arrow-line-left@3x.png 3x
+            ">
+        </button>
+        <button mat-mini-fab  color="warn" class="button is-rounded next btn btn-warning" (click)="next()">
+          <img alt="next" src="../../../assets/images/ic-arrow-line-right.png" srcset="
+          ../../../assets/images/ic-arrow-line-right@2x.png 2x,
+          ../../../assets/images/ic-arrow-line-right@3x.png 3x
+            ">
+        </button>
+        <span class="navbar--range"></span>
+        <!-- <div class="nav-checkbox">
+          <input class="checkbox-collapse" type="checkbox" id="collapse" value="collapse">
+          <label for="collapse">Collapse duplicate events and disable the detail popup</label>
+        </div> -->
+      </nav>
+      <main id="app"></main>
+    </section>
+    
+    <div #calendar></div>
+
+  <!--  -->
+ </div>
+ <div mat-dialog-content [hidden]="data?.flag!='reserv_rest'">
+  <div class="row">
+    <div class="col-12">
+      <label for="">Name</label>
+      <input class="form-control p-2" type="text" placeholder="name"
+        name="name">
+    </div>
+    <div class="col-6">
+      <label for="">Phone</label>
+      <input class="form-control p-2" type="text" placeholder="Phone No"
+        name="phone_no">
+    </div>
+    <div class="col-6">
+      <label for="">Email</label>
+      <input class="form-control p-2" type="text" placeholder="Email"
+        name="email">
+    </div>
+    
+    <div class="col-6">
+      <label for="">Date</label>
+      <input class="form-control p-2" type="date"
+        name="date">
+    </div>
+    <div class="col-6">
+      <label for="">Start Time</label>
+      <input class="form-control p-2" type="text" placeholder="name"
+        name="st_time">
+    </div>
+    
+    <div class="col-6">
+      <label for="">End Time</label>
+      <input class="form-control p-2" type="text" placeholder="name"
+        name="end_time">
+    </div>
+    <div class="col-6">
+      <label for="">Special Request</label>
+      <input class="form-control p-2" type="text" placeholder="Special Request"
+        name="special_req">
+    </div>
+  </div>
+
+  <div class="row float-end mt-5">
+    <div class="col-12">
+      <button mat-raised-button class="btn btn-success" (click)="showVipList()"> Update </button>
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-content [hidden]="data?.flag!='noRoom'">
+ <small><strong>Please enter the following information to access the directory</strong> </small> 
+
+  <div class="row">
+    <div class="col-12">
+      <label for="">Room No.</label>
+      <input class="form-control p-2" type="text" placeholder="Room No."
+        name="name" #roomNo>
+    </div>
+   
+  </div>
+
+  <div class="row float-end mt-5">
+    <div class="col-12">
+      <!-- <button mat-raised-button class="btn btn-danger" (click)="onClose(0)"> Close </button> -->
+      <button mat-raised-button class="btn btn-success" (click)="submitRoom(roomNo.value)"> Update </button>
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-content [hidden]="data?.flag!='noRoomCheck'">
+ <small><strong>Please enter the following information to access the directory</strong> </small> 
+  <div class="row">
+    <div class="col-12">
+      <label for="">Room No.</label>
+      <input class="form-control p-2" type="text" #room placeholder="Room No."
+        name="name">
+    </div>
+   
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label for="">Check In</label>
+      <input class="form-control p-2" #checkIn type="datetime-local" placeholder="Room No."
+        name="name">
+    </div>
+   
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label for="">Check Out</label>
+      <input class="form-control p-2" #checkOut type="datetime-local" placeholder="Room No."
+        name="name">
+    </div>
+   
+  </div>
+
+  <div class="row float-end mt-5">
+    <div class="col-12">
+      <button mat-raised-button class="btn btn-success" (click)="saveRoomCheck(room.value,checkIn.value,checkOut.value)"> Update </button>
+
+    </div>
+  </div>
+</div>
+  </div>
+

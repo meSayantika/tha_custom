@@ -1,0 +1,1907 @@
+<div class="content-div">
+  <mat-card>
+    <input type="color" hidden name="" id="backCol" [(ngModel)]="bgCol">
+    <input type="color" hidden name="" id="textCol" [(ngModel)]="txtCol">
+    <input type="color" hidden name="" id="borderCol" [(ngModel)]="bordCol">
+    <input type="color" hidden name="" id="buttonCol" [(ngModel)]="buttonCol">
+    <input type="color" hidden name="" id="innerCol" [(ngModel)]="innerCol">
+    <input type="color" hidden name="" id="expCol" [(ngModel)]="expCol">
+
+    <mat-card-title>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Directory Design</li>
+        </ol>
+        <button mat-mini-fab class="directory_button" matTooltip="Preview" (click)="showDirectory()">
+          <mat-icon> visibility </mat-icon>
+        </button>
+
+      </nav>
+
+    </mat-card-title>
+
+
+    <hr>
+    <div class="dir">
+
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle matTooltip="Background color" (click)="changeBackCol()">
+          <mat-icon [ngStyle]="{'color':bgCol}">format_color_fill</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle [ngStyle]="{'color':txtCol}" matTooltip="Text color" (click)="changeTextCol()"> <mat-icon
+            style="border-color: black;">format_color_text</mat-icon></mat-button-toggle>
+        <mat-button-toggle matTooltip="Expansion body color" (click)="changeExpCol()">
+          <mat-icon [ngStyle]="{'background-color':expCol}">gradient</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle matTooltip="Font Family" [matMenuTriggerFor]="font_fam">
+          <mat-icon>title</mat-icon></mat-button-toggle>
+        <mat-button-toggle matTooltip="Heading Size" [matMenuTriggerFor]="headSize">
+          <!-- <h5> <b> H </b></h5> -->
+          <mat-icon>
+            h_plus_mobiledata
+          </mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle matTooltip="Sub heading Size" class="p-1 pt-3" [matMenuTriggerFor]="subSize">
+          <h5> <b> S </b></h5>
+        </mat-button-toggle>
+        <mat-button-toggle matTooltip="Other text font sizes" [matMenuTriggerFor]="txtSize">
+          <mat-icon>
+            text_fields
+          </mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle matTooltip="Button color" (click)="changeButtonCol()">
+          <mat-icon [ngStyle]="{'color':buttonCol}"> format_paint</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle matTooltip="Inner border color" (click)="changeInnerCol()">
+          <mat-icon [ngStyle]="{'color':innerCol}">border_inner</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle matTooltip="Outer border color" [ngStyle]="{'color':bordCol}"
+          (click)="changeBordCol()"><mat-icon>border_outer</mat-icon></mat-button-toggle>
+        <!-- <mat-button-toggle  matTooltip="Border Thickness" [matMenuTriggerFor]="thickness"> <mat-icon>border_style</mat-icon></mat-button-toggle> -->
+
+        <mat-button-toggle matTooltip=" Outer border Width" [matMenuTriggerFor]="borderType">
+          <mat-icon>line_weight</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle matTooltip="Divider design" [matMenuTriggerFor]="divStyles">
+          <mat-icon>power_input</mat-icon>
+        </mat-button-toggle>
+
+      </mat-button-toggle-group>
+      <mat-menu #headSize="matMenu">
+        <button mat-menu-item (click)="setHeaderSize('32px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:32px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('24px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:24px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('18.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:18.72px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('16px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:16px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('13.28px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:13.28px">Header</span>
+        </button>
+
+        <button mat-menu-item (click)="setHeaderSize('10.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:10.72px">Header</span>
+        </button>
+
+      </mat-menu>
+      <mat-menu #divStyles="matMenu">
+        <button mat-menu-item *ngFor="let image of imageData" style="height:60%">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <!-- {{image.id}} -->
+          <img [src]="url1+image.img_path" height="30" width="228" alt="" (click)="setPath(url1+image.img_path)">
+        </button>
+
+      </mat-menu>
+      <mat-menu #thickness="matMenu">
+        <button mat-menu-item (click)="setHeaderSize('32px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:32px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('24px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:24px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('18.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:18.72px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('16px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:16px">Header</span>
+        </button>
+        <button mat-menu-item (click)="setHeaderSize('13.28px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:13.28px">Header</span>
+        </button>
+
+        <button mat-menu-item (click)="setHeaderSize('10.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:10.72px">Header</span>
+        </button>
+
+      </mat-menu>
+      <mat-menu #subSize="matMenu">
+
+        <button mat-menu-item (click)="setSubheaderSize('18.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:18.72px">Sub-header</span>
+        </button>
+        <button mat-menu-item (click)="setSubheaderSize('16px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:16px">Sub-header</span>
+        </button>
+        <button mat-menu-item (click)="setSubheaderSize('13.28px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:13.28px">Sub-header</span>
+        </button>
+
+        <button mat-menu-item (click)="setSubheaderSize('10.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:10.72px">Sub-header</span>
+        </button>
+
+      </mat-menu>
+      <mat-menu #txtSize="matMenu">
+
+        <button mat-menu-item (click)="setOthSize('18.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:18.72px">My Text</span>
+        </button>
+        <button mat-menu-item (click)="setOthSize('16px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:16px">My Text</span>
+        </button>
+        <button mat-menu-item (click)="setOthSize('13.28px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:13.28px">My Text</span>
+        </button>
+
+        <button mat-menu-item (click)="setOthSize('10.72px')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span style="font-size:10.72px">My Text</span>
+        </button>
+
+      </mat-menu>
+      <mat-menu #font_fam="matMenu">
+        <button mat-menu-item (click)="setFont('Arial, Helvetica, sans-serif')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family:Arial, Helvetica, sans-serif;">Ariel</p>
+        </button>
+
+        <button mat-menu-item (click)="setFont('Times New Roman, serif')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family: Times New Roman, serif;">Times New Roman</p>
+        </button>
+        <button mat-menu-item (click)="setFont('Trebuchet MS, sans-serif')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family: Trebuchet MS, sans-serif;">Trebuchet MS</p>
+        </button>
+        <button mat-menu-item (click)="setFont('Courier New, monospace')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family: Courier New, monospace;">Courier New</p>
+        </button>
+        <button mat-menu-item (click)="setFont('Brush Script MT, cursive')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family: Brush Script MT, cursive;">Brush Script MT</p>
+        </button>
+
+        <button mat-menu-item (click)="setFont('Comic Sans MS, cursive')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family:Comic Sans MS, cursive;">Comic Sans MS
+          </p>
+        </button>
+        <button mat-menu-item (click)="setFont('cursive')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family:cursive;">Cursive
+          </p>
+        </button>
+        <button mat-menu-item (click)="setFont('Gill Sans, sans-serif')">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <p style="font-family:Gill Sans, sans-serif;">Gill Sans
+          </p>
+        </button>
+
+      </mat-menu>
+      <mat-menu #borderType="matMenu">
+        <button (click)="getType('2px')" mat-menu-item>
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          2px
+        </button>
+        <button (click)="getType('3px')" mat-menu-item>
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          3px
+        </button>
+        <button (click)="getType('4px')" mat-menu-item>
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          4px
+        </button>
+        <button (click)="getType('5px')" mat-menu-item>
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          5px
+        </button>
+        <button (click)="getType('6px')" mat-menu-item>
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          6px
+        </button>
+        <button (click)="getType('7px')" mat-menu-item>
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          7px
+        </button>
+        <button (click)="getType('8px')" mat-menu-item>
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          8px
+        </button>
+
+      </mat-menu>
+    </div>
+
+    <div class="container dir">
+
+      <!-- <a routerLink="/directory/directory_home" fragment="r_3"> R 3</a> -->
+
+      <!-- outer inner border color problem -->
+      <div class="row setDim" id="dirRow"
+        [ngStyle]="{'background-color':bgCol,'color':txtCol,'border':'solid '+bordCol+' '+thick}">
+
+        <div class="col-12 setCol "
+          [ngStyle]="{'background-color':bgCol,'color':txtCol,'border':'solid 2px '+innerCol}">
+          <div class="dividerPad">
+            <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+          </div>
+          <!-- <img src="/assets/images/dirLogo.jpeg" class="image mt-3" width="100%" height="18%" /> -->
+          <ng-container *ngIf="cover.length == 0">
+
+            <div class="d-flex flex-row justify-content-center mt-2">
+              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse image</button>
+              <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('cover')"> Stock image
+                </button>
+            </div>
+
+            <div *ngIf="showBrouseImage" class="row mt-3">
+              <div class="col-12">
+                <label for="" style=" margin-left: 35%;">Choose Image:</label>
+                <input type="file" name="av_img_path" (change)="event_image_change($event, 'cover')"
+                  class="form-control show">
+              </div>
+            </div>
+          </ng-container>
+          <div *ngIf="coverURL" class="containerTop">
+            <img class="mt-2 " [src]="coverURL" style="width: 100%;height:100%" alt="">
+            <button (click)="onRemoveCover()" class="top-rightTopBtn" mat-mini-fab color="warn"
+              aria-label="Example icon button with a home icon">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="row text-center mt-4">
+            <div class="col-12">
+              <span [ngStyle]="{'font-size':headerSize}">PERSONAL CONCIERGE
+              </span>
+            </div>
+            <div class="col-12 mt-2">
+              <span class="mkUpper" [ngStyle]="{'font-size':headerSize}"> {{getAvatarData?.msg[0]?.avt_name}} </span>
+            </div>
+            <div class="col-12 mt-2">
+              <span [ngStyle]="{'font-size':subHeaderSize}">COMMUNICATIONS & RESERVATION CENTER!</span>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <img src="{{spstockImg}}" class="image1" width="150" height="150" style="border-radius:50%" />
+          </div>
+          <div class="text-center mt-3">
+            <span id="perCon" style="cursor:pointer"
+              [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}" (click)="openAbout()">
+              Find out more about your Personal Concierge
+            </span>
+          </div>
+          <div class="text-center mt-4">
+            <button mat-raised-button type="button" class="btn btn-danger btn-lg" (click)="openEmergencyMessages()">
+              EMERGENCY MESSAGES
+            </button>
+          </div>
+          <div class="text-center mt-4">
+            <button mat-button [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">REPORT AN
+              EMERGENCY</button>
+          </div>
+          <div class="text-center mt-3">
+            <button mat-raised-button type="button" style="cursor:pointer"
+              [ngStyle]="{'background-color':buttonCol,'color':txtCol}" (click)="openMessageCenter()">MESSAGE
+                CENTER</button>
+          </div>
+          <div class="text-center mt-5" *ngIf="getVIPFlag=='V'">
+            <button *ngIf="count" mat-raised-button type="button" matBadge="{{count}}" matBadgeColor="warn"
+              class="btn btn-light btn-lg" style="color:rgb(2, 119, 2)" (click)="getVIPMessages()">VIP MESSAGES</button>
+            <button *ngIf="!count" mat-raised-button type="button" class="btn btn-light btn-lg"
+              style="color:rgb(2, 119, 2)" (click)="getVIPMessages()">VIP MESSAGES</button>
+
+          </div>
+          <!-- <div class="text-center mt-5">
+             <button *ngIf="count" mat-raised-button type="button" matBadge="{{count}}" matBadgeColor="warn" class="btn btn-light btn-lg" style="color:rgb(2, 119, 2)" (click)="getGroupMessages()">GROUP MESSAGES</button>
+       
+           </div> -->
+          <div class="dividerPad">
+            <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+          </div>
+          <div class="container mt-4">
+            <div class="row">
+              <div class="col-12">
+                <mat-accordion>
+                  <mat-expansion-panel class="mt-2" hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}"
+                    #panelFD>
+                    <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol}">
+                      <mat-panel-title class="matAc" [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                        FRONT DESK
+                      </mat-panel-title>
+                      <mat-icon>{{panelFD.expanded ? 'north' : 'south' }}</mat-icon>
+                      <mat-panel-description class="ml-5 float-end"
+                        [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div class="mat-expansion-panel-content" [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                      <div class="row pb-3 text-center">
+                        <div class="col-12 text-center">
+
+                          <ng-container *ngIf="fd.length == 0">
+
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse image</button>
+                              <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('fd')">
+                                 Stock image</button>
+                            </div>
+
+                            <div *ngIf="showBrouseImage" class="row mt-3">
+                              <div class="col-12">
+                                <label for="">Choose Image:</label>
+                                <input type="file" name="av_img_path" (change)="event_image_change($event, 'fd')"
+                                  class="form-control display">
+                              </div>
+                            </div>
+                          </ng-container>
+                          <div *ngIf="fdURL" class="containerCollapse">
+                            <img class="mt-2 " [src]="fdURL" style="width: 100%;height:100%" alt="">
+                            <button (click)="onRemoveFD()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                              aria-label="Example icon button with a home icon">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row pb-3 px-3">
+                        <div class="col-6 fw-bold text-start">
+                          <button mat-icon-button [matMenuTriggerFor]="menuIconFd"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[0].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[0].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[0].name" alt="">
+                          </button>
+                          <mat-menu #menuIconFd="matMenu">
+                            <div class="row">
+
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('fdCall',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+
+                            </div>
+                          </mat-menu>
+                        </div>
+                       
+                        <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center"
+                          [ngStyle]="{'font-size':othSize?othSize:''}">CALL</div>
+                      </div>
+
+
+                    </div>
+
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel class="mt-3" hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}"
+                    #panelWIFI>
+                    <mat-expansion-panel-header [ngStyle]="{'background-color':bgCol}">
+                      <mat-panel-title class="matAc" [ngStyle]="{'color':txtCol,'font-size':subHeaderSize}">
+                        WIFI
+                      </mat-panel-title>
+                      <mat-icon>{{panelWIFI.expanded ? 'north' : 'south' }}</mat-icon>
+                      <mat-panel-description class="ml-5 float-end"
+                        [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div class="mat-expansion-panel-content" [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                      <div class="row pb-3 px-3  mt-4">
+                        <div class="col-2 fw-bold text-start">
+
+
+                          <button mat-icon-button [matMenuTriggerFor]="menuIconwifi"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[15].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[15].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[15].name" alt="">
+                          </button>
+                          <mat-menu #menuIconwifi="matMenu">
+                            <div class="row">
+
+                              <div class="col-6" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('wifiCall',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                          </mat-menu>
+                        </div>
+
+                        <div class="col-10 fw-bold text-end d-flex justify-content-end align-items-center"
+                          [ngStyle]="{'font-size':othSize}">
+                          <div class="input-group" style="display: contents;">
+                            <input [type]="!showText?'password':'text'" class="form-control"
+                              placeholder="Enter password" [(ngModel)]="wifi_pass" aria-label=""
+                              aria-describedby="basic-addon1">
+                            <div class="input-group-append">
+                              <span class="input-group-text" style="height:38px">
+                                <button [matTooltip]="showText?'hide':'show'" mat-button
+                                  class="btn visible_button border-black" (click)="showText = !showText">
+                                  <mat-icon style="margin-bottom: 4px;" *ngIf="showText">visibility_off</mat-icon>
+                                  <mat-icon style="margin-bottom: 4px;" *ngIf="!showText">visibility</mat-icon>
+                                </button>
+                              </span>
+
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+
+                    </div>
+                  </mat-expansion-panel>
+
+
+                  <mat-expansion-panel class="mt-3" #panelRS hideToggle
+                    [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="matAc"
+                        [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                        <span class="mkUpper"> {{guestRoomService?.name}} </span>
+                      </mat-panel-title>
+                      <mat-icon>{{panelRS.expanded ? 'north' : 'south' }}</mat-icon>
+
+                      <mat-panel-description [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                      </mat-panel-description>
+
+                    </mat-expansion-panel-header>
+                    <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+
+                      <div class="row pb-3 px-3">
+                        <div class="col-12 text-center">
+                          <ng-container *ngIf="rs.length == 0">
+
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse image
+                               </button>
+                              <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('rs')">
+                                Stock image</button>
+                            </div>
+
+                            <div *ngIf="showBrouseImage" class="row mt-3">
+                              <div class="col-12">
+                                <label for="">Choose Image:</label>
+                                <input type="file" name="av_img_path" (change)="event_image_change($event, 'rs')"
+                                  class="form-control display">
+                              </div>
+                            </div>
+                          </ng-container>
+                          <div *ngIf="rsURL" class="containerCollapse">
+                            <img class="mt-2 " [src]="rsURL" style="width: 100%;height:100%" alt="">
+                            <button (click)="onRemoveRS()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                              aria-label="Example icon button with a home icon">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row pb-3 px-3" id="matAc4" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 fw-bold text-start">
+                          <button mat-icon-button [matMenuTriggerFor]="menuRsMenu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[1].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[1].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[1].name" alt="">
+
+                          </button>
+                          <mat-menu #menuRsMenu="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('rsMenu',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                            <!-- <div class="iconDiv">
+                          <div class="iconList">
+                            <ng-container >
+                              
+                            </ng-container>
+                            
+                           
+                          
+                      </div>
+                          </div> -->
+                          </mat-menu>
+
+                        </div>
+                        <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center"
+                          style="cursor:pointer" (click)="open_popup_window(guestRoomService?.id)">MENU & INFO</div>
+                      </div>
+                      <div class="row pb-4 px-3" id="matAc5" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 text-start">
+                          <button mat-icon-button [matMenuTriggerFor]="menuRsCall"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[2].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[2].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[2].name" alt="">
+
+                          </button>
+                          <mat-menu #menuRsCall="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('rsCall',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                            <!-- <div class="iconDiv">
+                          <div class="iconList">
+                            <ng-container >
+                              
+                            </ng-container>
+                            
+                           
+                          
+                      </div>
+                          </div> -->
+                          </mat-menu>
+                        </div>
+                        <div class="col-6  fw-bold text-end d-flex justify-content-end align-items-center">CALL / CHAT
+                        </div>
+                      </div>
+                      <div class="row pb-4 px-3" id="matAc6" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 text-start">
+                          <button mat-icon-button [matMenuTriggerFor]="menuRsOrder"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[3].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[3].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[3].name" alt="">
+
+                          </button>
+                          <mat-menu #menuRsOrder="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('rsOrder',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                            <!-- <div class="iconDiv">
+                          <div class="iconList">
+                            <ng-container >
+                              
+                            </ng-container>
+                            
+                           
+                          
+                      </div>
+                          </div> -->
+                          </mat-menu>
+                        </div>
+                        <div class="col-6  fw-bold text-end d-flex justify-content-end align-items-center">ORDER</div>
+                      </div>
+
+                    </div>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel class="mt-3" *ngIf="ent_cal=='Y'" #panelEnt hideToggle
+                    [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                        ENTERTAINMENT
+                      </mat-panel-title>
+                      <mat-icon>{{panelEnt.expanded ? 'north' : 'south' }}</mat-icon>
+
+                      <mat-panel-description [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                        <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                        <!-- CALENDAR -->
+                      </mat-panel-description>
+                      <!-- {{this.menuShow[0]?.ent_cal=='Y'}} -->
+
+                    </mat-expansion-panel-header>
+                    <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                      <div class="row pb-3 ">
+                        <div class="col-12 text-center">
+                          <ng-container *ngIf="ent.length == 0">
+
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse image</button>
+                              <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('ent')">
+                                 Stock image</button>
+                            </div>
+
+                            <div *ngIf="showBrouseImage" class="row mt-3">
+                              <div class="col-12">
+                                <label for="">Choose Image:</label>
+                                <input type="file" name="av_img_path" (change)="event_image_change($event, 'ent')"
+                                  class="form-control display">
+                              </div>
+                            </div>
+                          </ng-container>
+                          <div *ngIf="entURL" class="containerCollapse">
+                            <img class="mt-2" [src]="entURL" style="width: 100%;height:100%" alt="">
+                            <button (click)="onRemoveENT()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                              aria-label="Example icon button with a home icon">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row pb-3 px-3" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 fw-bold text-start">
+                          <button mat-icon-button [matMenuTriggerFor]="menuEntView"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[4].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[4].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[4].name" alt="">
+
+                          </button>
+                          <mat-menu #menuEntView="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('entView',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                            <!-- <div class="iconDiv">
+                          <div class="iconList">
+                            <ng-container >
+                              
+                            </ng-container>
+  
+                      </div>
+                          </div> -->
+                          </mat-menu>
+                        </div>
+                        <div class="col-6  fw-bold text-end d-flex justify-content-end align-items-center">VIEW</div>
+
+                      </div>
+                      <div class="row pb-4 px-3" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 text-start">
+                          <mat-icon matTooltip="Edit" [hidden]="ent_cal=='Y'" id='cal'
+                            class="setIcon text-danger">edit</mat-icon>
+
+
+
+                        </div>
+                        <div class="col-6 fw-bold text-end">
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel class="mt-3" *ngIf="fun_dir=='Y'" #panelFD hideToggle
+                    [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                        FUN DIRECTORY
+                      </mat-panel-title>
+                      <mat-icon>{{panelFD.expanded ? 'north' : 'south' }}</mat-icon>
+
+                      <mat-panel-description [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                        <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                        <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                      </mat-panel-description>
+
+                    </mat-expansion-panel-header>
+                    <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                      <div class="row pb-3">
+                        <div class="col-12 text-center">
+                          <ng-container *ngIf="fun.length == 0">
+
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse image</button>
+                              <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('fun')">
+                                Stock image</button>
+                            </div>
+
+                            <div *ngIf="showBrouseImage" class="row mt-3">
+                              <div class="col-12">
+                                <label for="">Choose Image:</label>
+                                <input type="file" name="av_img_path" (change)="event_image_change($event, 'fun')"
+                                  class="form-control display">
+                              </div>
+                            </div>
+                          </ng-container>
+                          <div *ngIf="funURL" class="containerCollapse">
+                            <img class="mt-2 " [src]="funURL" style="width: 100%;height:100%" alt="">
+                            <button (click)="onRemoveFun()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                              aria-label="Example icon button with a home icon">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+
+
+                        <div class="row  pb-4 px-3 mt-3" [ngStyle]="{'font-size':othSize}">
+                          <div class="col-6 fw-bold text-start">
+                            <div class="row">
+                              <!-- <div class="col-12 mt-3">CONCIERGE FAQ's</div> -->
+                              <div class="col-12 ">
+                                <button mat-icon-button [matMenuTriggerFor]="menuFunDir"
+                                  aria-label="Example icon-button with a menu">
+                                  <mat-icon *ngIf="!this.iconList[7].name">add_reaction</mat-icon>
+                                  <img *ngIf="this.iconList[7].name" style="vertical-align:-8px" height="50" width="50"
+                                    [src]="this.iconList[7].name" alt="">
+
+                                </button>
+                                <mat-menu #menuFunDir="matMenu">
+                                  <div class="row">
+                                    <div class="col-4" *ngFor="let icon of iconArr">
+                                      <button mat-menu-item (click)="setIcon('funDirIcon',url1+icon.img_path)">
+                                        <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                      </button>
+                                    </div>
+                                  </div>
+                                </mat-menu>
+                              </div>
+                              <!-- <div class="col-12 mt-3">Need to ask Lucia a question?</div> -->
+                            </div>
+                          </div>
+
+                          <!-- <div class="row"> -->
+                          <div class="col-6 fw-bold text-end">
+                            <div class="row mt-3">
+                              <!-- <div class="col-12 mt-3">VIEW INFO.</div> -->
+                              <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center" (click)="preview_fun()" style="cursor:pointer">VIEW
+                              </div>
+                              <!-- <div class="col-12 mt-3">CHAT/CALL</div> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel class="mt-3" *ngIf="con_faq=='Y'" #panelConf hideToggle
+                    [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                        CONCIERGE FAQs
+                      </mat-panel-title>
+                      <mat-icon>{{panelConf.expanded ? 'north' : 'south' }}</mat-icon>
+
+                      <mat-panel-description [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                        <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                        <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                      </mat-panel-description>
+
+                    </mat-expansion-panel-header>
+                    <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                      <div class="row pb-3">
+                        <div class="col-12 text-center">
+                          <ng-container *ngIf="conf.length == 0">
+
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse image</button>
+                              <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('conf')">
+                                Stock image</button>
+                            </div>
+
+                            <div *ngIf="showBrouseImage" class="row mt-3">
+                              <div class="col-12">
+                                <label for="">Choose Image:</label>
+                                <input type="file" name="av_img_path" (change)="event_image_change($event, 'conf')"
+                                  class="form-control display">
+                              </div>
+                            </div>
+                          </ng-container>
+                          <div *ngIf="confURL" class="containerCollapse">
+                            <img class="mt-2 " [src]="confURL" style="width: 100%;height:100%" alt="">
+                            <button (click)="onRemoveConf()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                              aria-label="Example icon button with a home icon">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3 pb-4 px-3" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 fw-bold text-start">
+                          <div class="row">
+                            <div class="col-12 ">
+                              <button mat-icon-button [matMenuTriggerFor]="menuConFaq"
+                                aria-label="Example icon-button with a menu">
+                                <mat-icon *ngIf="!this.iconList[6].name">add_reaction</mat-icon>
+                                <img *ngIf="this.iconList[6].name" style="vertical-align:-8px" height="50" width="50"
+                                  [src]="this.iconList[6].name" alt="">
+
+                              </button>
+                              <mat-menu #menuConFaq="matMenu">
+                                <div class="row">
+                                  <div class="col-4" *ngFor="let icon of iconArr">
+                                    <button mat-menu-item (click)="setIcon('conFaqIcon',url1+icon.img_path)">
+                                      <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                    </button>
+                                  </div>
+                                </div>
+                              </mat-menu>
+                            </div>
+                            <!-- <div class="col-12 mt-3">FUN DIRECTORY</div> -->
+                            <!-- <div class="col-12 mt-3">Need to ask Lucia a question?</div> -->
+                          </div>
+                        </div>
+
+                        <!-- <div class="row"> -->
+                        <div class="col-6 fw-bold text-end" [ngStyle]="{'font-size':othSize}">
+                          <div class="row mt-3">
+                            <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center"
+                              style="cursor:pointer" (click)="getConciergeFaq()">VIEW INFO.</div>
+                            <!-- <div class="col-12 mt-3">VIEW</div> -->
+                            <!-- <div class="col-12 mt-3">CHAT/CALL</div> -->
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel class="mt-3" *ngIf="photo_ops=='Y'" #panelPO hideToggle
+                    [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                        PHOTO OPS
+                      </mat-panel-title>
+                      <mat-icon>{{panelPO.expanded ? 'north' : 'south' }}</mat-icon>
+
+                      <mat-panel-description [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                        <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                        <!-- FUN, exciting, unique opportunities ... -->
+                      </mat-panel-description>
+
+                    </mat-expansion-panel-header>
+                    <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                      <div class="row pb-3" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-12 text-center">
+                          <ng-container *ngIf="photo.length == 0">
+
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse image</button>
+                              <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('photo')">
+                                 Stock image</button>
+                            </div>
+
+                            <div *ngIf="showBrouseImage" class="row mt-3">
+                              <div class="col-12">
+                                <label for="">Choose Image:</label>
+                                <input type="file" name="av_img_path" (change)="event_image_change($event, 'photo')"
+                                  class="form-control display">
+                              </div>
+                            </div>
+                          </ng-container>
+                          <div *ngIf="photoURL" class="containerCollapse">
+                            <img class="mt-2 " [src]="photoURL" style="width: 100%;height:100%" alt="">
+                            <button (click)="onRemovePhoto()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                              aria-label="Example icon button with a home icon">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row pb-3 px-3" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 fw-bold text-start">
+                          <button mat-icon-button [matMenuTriggerFor]="menuPhotoOps"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[5].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[5].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[5].name" alt="">
+
+                          </button>
+                          <mat-menu #menuPhotoOps="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('photoOps',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                          </mat-menu>
+                        </div>
+                        <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center"
+                          style="cursor:pointer" (click)="openPhotoOps()">VIEW</div>
+
+                      </div>
+
+                    </div>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel class="mt-3" *ngIf="promo=='Y'" #panelProm hideToggle
+                    [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                        PROMOTIONS
+                      </mat-panel-title>
+                      <mat-icon>{{panelProm.expanded ? 'north' : 'south' }}</mat-icon>
+
+                      <mat-panel-description [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                        <!-- FRONT DESK - HOUSEKEEPING -BELLMAN -->
+                        <!-- CONCIERGE FAQs - FUN DIRECTORY -->
+                      </mat-panel-description>
+
+                    </mat-expansion-panel-header>
+                    <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                      <div class="row pb-3 px-3">
+                        <div class="col-12 text-center">
+                          <ng-container *ngIf="promoArr.length == 0">
+
+                            <div class="d-flex flex-row justify-content-center mt-2">
+                              <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse
+                                image</button>
+                              <button class="btn btn-danger ml-3" mat-raised-button
+                                (click)="openstockmodal('promoArr')">  Stock image</button>
+                            </div>
+
+                            <div *ngIf="showBrouseImage" class="row mt-3">
+                              <div class="col-12">
+                                <label for="">Choose Image:</label>
+                                <input type="file" name="av_img_path" (change)="event_image_change($event, 'promoArr')"
+                                  class="form-control display">
+                              </div>
+                            </div>
+                          </ng-container>
+                          <div *ngIf="promoURL" class="containerCollapse">
+                            <img class="mt-2 " [src]="promoURL" style="width: 100%;height:100%" alt="">
+                            <button (click)="onRemovePromo()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                              aria-label="Example icon button with a home icon">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row px-3 mt-3" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-6 fw-bold text-start">
+                          <div class="row">
+                            <!-- <div class="col-12 mt-3">CONCIERGE FAQ's</div> -->
+                            <!-- <div class="col-12 ">FUN DIRECTORY</div> -->
+                            <div class="col-12">
+                              <button mat-icon-button [matMenuTriggerFor]="menuPromo"
+                                aria-label="Example icon-button with a menu">
+                                <mat-icon *ngIf="!this.iconList[8].name">add_reaction</mat-icon>
+                                <img *ngIf="this.iconList[8].name" style="vertical-align:-8px" height="50" width="50"
+                                  [src]="this.iconList[8].name" alt="">
+
+                              </button>
+                              <mat-menu #menuPromo="matMenu">
+                                <div class="row">
+                                  <div class="col-4" *ngFor="let icon of iconArr">
+                                    <button mat-menu-item (click)="setIcon('promoIcon',url1+icon.img_path)">
+                                      <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                    </button>
+                                  </div>
+                                </div>
+                              </mat-menu>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- <div class="row"> -->
+                        <div class="col-6 fw-bold text-end">
+                          <div class="row pb-4 mt-3">
+                            <!-- <div class="col-12 mt-3">VIEW INFO.</div> -->
+                            <!-- <div class="col-12 ">VIEW</div> -->
+                            <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center"
+                              style="cursor:pointer;" (click)="openPromotions()">VIEW</div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="container mt-5 pb-3">
+            <div class="row pb-3">
+              <div class="col-12 text-center">
+                <ng-container *ngIf="banner1.length == 0">
+
+                  <div class="d-flex flex-row justify-content-center mt-2">
+                    <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse 
+                      image</button>
+                    <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('banner1')"> 
+                      Stock images</button>
+                  </div>
+
+                  <div *ngIf="showBrouseImage" class="row mt-3">
+                    <div class="col-12">
+                      <label for="">Choose Image:</label>
+                      <input type="file" name="av_img_path" (change)="event_image_change($event, 'banner1')"
+                        class="form-control display">
+                    </div>
+                  </div>
+                </ng-container>
+                <div *ngIf="banner1_url" class="containerBanner">
+                  <img class="mt-2 " [src]="banner1_url" style="width: 100%;height:100%" alt="">
+                  <button (click)="onRemoveBanner1()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dividerPad">
+            <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+          </div>
+          <div class="container mt-4">
+            <div class="text-center mt-4 text-light">
+              <span [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':headerSize}">RESTAURANTS</span>
+            </div>
+            <mat-accordion>
+              <div *ngFor="let r of getVenuesRest; let i=index">
+
+                <mat-expansion-panel #restPanel hideToggle *ngIf="r.hotel_type!='S'"
+                  [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                      <span class="mkUpper">{{r.name}} </span>
+                    </mat-panel-title>
+                    <mat-icon>{{restPanel.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  </mat-expansion-panel-header>
+                  <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                    <div class="row pb-3 px-3">
+                      <div class="col-12 text-center">
+                        <!-- <div class="custom-dropzoneCollapse" id="rest_drop_{{i}}" *ngIf="restArr[i] == null"
+                          ngx-dropzone [accept]="'image/*'" (change)="onSelectRest($event,i,r.name.split(' ').join())">
+                          <ngx-dropzone-label>
+                            <div>
+                              <h2>Drop your image here!</h2>
+                            </div>
+                          </ngx-dropzone-label>
+                          <ngx-dropzone-image-preview id="la_{{i}}" ngProjectAs="ngx-dropzone-preview"
+                            *ngFor="let c of restArr[i]" [file]="c" [removable]="true" (removed)="onRemoveRest(i)">
+                            <ngx-dropzone-label class="text-center">{{ c.name }} ({{ c.type }})</ngx-dropzone-label>
+                          </ngx-dropzone-image-preview>
+
+                        </div> -->
+                        <ng-container *ngIf="restURL[i] == null" >
+
+                          <div class="d-flex flex-row justify-content-center mt-2">
+                            <button class="btn btn-danger" mat-raised-button (click)="showRestImage=true"> Browse
+                               image</button>
+                            <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodalRest(i,r.name.split(' ').join())">
+                               Stock image</button>
+                          </div>
+
+                          <div *ngIf="showRestImage" class="row mt-3">
+                            <div class="col-12">
+                              <label for="">Choose Image:</label>
+                              <input type="file" name="av_img_path" (change)="event_rest_img_change($event, i, r.name.split(' ').join())"
+                                class="form-control display">
+                            </div>
+                          </div>
+                        </ng-container>
+                        <!-- {{restURL[i]}} -->
+                        <div class="containerCollapse" *ngIf="restURL[i]">
+                          <img class="mt-2 " [src]="restURL[i]" style="width: 100%;height:100%" alt="">
+                          <button (click)="onRemoveRest(i)" class="top-rightTopBtn" mat-mini-fab color="warn"
+                            aria-label="Example icon button with a home icon">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row px-3" [ngStyle]="{'font-size':othSize}" style="text-transform: uppercase">
+                      <div id="r_{{r.id}}" class="col-12 fw-bold text-start" style="text-transform: uppercase">
+                        <div class="row mt-3">
+                          <div class="col-6 pb-3" style="cursor:pointer">
+                            <button mat-icon-button [matMenuTriggerFor]="menuRestMenu"
+                              aria-label="Example icon-button with a menu">
+                              <mat-icon
+                                *ngIf="!this.restIconArr[r?.name?.split(' ').join('')+'_menu_icon']?.name">add_reaction</mat-icon>
+                              <img *ngIf="this.restIconArr[r?.name?.split(' ').join('')+'_menu_icon']?.name"
+                                style="vertical-align:-8px" height="50" width="50"
+                                [src]="this.restIconArr[r?.name?.split(' ').join('')+'_menu_icon']?.name" alt="">
+                            </button>
+                            <mat-menu #menuRestMenu="matMenu">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let icon of iconArr">
+                                  <button mat-menu-item
+                                    (click)="setRestIcon(r?.name.split(' ').join('')+'_menu_icon',url1+icon.img_path)">
+                                    <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-menu>
+                          </div>
+                          <div class="col-6 fw-bold text-right" style="cursor:pointer"
+                            (click)="open_popup_window(r.id)">MENU & INFO
+                          </div>
+                          <div class="col-6  pb-3" style="cursor:pointer">
+                            <button mat-icon-button [matMenuTriggerFor]="menuRestReserve"
+                              aria-label="Example icon-button with a menu">
+                              <mat-icon
+                                *ngIf="!this.restIconArr[r?.name?.split(' ').join('')+'_reserve_icon']?.name">add_reaction</mat-icon>
+                              <img *ngIf="this.restIconArr[r?.name?.split(' ').join('')+'_reserve_icon']?.name"
+                                style="vertical-align:-8px" height="50" width="50"
+                                [src]="this.restIconArr[r?.name?.split(' ').join('')+'_reserve_icon']?.name" alt="">
+
+                            </button>
+                            <mat-menu #menuRestReserve="matMenu">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let icon of iconArr">
+                                  <button mat-menu-item
+                                    (click)="setRestIcon(r.name?.split(' ').join('')+'_reserve_icon',url1+icon.img_path)">
+                                    <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-menu>
+
+                          </div>
+                          <div class="col-6  fw-bold text-right">RESERVATION</div>
+                          <div class="col-6 pb-3" style="cursor:pointer">
+                            <button mat-icon-button [matMenuTriggerFor]="menuRestEnt"
+                              aria-label="Example icon-button with a menu">
+                              <mat-icon
+                                *ngIf="!this.restIconArr[r?.name?.split(' ').join('')+'_ent_icon']?.name">add_reaction</mat-icon>
+                              <img *ngIf="this.restIconArr[r?.name?.split(' ').join('')+'_ent_icon']?.name"
+                                style="vertical-align:-8px" height="50" width="50"
+                                [src]="this.restIconArr[r?.name?.split(' ').join('')+'_ent_icon']?.name" alt="">
+                            </button>
+                            <mat-menu #menuRestEnt="matMenu">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let icon of iconArr">
+                                  <button mat-menu-item
+                                    (click)="setRestIcon(r.name.split(' ').join('')+'_ent_icon',url1+icon.img_path)">
+                                    <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-menu>
+                          </div>
+                          <div class="col-6  fw-bold text-right">ENTERTAINMENT</div>
+                        </div>
+                      </div>
+                      <div class="col-6  fw-bold text-end">
+                        <div class="row mt-3">
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </mat-expansion-panel>
+
+              </div>
+            </mat-accordion>
+            <div class="dividerPad">
+              <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+            </div>
+            <div class="text-center mt-4 text-light">
+              <span [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':headerSize}">SERVICES</span>
+
+            </div>
+            <mat-accordion>
+
+              <div *ngFor="let s of getVenuesServe; let i=index;">
+                <mat-expansion-panel #servePanel hideToggle [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                      <span class="mkUpper"> {{s.name}} </span>
+                    </mat-panel-title>
+                    <mat-icon>{{servePanel.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  </mat-expansion-panel-header>
+                  <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                    <div class="row mt-4 px-3" style="text-transform: uppercase" [ngStyle]="{'font-size':othSize}">
+                      <div id="s_{{s.id}}" class="col-12 fw-bold text-start" style="text-transform: uppercase">
+                        <!-- <div class="row">
+                          <div class="col-12 pb-3" style="cursor:pointer">
+                            <button mat-icon-button [matMenuTriggerFor]="menuServMenu"
+                              aria-label="Example icon-button with a menu">
+                              <mat-icon
+                                *ngIf="!this.servIconArr[s.name.split(' ').join('')+'_menu_icon']?.name">add_reaction</mat-icon>
+                              <img *ngIf="this.servIconArr[s.name.split(' ').join('')+'_menu_icon']?.name"
+                                style="vertical-align:-8px" height="50" width="50"
+                                [src]="this.servIconArr[s.name.split(' ').join('')+'_menu_icon']?.name" alt="">
+                            </button>
+                            <mat-menu #menuServMenu="matMenu">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let icon of iconArr">
+                                  <button mat-menu-item
+                                    (click)="setServeIcon(s.name.split(' ').join('')+'_menu_icon',url1+icon.img_path)">
+                                    <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-menu>
+                          </div>
+                        </div> -->
+
+                        <div class="row">
+                          <div class="col-6 pb-3" style="cursor:pointer">
+                            <button mat-icon-button [matMenuTriggerFor]="menuServMenu"
+                              aria-label="Example icon-button with a menu">
+                              <mat-icon
+                                *ngIf="!this.servIconArr[s.name.split(' ').join('')+'_menu_icon']?.name">add_reaction</mat-icon>
+                              <img *ngIf="this.servIconArr[s.name.split(' ').join('')+'_menu_icon']?.name"
+                                style="vertical-align:-8px" height="50" width="50"
+                                [src]="this.servIconArr[s.name.split(' ').join('')+'_menu_icon']?.name" alt="">
+                            </button>
+                            <mat-menu #menuServMenu="matMenu">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let icon of iconArr">
+                                  <button mat-menu-item
+                                    (click)="setServeIcon(s.name.split(' ').join('')+'_menu_icon',url1+icon.img_path)">
+                                    <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-menu>
+                          </div>
+                          <div class="col-6 fw-bold text-right" [ngStyle]="{'font-size':othSize}">CHAT/CALL</div>
+                          <div class="col-6  pb-3" style="cursor:pointer">
+                            <button mat-icon-button [matMenuTriggerFor]="menuServServices"
+                              aria-label="Example icon-button with a menu">
+                              <mat-icon
+                                *ngIf="!this.servIconArr[s.name.split(' ').join('')+'_services_icon']?.name">add_reaction</mat-icon>
+                              <img *ngIf="this.servIconArr[s.name.split(' ').join('')+'_services_icon']?.name"
+                                style="vertical-align:-8px" height="50" width="50"
+                                [src]="this.servIconArr[s.name.split(' ').join('')+'_services_icon']?.name" alt="">
+
+                            </button>
+                            <mat-menu #menuServServices="matMenu">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let icon of iconArr">
+                                  <button mat-menu-item
+                                    (click)="setServeIcon(s.name.split(' ').join('')+'_services_icon',url1+icon.img_path)">
+                                    <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-menu>
+
+                          </div>
+                          <div class="col-6 fw-bold text-right" [ngStyle]="{'font-size':othSize}">{{s.name}} SERVICES
+                          </div>
+                          <div class="col-6 pb-3" style="cursor:pointer">
+                            <button mat-icon-button [matMenuTriggerFor]="menuServCal"
+                              aria-label="Example icon-button with a menu">
+                              <mat-icon
+                                *ngIf="!this.servIconArr[s.name.split(' ').join('')+'_cal_icon']?.name">add_reaction</mat-icon>
+                              <img *ngIf="this.servIconArr[s.name.split(' ').join('')+'_cal_icon']?.name"
+                                style="vertical-align:-8px" height="50" width="50"
+                                [src]="this.servIconArr[s.name.split(' ').join('')+'_cal_icon']?.name" alt="">
+                            </button>
+                            <mat-menu #menuServCal="matMenu">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let icon of iconArr">
+                                  <button mat-menu-item
+                                    (click)="setServeIcon(s.name.split(' ').join('')+'_cal_icon',url1+icon.img_path)">
+                                    <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                  </button>
+                                </div>
+                              </div>
+                            </mat-menu>
+                          </div>
+                          <div class="col-6  fw-bold text-right" [ngStyle]="{'font-size':othSize}">CLASSES/CALENDAR
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-6  fw-bold text-end">
+                        <div class="row">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </mat-expansion-panel>
+
+              </div>
+            </mat-accordion>
+            <div class="row mt-5 pb-3">
+              <div class="col-12 text-center">
+                <ng-container *ngIf="banner2.length == 0">
+
+                  <div class="d-flex flex-row justify-content-center mt-2">
+                    <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse 
+                      image</button>
+                    <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('banner2')"> 
+                      Stock image</button>
+                  </div>
+
+                  <div *ngIf="showBrouseImage" class="row mt-3">
+                    <div class="col-12">
+                      <label for="">Choose Image:</label>
+                      <input type="file" name="av_img_path" (change)="event_image_change($event, 'banner2')"
+                        class="form-control display">
+                    </div>
+                  </div>
+                </ng-container>
+                <div *ngIf="banner2_url" class="containerBanner">
+                  <img class="mt-2 " [src]="banner2_url" style="width: 100%;height:100%" alt="">
+                  <button (click)="onRemoveBanner2()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="dividerPad">
+              <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+            </div>
+            <mat-accordion class="mt-5">
+              <mat-expansion-panel #panelSaf *ngIf="saf_faq=='Y'" class="faq" hideToggle
+                [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                    SAFETY FAQ's
+                  </mat-panel-title>
+                  <mat-icon>{{panelSaf.expanded ? 'north' : 'south' }}</mat-icon>
+
+                </mat-expansion-panel-header>
+                <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                  <div class="row pb-3 px-3" [ngStyle]="{'font-size':othSize}">
+                    <div class="col-12 text-center">
+                      <ng-container *ngIf="safety.length == 0">
+
+                        <div class="d-flex flex-row justify-content-center mt-2">
+                          <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse 
+                            image</button>
+                          <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('safety')">
+                            Stock image</button>
+                        </div>
+
+                        <div *ngIf="showBrouseImage" class="row mt-3">
+                          <div class="col-12">
+                            <label for="">Choose Image:</label>
+                            <input type="file" name="av_img_path" (change)="event_image_change($event, 'safety')"
+                              class="form-control display">
+                          </div>
+                        </div>
+                      </ng-container>
+                      <div *ngIf="safetyURL" class="containerCollapse">
+                        <img class="mt-2 " [src]="safetyURL" style="width: 100%;height:100%" alt="">
+                        <button (click)="onRemovesafety()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row  pb-4 px-3 mt-3" [ngStyle]="{'font-size':othSize}">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <div class="col-12">
+                          <button mat-icon-button [matMenuTriggerFor]="menuSafety"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[9].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[9].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[9].name" alt="">
+
+                          </button>
+                          <mat-menu #menuSafety="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('safetyIcon',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                          </mat-menu>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 fw-bold text-end">
+                      <div class="row mt-3">
+                        <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center"
+                          style="cursor:pointer" (click)="getSafetyFaq()">VIEW INFO.</div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </mat-expansion-panel>
+
+            </mat-accordion>
+
+            <br>
+            <mat-accordion>
+              <mat-expansion-panel hideToggle #panelHotelF *ngIf="hot_faq=='Y'" [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                    HOTEL FAQ's
+                  </mat-panel-title>
+                  <mat-icon>{{panelHotelF.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <!-- <mat-panel-description>
+                 This is a summary of the content
+               </mat-panel-description> -->
+
+                </mat-expansion-panel-header>
+                <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                  <div class="row pb-1 px-3">
+                    <div class="col-12 text-center">
+                      <ng-container *ngIf="hotel.length == 0">
+
+                        <div class="d-flex flex-row justify-content-center mt-2">
+                          <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse 
+                            image</button>
+                          <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('hotel')">
+                             Stock image</button>
+                        </div>
+
+                        <div *ngIf="showBrouseImage" class="row mt-3">
+                          <div class="col-12">
+                            <label for="">Choose Image:</label>
+                            <input type="file" name="av_img_path" (change)="event_image_change($event, 'hotel')"
+                              class="form-control display">
+                          </div>
+                        </div>
+                      </ng-container>
+                      <div *ngIf="hotelURL" class="containerCollapse">
+                        <img class="mt-2 " [src]="hotelURL" style="width: 100%;height:100%" alt="">
+                        <button (click)="onRemoveHotel()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="col-6 mt-2 fw-bold text-start">
+                      <div class="row" [ngStyle]="{'font-size':othSize}">
+                        <div class="col-12">
+                          <button mat-icon-button [matMenuTriggerFor]="menuHotelFaq"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[10].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[10].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[10].name" alt="">
+
+                          </button>
+                          <mat-menu #menuHotelFaq="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('hotelFaqIcon',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                          </mat-menu>
+                        </div>
+                        <!-- <div class="col-12">Need to ask Lucia a question?</div> -->
+                      </div>
+                    </div>
+                    <div class="col-6 mt-2 fw-bold text-end">
+                      <div class="row mt-2" [ngStyle]="{'font-size':othSize}">
+                        <!-- <div class="col-6"></div> -->
+                        <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center"
+                          style="cursor:pointer" (click)="getHotelFaq()">VIEW INFO.</div>
+                        <!-- <div class="col-12">CHAT LUCIA</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+
+            </mat-accordion>
+            <div class="dividerPad">
+              <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+            </div>
+            <mat-accordion>
+              <mat-expansion-panel *ngIf="lost_found=='Y'" class="lfSize" hideToggle #panelHotelLF
+                [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                    LOST & FOUND
+                  </mat-panel-title>
+                  <mat-icon>{{panelHotelLF.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <!-- <mat-panel-description>
+                 This is a summary of the content
+               </mat-panel-description> -->
+
+                </mat-expansion-panel-header>
+                <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                  <div class="row pb-3" [ngStyle]="{'font-size':othSize}">
+                    <div class="col-12 text-center">
+                      <ng-container *ngIf="lostfound.length == 0">
+
+                        <div class="d-flex flex-row justify-content-center mt-2">
+                          <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse 
+                            image</button>
+                          <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('lostfound')">
+                             Stock image</button>
+                        </div>
+
+                        <div *ngIf="showBrouseImage" class="row mt-3">
+                          <div class="col-12">
+                            <label for="">Choose Image:</label>
+                            <input type="file" name="av_img_path" (change)="event_image_change($event, 'lostfound')"
+                              class="form-control display">
+                          </div>
+                        </div>
+                      </ng-container>
+                      <div *ngIf="lostfoundURL" class="containerCollapse">
+                        <img class="mt-2 " [src]="lostfoundURL" style="width: 100%;height:100%" alt="">
+                        <button (click)="onRemoveLostFound()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3 pb-4 px-3" [ngStyle]="{'font-size':othSize}">
+                    <div class="col-6 fw-bold text-start">
+                      <div class="row">
+                        <div class="col-12">
+                          <button mat-icon-button [matMenuTriggerFor]="menuLFCall"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[11].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[11].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[11].name" alt="">
+
+                          </button>
+                          <mat-menu #menuLFCall="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('lostFoundCall',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                          </mat-menu>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <button mat-icon-button [matMenuTriggerFor]="menuLFView"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon *ngIf="!this.iconList[12].name">add_reaction</mat-icon>
+                            <img *ngIf="this.iconList[12].name" style="vertical-align:-8px" height="50" width="50"
+                              [src]="this.iconList[12].name" alt="">
+
+                          </button>
+                          <mat-menu #menuLFView="matMenu">
+                            <div class="row">
+                              <div class="col-4" *ngFor="let icon of iconArr">
+                                <button mat-menu-item (click)="setIcon('lostFoundView',url1+icon.img_path)">
+                                  <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                                </button>
+                              </div>
+                            </div>
+                          </mat-menu>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6  fw-bold text-end">
+                      <div class="row mt-3">
+                        <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center"
+                          style="cursor:pointer" (click)="itemLost()">CHAT/CALL</div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center"
+                          style="cursor:pointer" (click)="viewLost()">VIEW</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion> <br>
+            <mat-accordion>
+              <mat-expansion-panel class="suggestBox" *ngIf="sug_box1=='Y'" #panelHotelSB hideToggle
+                [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                    SUGGESTION BOX
+                  </mat-panel-title>
+                  <mat-icon>{{panelHotelSB.expanded ? 'north' : 'south' }}</mat-icon>
+
+                  <!-- <mat-panel-description>
+                   <mat-icon matTooltip="Edit" class="setIcon text-danger ml-3">edit</mat-icon> 
+                 </mat-panel-description> -->
+
+                </mat-expansion-panel-header>
+
+                <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                  <div class="row pb-1">
+                    <div class="col-12 text-center">
+                      <ng-container *ngIf="sugg.length == 0">
+
+                        <div class="d-flex flex-row justify-content-center mt-2">
+                          <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse 
+                            image</button>
+                          <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('sugg')"> 
+                            Stock image</button>
+                        </div>
+
+                        <div *ngIf="showBrouseImage" class="row mt-3">
+                          <div class="col-12">
+                            <label for="">Choose Image:</label>
+                            <input type="file" name="av_img_path" (change)="event_image_change($event, 'sugg')"
+                              class="form-control display">
+                          </div>
+                        </div>
+                      </ng-container>
+                      <div *ngIf="suggURL" class="containerCollapse">
+                        <img class="mt-2 " [src]="suggURL" style="width: 100%;height:100%" alt="">
+                        <button (click)="onRemoveSugg()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3 pb-2 px-3" [ngStyle]="{'font-size':othSize}">
+                    <div class="col-6 fw-bold text-start">
+                      <button mat-icon-button [matMenuTriggerFor]="menuSugg"
+                        aria-label="Example icon-button with a menu">
+                        <mat-icon *ngIf="!this.iconList[13].name">add_reaction</mat-icon>
+                        <img *ngIf="this.iconList[13].name" style="vertical-align:-8px" height="50" width="50"
+                          [src]="this.iconList[13].name" alt="">
+
+                      </button>
+                      <mat-menu #menuSugg="matMenu">
+                        <div class="row">
+                          <div class="col-4" *ngFor="let icon of iconArr">
+                            <button mat-menu-item (click)="setIcon('SuggBoxIcon',url1+icon.img_path)">
+                              <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                            </button>
+                          </div>
+                        </div>
+                      </mat-menu>
+                    </div>
+                    <div class="col-6  fw-bold text-end">
+                      <div class="row mt-3">
+                        <div class="col-12 fw-bold text-end d-flex justify-content-end align-items-center"
+                          style="cursor:pointer" (click)="sug_box()">MESSAGE</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </mat-expansion-panel>
+            </mat-accordion>
+
+            <br>
+            <mat-accordion>
+              <mat-expansion-panel class="vacation" *ngIf="flip_book=='Y'" hideToggle #panelHotelVB
+                [ngStyle]="{'background-color':bgCol,'color':txtCol}">
+                <mat-expansion-panel-header>
+                  <mat-panel-title [ngStyle]="{'background-color':bgCol,'color':txtCol,'font-size':subHeaderSize}">
+                    FREE VACATION BOOK
+                  </mat-panel-title>
+                  <mat-icon>{{panelHotelVB.expanded ? 'north' : 'south' }}</mat-icon>
+
+                </mat-expansion-panel-header>
+                <div [ngStyle]="{'background-color':expCol,'color':txtCol}">
+                  <div class="row pb-3 ">
+                    <div class="col-12 text-center">
+                      <ng-container *ngIf="vac.length == 0">
+
+                        <div class="d-flex flex-row justify-content-center mt-2">
+                          <button class="btn btn-danger" mat-raised-button (click)="showBrouseImage=true"> Browse 
+                            image</button>
+                          <button class="btn btn-danger ml-3" mat-raised-button (click)="openstockmodal('vac')"> 
+                            Stock image</button>
+                        </div>
+
+                        <div *ngIf="showBrouseImage" class="row mt-3">
+                          <div class="col-12">
+                            <label for="">Choose Image:</label>
+                            <input type="file" name="av_img_path" (change)="event_image_change($event, 'vac')"
+                              class="form-control display">
+                          </div>
+                        </div>
+                      </ng-container>
+                      <div *ngIf="vacURL" class="containerCollapse">
+                        <img class="mt-2 " [src]="vacURL" style="width: 100%;height:100%" alt="">
+                        <button (click)="onRemoveVac()" class="top-rightTopBtn" mat-mini-fab color="warn"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3 pb-4 px-3" [ngStyle]="{'font-size':othSize}">
+                    <div class="col-6 fw-bold text-start"> <button mat-icon-button [matMenuTriggerFor]="menuVac"
+                        aria-label="Example icon-button with a menu">
+                        <mat-icon *ngIf="!this.iconList[14].name">add_reaction</mat-icon>
+                        <img *ngIf="this.iconList[14].name" style="vertical-align:-8px" height="50" width="50"
+                          [src]="this.iconList[14].name" alt="">
+
+                      </button>
+                      <mat-menu #menuVac="matMenu">
+                        <div class="row mt-3">
+                          <div class="col-4" *ngFor="let icon of iconArr">
+                            <button mat-menu-item (click)="setIcon('VacBookIcon',url1+icon.img_path)">
+                              <img [src]="url1+icon.img_path" width="50" height="50" alt="">
+                            </button>
+                          </div>
+                        </div>
+                      </mat-menu>
+                    </div>
+                    <div class="col-6 fw-bold text-end d-flex justify-content-end align-items-center">START DESIGN</div>
+                    <div class="col-12">
+                      Build your own Vacation Flip Book and post to your friends & family on social media.One Vacation
+                      Flip Book per stay.
+                    </div>
+                  </div>
+
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+            <div class="dividerPad">
+              <img *ngIf="imgSrc" [src]="imgSrc" height="30" width="100%" alt="">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal cropModulContent" id="id02" style="margin-left:25%;">
+
+        <div class="modal-dialog">
+
+          <div class="modal-content modal_contentCustom">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="main_Brouse mainImgBrowse">
+                <div class="titleImgBrowse">
+                  <h2>Choose Image</h2>
+                  <div id="myBtnContainer" class="dropDownImg">
+                    <select #cats (change)="getStockimageonselectcategory(cats.value)">
+                      <option value="">Show all</option>
+                      <option *ngFor="let cat of category_name" value="{{cat.id}}">{{cat.name}}</option>
+                      <!-- <option onclick="filterSelection('all')"> Show all</option>
+          <option onclick="filterSelection('nature')"> Nature</option>
+          <option onclick="filterSelection('cars')"> Cars</option>
+          <option onclick="filterSelection('people')"> People</option> -->
+                    </select>
+
+                  </div>
+                </div>
+
+
+
+
+                <!-- Portfolio Gallery Grid -->
+                <div class="row_Brouse">
+                  <!-- class="column_Brouse nature" -->
+                  <div class="column_Brouse nature" *ngFor="let stock of st_img;let i=index">
+                    <div class="content_Brouse">
+
+                      <!-- <img src="/assets/images/mountains.jpg" alt="Mountains" style="width:100%"> -->
+                      <!-- {{apiurlset +'stock/' + stock.img_path}} -->
+                      <img [src]="apiurlset+'stock/' + stock.img_path" alt=""
+                        (click)="selectedimage(i,stock.img_path,stock.img_catg,st_img.length)" id="image_{{i}}">
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- END MAIN -->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" mat-raised-button class="btn btn-success" (click)="save_it('close')">Close</button>
+              &nbsp;
+              <button type="button" mat-raised-button class="btn btn-danger"
+                (click)="save_it('save', this.clicked_stock_btn)">Save Changes</button>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal cropModulContent" id="id03" style="margin-left:25%;">
+
+        <div class="modal-dialog">
+
+          <div class="modal-content modal_contentCustom">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="main_Brouse mainImgBrowse">
+                <div class="titleImgBrowse">
+                  <h2>Choose Image</h2>
+                  <div id="myBtnContainer" class="dropDownImg">
+                    <select #cats (change)="getStockimageonselectcategory(cats.value)">
+                      <option value="">Show all</option>
+                      <option *ngFor="let cat of category_name" value="{{cat.id}}">{{cat.name}}</option>
+                      <!-- <option onclick="filterSelection('all')"> Show all</option>
+          <option onclick="filterSelection('nature')"> Nature</option>
+          <option onclick="filterSelection('cars')"> Cars</option>
+          <option onclick="filterSelection('people')"> People</option> -->
+                    </select>
+
+                  </div>
+                </div>
+
+
+
+
+                <!-- Portfolio Gallery Grid -->
+                <div class="row_Brouse">
+                  <!-- class="column_Brouse nature" -->
+                  <div class="column_Brouse nature" *ngFor="let stock of st_img;let i=index">
+                    <div class="content_Brouse">
+
+                      <!-- <img src="/assets/images/mountains.jpg" alt="Mountains" style="width:100%"> -->
+                      <!-- {{apiurlset +'stock/' + stock.img_path}} -->
+                      <img [src]="apiurlset+'stock/' + stock.img_path" alt=""
+                        (click)="selectedimage_rest(i,stock.img_path,stock.img_catg,st_img.length)" id="rest_image_{{i}}">
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- END MAIN -->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" mat-raised-button class="btn btn-success" (click)="click_it('close')">Close</button>
+              &nbsp;
+              <button type="button" mat-raised-button class="btn btn-danger"
+                (click)="click_it('save',this.clicked_stock_rest_index, this.clicked_stock_rest_btn)">Save Changes</button>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12 text-center">
+        <button mat-raised-button (click)="submitControls()" class="btn btn-success">Save changes</button>
+
+      </div>
+    </div>
+    <hr>
+
+  </mat-card>
+
+
+</div>

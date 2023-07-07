@@ -1,0 +1,92 @@
+<div class="content-div">
+  <mat-card>
+    <mat-card-title>
+      <div class="row">
+        <div class="col-11">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a style="cursor:pointer;color:#3f51b5" (click)="go_home()">Home</a></li>
+           
+            <li class="breadcrumb-item active" aria-current="page">Training </li>
+          </ol>
+        </div>
+    
+      </div>
+     
+      <!-- <strong><mat-icon style="vertical-align:-7px"> chat</mat-icon>Create Messages</strong> -->
+    </mat-card-title> <hr>
+    <form [formGroup]="trainingForm">
+    <h3> <strong>  <span> Proposed training dates  </span> </strong> </h3> 
+  <div class="row">
+    <div class="col-4">
+    <label for=""> Date 1</label>
+     <input type="date" min="{{date}}" name="" class="form-control" formControlName="date_1" name="date_1" id="">
+    </div>
+    <div class="col-4"> 
+      <label for=""> Date 2</label>
+     <input type="date" name="" min="{{date2}}"  class="form-control" formControlName="date_2" name="date_2" id="">
+    </div>
+    <div class="col-4">
+      <label for=""> Date 3</label>
+     <input type="date" name=""  min="{{date3}}" class="form-control" formControlName="date_3" name="date_3" id="">
+    </div>
+  </div>
+<div class="row mt-4" [hidden]="user_type=='A' && !this.trainingData?.training_dt_1 && !this.trainingData?.training_dt_2 && !this.trainingData?.training_dt_3">
+    <div class="col-12">
+      <label for="">Training Scheduled</label>
+      <select name="" formControlName="schedule" class="form-control" [(ngModel)]="sch_dt" id="">
+        <option value="">Select Schedule</option>
+        <option [value]="this.trainingData?.training_dt_1.substr(0,10)">{{this.trainingData?.training_dt_1.substr(0,10) | date:'dd/MM/yyyy'}}</option>
+        <option [value]="this.trainingData?.training_dt_2.substr(0,10)">{{this.trainingData?.training_dt_2.substr(0,10) | date:'dd/MM/yyyy'}}</option>
+        <option [value]="this.trainingData?.training_dt_3.substr(0,10)">{{this.trainingData?.training_dt_3.substr(0,10) | date:'dd/MM/yyyy'}}</option>
+      </select>
+    </div>
+    <div class="col-12 mt-4" *ngIf="sch_dt">
+      <label for="">Confirm Accommodation</label>
+      <textarea name="acc" formControlName="acc" class="form-control" id="" cols="30" rows="5"></textarea>
+    </div>
+    <div class="col-12 mt-4" *ngIf="sch_dt">
+      <label for="">Ground Confirmation</label>
+      <textarea name="ground" class="form-control" formControlName="ground" id="" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="user_type=='H' && trainingData?.conf_approve_flag=='N'">
+    <div class="col-8"></div>
+    <div class="col-2 ">
+      <button mat-raised-button class="float-right btn btn-success" (click)="postTrainingData('Y')" [hidden]="!this.trainingForm.controls.ground.value || !this.trainingForm.controls.acc.value">Approve</button>
+    </div>
+    <div class="col-2 ">
+      <button mat-raised-button class="float-right btn btn-danger" (click)="postTrainingData('N')" [hidden]="!this.trainingForm.controls.ground.value || !this.trainingForm.controls.acc.value">Reject</button>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="sch_dt">
+    <div class="col-12">
+      <label for="">Air Confirmation</label>
+      <textarea name="air" formControlName="air" class="form-control" id="" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <label for="">Training Complete</label>
+      <input type="date" class="form-control" formControlName="comp_date" name="comp_date" id="">
+    </div>
+    
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <label for="">Note</label>
+      <textarea name="notes" formControlName="notes" class="form-control" id="" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <button mat-raised-button class="float-right btn btn-success" (click)="postTrainingData('S')">Submit</button>
+    </div>
+  </div>
+</form>
+  </mat-card>
+
+</div>
+
+
+
+

@@ -1,0 +1,175 @@
+.mainContainer{display: grid; flex: 1 0 auto;  height: 100vh; background: url("/assets/images/booking1.png") no-repeat center center;
+    background-size: cover; margin-top:-5%;text-align: center;} 
+
+    .card {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 12px;
+        border: 1px solid rgba(209, 213, 219, 0.3);
+        /* justify-content: center; */
+    }
+    .container{
+        width:85%;
+        margin-top: 15%;
+    }
+    .example-card {
+        max-width: 400px;
+      }
+      mat-card-title{
+        color:#f54335
+      }
+      .matHead{
+        display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+      }
+      .example-header-image {
+        /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
+        background-size: cover;
+      }
+      .notAvailabletxt{
+        font-size:small;background-color:rgb(197, 195, 195);color:rgb(88, 88, 88)
+      }
+    /* router-outlet{display:none;} */
+    .shift1{
+        margin-left:35%;
+        margin-top:10%
+      
+      }
+      .ex1{
+        margin-left:48%;
+        margin-top:-6% ;
+        font-size:140px !important
+      }
+
+      
+      .tile {
+        width:164px;
+        height:176px;
+        border-radius:4px;
+        box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.15);
+        margin-top:20px;
+        margin-left:20px;
+        float:left;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 1rem;
+      }
+      
+      .tile.wide {
+        width: 340px;
+      }
+      
+      .tile .header {
+        /* height:120px; */
+        background-color:#f4f4f4;
+        border-radius: 4px 4px 0 0;
+        color:white;
+        font-weight:300;
+      }
+      
+      .tile.wide .header .left, .tile.wide .header .right {
+        width:160px;
+        float:left;
+      }
+      .fitIcons{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-right: 37px;
+      }
+      .tile .header .count {
+        font-size: 24px;
+        text-align:center;
+        padding:1px 0 0;
+      }
+      
+      .tile .header .title {
+        font-size: 20px;
+        text-align:center;
+      }
+      
+      .tile .body {
+        /* height:60px; */
+        border-radius: 0 0 4px 4px;
+        color:#333333;
+        background-color:white;
+      }
+      
+      .tile .body .title {
+          text-align:center;
+          font-size:16px;
+          padding-top:4%;
+          padding-right:2%;
+      }
+      
+      .tile.wide .body .title {
+        padding:8%;
+      }
+      
+      .tile.job .header {
+        background: linear-gradient(to bottom right, #f54335, #ed8780);
+        padding-right:56%;
+        /* transition: all .2s ease-in-out; */
+      }
+      .tile.job:hover { box-shadow: 0px 0px 10px #444;
+        z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1.1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1.1);   
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1.1);
+        transition: all 200ms ease-in;
+        transform: scale(1.1); }
+      .tile.job  .body {
+        color: #f54335;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1); 
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1); 
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);   
+      
+      }
+      
+      .tile.resource .header {
+        background: linear-gradient(to bottom right, #ef7f00, #f7b200);
+      }
+      
+      .tile.resource  .body {
+        color: #ef7f00;
+      }
+      
+      .tile.quote .header {
+        background: linear-gradient(to bottom right, #f54335, #ed8780);
+      }
+      
+      .tile.quote  .body {
+        color: #f54335;
+      }
+      
+      .tile.invoice .header {
+        background: linear-gradient(to bottom right, #f54335, #ed8780);
+      }
+      
+      .tile.invoice  .body {
+        color: #f54335;
+      }   
+      /* .time {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: -4px;
+        justify-content: center;
+    } */
+      /* .categ{
+        position: sticky;
+      } */
+ 

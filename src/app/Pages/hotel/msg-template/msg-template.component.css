@@ -1,0 +1,10 @@
+.content-div{
+    margin-left:260px;margin-top:47px; padding-right: 2%; padding-bottom:5%;;
+}
+
+mat-card{
+    background-color: rgb(236, 57, 57);
+    color:white;
+    max-height: 560px;
+}
+   

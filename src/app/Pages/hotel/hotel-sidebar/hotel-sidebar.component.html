@@ -1,0 +1,275 @@
+<div class="sidebar" *ngIf="status=='A'">
+  <!-- <div class="sidebar"> -->
+
+  <ng-container *ngFor="let menu of menuData">
+
+    <a routerLinkActive="active" routerLink="{{menu.ref}}">{{menu.name}}</a>
+    <mat-divider></mat-divider>
+  </ng-container>
+
+  <a (click)="openDialog('')">Sign Out</a>
+  <mat-divider></mat-divider>
+</div>
+<div class="sidebar" *ngIf="activeMenu">
+  <a  (click)="move_to('home')" [ngClass]="url.includes('/hotel/home')?'active':''" routerLinkActive="active"> <mat-icon class="iconSide" style="vertical-align:-8px">feedback</mat-icon> &nbsp;Hotel Information</a>
+  <mat-divider></mat-divider>
+  <ng-container *ngIf="privilege!='H'">
+    <a  [ngClass]="url.includes('qsn')?'active':''"  *ngIf="privilege=='A' || privilege=='H'" (click)="move_to('qsn')" routerLinkActive="active"> <mat-icon class="iconSide" style="vertical-align:-8px">live_help</mat-icon> &nbsp;Send Questionnaire</a>
+    <mat-divider></mat-divider>
+    <a   [ngClass]="url.includes('proposal')?'active':''" *ngIf="privilege=='A' || privilege=='H'" (click)="move_to('proposal')" routerLinkActive="active"> <mat-icon class="iconSide" style="vertical-align:-8px">currency_ruble</mat-icon> &nbsp;Proposal</a>
+    <mat-divider></mat-divider>
+  </ng-container>
+  <a *ngIf="initial_pay!='null' || final_pay!='null'" [ngClass]="url.includes('department')?'active':''" routerLinkActive="active" (click)="move_to('dept')"><mat-icon style="vertical-align:-8px"> store</mat-icon> &nbsp;Add/Manage Departments</a>
+  <mat-divider *ngIf="initial_pay!='null' || final_pay!='null'"></mat-divider>
+  <!-- <a  [ngClass]="url.includes('managers')?'active':''" routerLinkActive="active" (click)="move_to('managers')"><mat-icon style="vertical-align:-8px"> man_4</mat-icon> &nbsp;Add/Manage Managers</a>
+  <mat-divider></mat-divider> -->
+  <mat-expansion-panel *ngIf="initial_pay!='null' || final_pay!='null'" hideToggle style="background-color:#3f51b5;color:white" #panel>
+    <mat-expansion-panel-header>
+    <mat-panel-title style="color:white; font-size:small;padding-left:-2px">
+      <mat-icon style="vertical-align:-8px"> tune</mat-icon> &nbsp;  Platform Setup
+    </mat-panel-title>
+    <mat-icon>{{panel.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+  
+    </mat-expansion-panel-header>
+    <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+  <p>
+
+   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" style="background-color:#3f51b5;color:white" [hidden]="privilege=='H' && setup_mode=='Y'">
+    <mat-tree-node style="color:white;font-size:small" *matTreeNodeDef="let node;let i=index" matTreeNodePadding >
+    <a id="{{node.name.split(' ').join('')}}"  class="" routerLinkActive="active"  (click)="move_to(node.name, dataSource)">
+      <!-- {{node.icon}} -->
+       <!-- <mat-icon> {{node.icon}}</mat-icon> -->
+       {{node.name}}
+      
+    </a>  
+    <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    </mat-tree-node>
+
+    <mat-tree-node style="color:white;font-size:small" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle style="font-size:12px"
+              [attr.aria-label]="'Toggle ' + node.name">
+        <mat-icon class="mat-icon-rtl-mirror" style="color:white;font-size:small">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+ {{node.name}}
+    </button>
+
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    </mat-tree-node>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+  </mat-tree>
+  <a   [ngClass]="url.includes('pre_reg_url')?'active':''" routerLinkActive="active" (click)="move_to('pre_reg_url')" style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-5px;font-size:18px"> link</mat-icon>Pre-registration URL</a>
+  <mat-divider ></mat-divider>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a   [ngClass]="url.includes('group')?'active':''" routerLinkActive="active" (click)="move_to('group')" style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-5px;font-size:18px"> diversity_3</mat-icon>Group / Group Leader</a>
+  <mat-divider ></mat-divider>
+
+  <a   [ngClass]="url.includes('progress')?'active':''" routerLinkActive="active" (click)="move_to('progress')" style="font-size:12px"><mat-icon style="vertical-align:-5px;font-size:18px"> settings_suggest</mat-icon>Menu Setup</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  
+  <a  [ngClass]="url.includes('communications')?'active':''" routerLinkActive="active" (click)="move_to('comm')" style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> local_phone</mat-icon>  Communications</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a   [ngClass]="url.includes('emergency')?'active':''" routerLinkActive="active" (click)="move_to('emergency')" style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> offline_bolt</mat-icon>  Report Emergency</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <mat-tree [dataSource]="dataSource1" [treeControl]="treeControl" style="background-color:#3f51b5;color:white" [hidden]="privilege=='H' && setup_mode=='Y'">
+    <mat-tree-node style="color:white;font-size:small" *matTreeNodeDef="let node" matTreeNodePadding>
+    <a id="{{node.name.split(' ').join('')}}" class=""  routerLinkActive="active"  (click)="move_to(node.name, dataSource1)">
+      <!-- {{node.icon}} -->
+       <!-- <mat-icon> {{node.icon}}</mat-icon> -->
+       {{node.name}} 
+      
+    </a>  
+    <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    </mat-tree-node>
+
+    <mat-tree-node style="color:white;font-size:small" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle style="font-size:12px"
+              [attr.aria-label]="'Toggle ' + node.name" >
+        <mat-icon class="mat-icon-rtl-mirror" style="color:white;font-size:small">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+ {{node.name}}
+    </button>
+
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    </mat-tree-node>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+  </mat-tree>
+  <!-- <a  routerLinkActive="active" (click)="move_to('em')" style="font-size:12px"><mat-icon style="vertical-align:-7px;font-size:18px"> chat</mat-icon>  Employee Messages</a>
+  <mat-divider></mat-divider>
+  <a  routerLinkActive="active" (click)="move_to('guest')" style="font-size:12px"><mat-icon style="vertical-align:-7px;font-size:18px"> chat</mat-icon>  Guest Messages</a> -->
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a  [ngClass]="url.includes('platform_faq')?'active':''" (click)="move_to('platformfaq')" style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> live_help</mat-icon> FAQ</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+  <a  [ngClass]="url.includes('hotel_calendar')?'active':''" (click)="move_to('hotel_calendar')" routerLinkActive="active" style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> calendar_month</mat-icon> Calendars</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a  [ngClass]="url.includes('qr_code_signage')?'active':''" routerLinkActive="active" (click)="move_to('qr_code_signage')" style="font-size:9px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> qr_code_2</mat-icon>QR Code/ Signage/ Holder</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a  [ngClass]="url.includes('your_directory')?'active':''" (click)="move_to('your_directory')"   style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> smart_display</mat-icon>  Your Directory</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a  [ngClass]="url.includes('hotel_promo')?'active':''" (click)="move_to('Promotions')" style="font-size:10px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> image</mat-icon>  Promotions/ Photo Ops</a>
+ 
+ 
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <mat-tree [dataSource]="dataSource3" [treeControl]="treeControl" style="background-color:#3f51b5;color:white" [hidden]="privilege=='H' && setup_mode=='Y'">
+    <mat-tree-node style="color:white;font-size:small" *matTreeNodeDef="let node" matTreeNodePadding>
+      <!-- <ng-container *ngIf = "node.name == url.includes('lost_found_home')">
+
+      </ng-container> -->
+    <a id="{{node.name.split(' ').join('')}}" class="" routerLinkActive="active" (click)="move_to(node.name, dataSource3)">
+      <!-- {{node.icon}} -->
+       <!-- <mat-icon> {{node.icon}}</mat-icon> -->
+       {{node.name}}
+      
+    </a>  
+    <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    </mat-tree-node>
+
+    <mat-tree-node style="color:white;font-size:small" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle style="font-size:12px"
+              [attr.aria-label]="'Toggle ' + node.name" >
+        <mat-icon class="mat-icon-rtl-mirror" style="color:white;font-size:small">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+ {{node.name}}
+    </button>
+
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    </mat-tree-node>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+  </mat-tree>
+  <!-- <a [ngClass]="url.includes('/hotel/lost_found_home')?'active':''" (click)="move_to('lost_found')"  style="font-size:12px"><mat-icon style="vertical-align:-7px;font-size:18px"> sync_problem</mat-icon>  Lost & Found</a> -->
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a  [ngClass]="url.includes('suggest')?'active':''" (click)="move_to('suggest')" style="font-size:12px" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-7px;font-size:18px"> edit_note</mat-icon>  Suggestion Box</a>
+  <!-- <mat-divider  *ngIf="initial_pay!='null' || final_pay!='null'"></mat-divider> -->
+   <!--  -->
+    
+   
+  </p>
+    </mat-expansion-panel>
+  <mat-divider *ngIf="initial_pay!='null' || final_pay!='null'"></mat-divider>
+  <a [ngClass]="url.includes('directory_design')?'active':''" (click)="move_to('directory_design')"  routerLinkActive="active" *ngIf="initial_pay!='null' || final_pay!='null'" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-8px"> display_settings</mat-icon> &nbsp;Directory Setup</a>
+  <mat-divider *ngIf="initial_pay!='null' || final_pay!='null'" [hidden]="privilege=='H' && setup_mode=='Y'"> </mat-divider>
+  <a [ngClass]="url.includes('hotel_data')?'active':''" (click)="move_to('hotel_data')" routerLinkActive="active" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-8px"> table</mat-icon> &nbsp; Hotel Database</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a  [ngClass]="url.includes('training')?'active':''" (click)="move_to('training')"  routerLinkActive="active" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-8px"> cast_for_education</mat-icon> &nbsp; Training</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <a  routerLinkActive="active" [hidden]="privilege=='H' && setup_mode=='Y'"><mat-icon style="vertical-align:-8px"> attach_money</mat-icon>Final Payment</a>
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+  <mat-expansion-panel *ngIf="initial_pay!='null' || final_pay!='null'" hideToggle style="background-color:#3f51b5;color:white" #panel>
+    <mat-expansion-panel-header>
+    <mat-panel-title style="color:white; font-size:small;padding-left:-2px">
+      <mat-icon style="vertical-align:-8px">support_agent</mat-icon> &nbsp;  Support
+    </mat-panel-title>
+    <mat-icon>{{panel.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+  
+    </mat-expansion-panel-header>
+    <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    <p>
+   <a  [ngClass]="url.includes('submit_ticket')?'active':''" routerLinkActive="active" (click)="move_to('submit_ticket')" style="font-size:12px" ><mat-icon style="vertical-align:-7px;font-size:18px">confirmation_number</mat-icon>Submit a Ticket</a>
+     <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+     <a   style="font-size:12px" ><mat-icon style="vertical-align:-7px;font-size:18px">ring_volume</mat-icon>24/7 Emergency Call</a>
+     <mat-divider ></mat-divider>
+     <a    style="font-size:12px" ><mat-icon style="vertical-align:-7px;font-size:18px">play_circle</mat-icon>Trainning videos</a>
+     <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+   <a  [ngClass]="url.includes('training')?'active':''" (click)="move_to('training')" routerLinkActive="active"    style="font-size:12px"><mat-icon style="vertical-align:-7px;font-size:18px"> calendar_month</mat-icon>Hotel Trainning Dates</a>
+     
+  </p>
+  </mat-expansion-panel>
+
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <mat-expansion-panel *ngIf="initial_pay!='null' || final_pay!='null'" hideToggle style="background-color:#3f51b5;color:white" #panel>
+    <mat-expansion-panel-header>
+    <mat-panel-title style="color:white; font-size:small;padding-left:-2px">
+      <mat-icon style="vertical-align:-8px">info</mat-icon> &nbsp;  Report
+    </mat-panel-title>
+    <mat-icon>{{panel.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+  
+    </mat-expansion-panel-header>
+    <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    <p>
+     <a  style="font-size:12px" ><mat-icon style="vertical-align:-7px;font-size:18px">shop</mat-icon>Google Analytics</a>
+     
+  </p>
+  </mat-expansion-panel>
+  <mat-divider></mat-divider>
+  <!-- <mat-expansion-panel *ngIf="initial_pay!='null' || final_pay!='null'" hideToggle style="background-color:#3f51b5;color:white" #panel>
+    <mat-expansion-panel-header>
+    <mat-panel-title style="color:white; font-size:small;padding-left:-2px">
+      <mat-icon style="vertical-align:-8px">info</mat-icon> &nbsp;  Report
+    </mat-panel-title>
+    
+    <mat-icon>{{panel.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+  </mat-expansion-panel-header>
+
+    
+    <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+
+    <p>
+   <a  style="font-size:12px" ><mat-icon style="vertical-align:-7px;font-size:18px">shop</mat-icon>Google Analytics</a>
+     <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  </p>
+  </mat-expansion-panel> -->
+  
+  <!-- <a  (click)="move_to('home')" [ngClass]="url.includes('/hotel/home')?'active':''" routerLinkActive="active"> <mat-icon class="iconSide" style="vertical-align:-8px">feedback</mat-icon> &nbsp;Hotel Information</a> -->
+  <a [ngClass]="url.includes('no_sale')?'active':''" *ngIf="privilege=='A' || privilege=='H'" (click)="move_to('no_sale')" routerLinkActive="active" [hidden]="privilege=='H' && setup_mode=='Y'"> <mat-icon class="iconSide" style="vertical-align:-8px">money_off</mat-icon> &nbsp;No Sale</a>
+  <!-- <a  (click)="move_to('no_sale')" [ngClass]="url.includes('no_sale')?'active':''" routerLinkActive="active"> <mat-icon class="iconSide" style="vertical-align:-8px"> money_off</mat-icon>No Sale</a> -->
+  <mat-divider [hidden]="privilege=='H' && setup_mode=='Y'"></mat-divider>
+  <!-- <a routerLink="setup" routerLinkActive="active" >Setup</a>
+  <mat-divider></mat-divider> -->
+  <!-- <a (click)="go_to_managers()" routerLinkActive="active" >Managers</a>
+  <mat-divider></mat-divider>
+  <a>Tawk</a>
+  <mat-divider></mat-divider>
+
+  <a>Hosting</a>
+  <mat-divider></mat-divider>
+
+  <a>3rd Party API</a>
+  <mat-divider></mat-divider>
+
+  <a>Accounting</a>
+  <mat-divider></mat-divider>
+
+  <a>Support</a>
+  <mat-divider></mat-divider>
+
+  <a>Training</a>
+  <mat-divider></mat-divider>
+
+  <a>Hotel Databases</a>
+  <mat-divider></mat-divider>
+
+  <a>Admin Info.</a>
+  <mat-divider></mat-divider> -->
+  <!-- <a *ngIf="initial_pay!='null' || final_pay!='null'"><mat-icon style="vertical-align:-8px">support_agent</mat-icon> &nbsp;Menu Support</a>
+  <mat-divider *ngIf="initial_pay!='null' || final_pay!='null'"></mat-divider> -->
+  <ng-container *ngIf="privilege=='H'">
+  <a  [ngClass]="url.includes('qsn')?'active':''"  *ngIf="privilege=='A' || privilege=='H'" (click)="move_to('qsn')" routerLinkActive="active"> <mat-icon class="iconSide" style="vertical-align:-8px">live_help</mat-icon> &nbsp;Send Questionnaire</a>
+  <mat-divider></mat-divider>
+  <a   [ngClass]="url.includes('proposal')?'active':''" *ngIf="privilege=='A' || privilege=='H'" (click)="move_to('proposal')" routerLinkActive="active"> <mat-icon class="iconSide" style="vertical-align:-8px">currency_ruble</mat-icon> &nbsp;Proposal</a>
+  <mat-divider></mat-divider>
+</ng-container>
+  <a (click)="openDialog('')"><mat-icon style="vertical-align:-8px"> logout</mat-icon> &nbsp;Sign Out</a>
+ <!-- <mat-divider></mat-divider> -->
+ 
+</div>
+
+
+<!--  -->
+
+<!--  -->

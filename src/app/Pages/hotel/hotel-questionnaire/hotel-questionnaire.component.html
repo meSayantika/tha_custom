@@ -1,0 +1,83 @@
+
+<div class="content-div">
+ 
+  <mat-card>
+    
+    <mat-card-title>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Questionnaire</li>
+        </ol>
+        </nav>
+      <!-- <strong><mat-icon style="vertical-align:-7px">live_help</mat-icon> Questionnaire</strong> -->
+    </mat-card-title> <hr>
+    <div class="float-end">
+      <button class="btn btn-success" matTooltip="Send questionnaire" [disabled]="this.userData?.msg[0]?.send_dt" mat-mini-fab (click)="go_to_questionnaire('S')">
+          <mat-icon>send</mat-icon>
+     </button> 
+    </div>
+     <br>
+     <div>
+      <form [formGroup]="qTabForm" >
+        <!-- <form (ngSubmit)="regSubmit()"> -->
+        <div class="row mt-4">
+          <label for="">First Call to Hotel Date</label>
+        
+        <div class="col-12"><input class="form-control p-2"  type="date" formControlName="firstCall" name="firstCall">
+        </div>
+        </div>
+        <div class="row mt-4">
+          <label for="">Notes</label>
+          <div class="col-12">
+            <textarea class="form-control p-3"  formControlName="notes" name="notes"  id="" cols="30" rows="6"></textarea>
+          </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-5 mt-4" style="padding-left:2%; ">
+         
+              <button [disabled]="!userData?.msg[0]?.send_dt" mat-raised-button class="btn btn-danger btn-lg col-12 p-1" (click)="go_to_questionnaire('E')"routerLink="/main/admin/questionnaire">
+            View / Edit Questionnaire 
+              </button>
+        
+              &nbsp;
+          
+            </div> 
+            <div class="col-7">
+          <label for="">Date Sent</label>
+    
+              <input readonly class="form-control p-2 date" type="date" formControlName="date_sent" name="date_sent">
+            </div>
+           
+            </div>
+            <div class="row mt-4">
+              <label for="">Questionnaire received / completed from hotel date</label>
+              <div class="col-12"><input readonly class="form-control p-2"  type="date" placeholder="" formControlName="qcomplete" name="qcomplete">
+              </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-2"></div>
+                <div class="col-4 float-end mt-4">
+                  <button  mat-raised-button class="btn btn-success float-end" [disabled]="qTabForm.invalid || (this.initial_pay==null && this.final_pay==null && user_type=='A') || (this.initial_pay!=null && this.final_pay!=null)" (click)="submitqInfo()">Submit</button>
+    
+                </div>
+                <div class="col-4">
+    
+                </div>
+                <div class="col-4">
+                  <!-- <button hidden mat-raised-button class="btn btn-danger">Resend questionnaire</button> -->
+    &nbsp;
+    
+                </div>
+               
+                </div>
+        <div class="form-row">
+        
+        </div>
+      </form>
+     </div>
+  </mat-card>
+  
+</div>
+
+

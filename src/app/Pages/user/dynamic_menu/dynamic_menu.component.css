@@ -1,0 +1,29 @@
+.btn{
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-size: x-small;
+    min-width: 75px
+}
+
+.btn:hover{
+    background-color: rgb(255, 255, 255);
+    color:black
+}
+
+.btnSpace{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2%;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+
+}
+
+.btnSecondRow{
+    display:flex;
+    justify-content: space-around;
+    padding:5%
+}
+

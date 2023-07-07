@@ -1,0 +1,18 @@
+.mainContainer{display: grid; flex: 1 0 auto; align-items: center; height: 120%; background: url("/assets/images/hotellogin.svg") no-repeat center center;
+    background-size: cover;} 
+
+    .content-div{
+        margin-left:25px;margin-top:20px; padding-right: 2%; padding-bottom:5%; width:97vw; 
+    }
+    mat-card{
+      background-color: rgb(236, 236, 236);
+      padding-right: 2%;
+      /* max-height: 550px; */
+      overflow: auto;
+  }
+
+  img.qr_img{
+    height: 80%;
+    width: 80%;
+  }
+

@@ -1,0 +1,101 @@
+<div class="content-div">
+
+  <mat-card>
+
+
+    <div class="row">
+      <div class="col-6">
+        <h2><strong><mat-icon>home</mat-icon>&nbsp;Support </strong>
+        </h2>
+      </div>
+      <div class="col-6">
+        <div class="float-end">
+          <button mat-mini-fab matTooltip="Add Ticket" class="btn btn-success" (click)="go_to_add(0)"><mat-icon>add</mat-icon></button>
+    
+        </div>
+      </div><br><br>
+       </div><br><br>
+
+
+       <div class="row">
+        <div class="col-2">
+          <input type="radio" name="support" (change)="getFilter()"  [(ngModel)]="category"  id="support"  value="O" style="margin-right: 8px;"> &nbsp; <label for="" class="color">Open</label> 
+        </div>
+        <div class="col-2">
+          <input type="radio" name="support" (change)="getFilter()"  [(ngModel)]="category"  id="support" value="C" style="margin-left: -57px;"> &nbsp; <label for="" class="color">Close</label>
+        </div>
+      </div><br>
+
+
+    <div *ngIf="this.userData?.msg.length">
+
+
+      <mat-form-field appearance="outline" class="float-end">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search restaurant" #input>
+      </mat-form-field>
+      
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+       
+
+        
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> # </th>
+          <td mat-cell *matCellDef="let element">{{element.id}} </td>
+        </ng-container>
+
+       
+        <ng-container matColumnDef="ticket">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="ticket">Ticket No. </th>
+          <td mat-cell matTooltip="{{element.ticket}}" *matCellDef="let element">
+            <p>{{element.tkt_no}}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="date"> Date</th>
+          <td mat-cell *matCellDef="let element">{{element.tkt_date | date:'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> Status</th>
+          <!-- <td mat-cell *matCellDef="let element">{{element.tkt_status}} </td> -->
+          <td mat-cell *matCellDef="let element">
+
+            <label class="status" *ngIf="element.tkt_status=='I'">In-Progress</label>
+            <label class="Pending" *ngIf="element.tkt_status=='P'">Pending</label>
+            <label class="Setup" *ngIf="element.tkt_status=='S'">Solved</label>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> View </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
+
+            <a class="editLink" id="setup{{element.id}}" (click)="go_to_add(element.id)">
+              <mat-icon matTooltip=" View / Edit" matTooltipPosition="above" color="primary">edit</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell class="text-center" *matHeaderCellDef> Action </th>
+          <td class="text-center" mat-cell *matCellDef="let element">
+            <button mat-button (click)="del_res(element.id)" [hidden] = "element.tkt_status != 'P'">
+            <mat-icon matTooltip="Delete" matTooltipPosition="above"
+               style="cursor:pointer; color:#540B0E">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+       
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100, this.userData?.msg.length]" showFirstLastButtons
+        aria-label="Select page of users"></mat-paginator>
+      <br><br>
+    </div>
+    <div style="text-align:center" *ngIf="!this.userData?.msg.length">
+      No Data!
+    </div>
+  </mat-card>

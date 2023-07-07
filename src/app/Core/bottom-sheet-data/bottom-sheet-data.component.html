@@ -1,0 +1,141 @@
+<div class="text-center" [hidden]="data.flag!='msg'">
+
+  <div class="row mt-3">
+    <!-- {{urlSet+data.content?.img_path}} -->
+    <div class="col-12 mt-5" [hidden]="isNotImg">
+      <img [src]="urlSet+data.content?.img_path" alt="Avatar" height="150"
+        style="margin-top:-5%;padding-bottom:2%; width:100%">
+
+      <!-- </div> -->
+    </div>
+
+
+    <div class="col-12 mt-5" [hidden]="!isNotImg">
+      <!-- <img [src]="urlSet+d?.img_path" alt="Avatar" height="150" style="margin-top:-5%;padding-bottom:2%; width:100%"> -->
+      <video controls style="margin-top:-5%;padding-bottom:2%; width:100%;height:150px" mute="false">
+        <source [src]="urlSet+data.content?.img_path" type="video/mp4" />
+        Browser not supported
+      </video>
+    </div>
+    <!-- <video controls style="margin-top:-5%;padding-bottom:2%; width:100%;height:150px" mute="false">
+        <source src="https://www.bigbuckbunny.org/" type="video/mp4" />
+        Browser not supported
+      </video> -->
+
+
+
+
+    <div class="row mt-3">
+      <div class="col-9">
+        <h4>
+          <b> {{data.content?.msg_title}} </b>
+        </h4>
+
+      </div>
+      <!-- <div class="col-3">
+
+    </div> -->
+      <div class="col-2"></div>
+      <div class="col-1 float-end">
+        <b>{{data.content?.send_time?.substr(0,5)}} </b>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-10" class="truncate">
+        <h6>
+          <!-- <h5> -->
+          {{data.content?.msg_subtitle}}
+        </h6>
+      </div>
+    </div>
+
+    <div class="container-text">
+      {{data.content?.msg_body}}
+
+    </div>
+  </div>
+</div>
+
+<div [hidden]="data.flag!='lost'">
+  <div class="row mt-3">
+    <div class="col-12 text-center">
+      <h2 style="background-color:#ff9800;color:white">{{data.content.item_name}}</h2>
+
+    </div>
+  </div>
+  <div class="p-2">
+
+
+    <div class="row mt-1">
+      <div class="col-12">
+        <b> Reported On: <i> {{data.content?.lf_date?.substr(0,10)}} </i> </b>
+      </div>
+    </div>
+    <hr>
+    <div class="row mt-2">
+      <div class="col-12 text-muted">
+        <i> {{data.content?.item_desc}} </i>
+      </div>
+    </div>
+    <hr>
+    <div class="row mt-2 text-muted">
+      <div class="col-12">
+        <i> {{data.content?.remarks}} </i>
+      </div>
+    </div>
+  </div>
+</div>
+<div [hidden]="data.flag!='timeSlotConfirm'">
+  <div class="row mt-3">
+    <div class="col-12 text-center">
+      <h3 style="color:#f54335"><span *ngIf="data.content[0].max_capacity-data.content[0].tot_pax >0">
+        {{data.content[0].max_capacity-data.content[0].tot_pax}} Total number of seats are available.
+      </span>
+      <span *ngIf="data.content[0].max_capacity-data.content[0].tot_pax == 0">{{data.content[0].max_capacity-data.content[0].tot_pax}} Total number of seats are available.</span>
+        </h3>
+      <h3 style="color:#f54335">Please confirm the time slot.</h3>
+
+    </div>
+  </div>
+  <div class="row mt-2 pb-3">
+    <div class="col-2"></div>
+    <div class="col-4">
+      <button class="btn btn-light cancelBtn" (click)="onClose(0)">Cancel</button>
+    </div>
+    <div class="col-6">
+      <button mat-raised-button color="warn" [disabled]="data.content[0].max_capacity-data.content[0].tot_pax == 0" (click)="onClose(1)">Confirm</button>
+    </div>
+  </div>
+
+</div>
+<div [hidden]="data.flag!='timeSlotSave'">
+  <div class="row mt-3">
+    <div class="col-12 text-center">
+      <h3 style="color:#f54335">Please select preferences and continue</h3>
+
+    </div>
+  </div>
+  <!-- <div class="row mt-2">
+    <div class="col-2"></div>
+    <div class="col-10">
+      <mat-slide-toggle color="warn">Email confirmation</mat-slide-toggle>
+    </div>
+  </div> -->
+  <!-- <div class="row mt-2">
+    <div class="col-2"></div>
+
+    <div class="col-10 ">
+      <mat-slide-toggle color="warn">Push Notification</mat-slide-toggle>
+    </div>
+  </div> -->
+  <div class="row mt-4 pb-3">
+    <div class="col-2"></div>
+    <div class="col-4">
+      <button class="btn btn-light cancelBtn" (click)="onClose(1)">Cancel</button>
+    </div>
+    <div class="col-6">
+      <button mat-raised-button color="warn" (click)="onClose(2)">Continue saving</button>
+    </div>
+  </div>
+
+</div>

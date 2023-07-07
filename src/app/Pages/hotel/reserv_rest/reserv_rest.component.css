@@ -1,0 +1,17 @@
+.content-div{
+    margin-left:250px;
+    margin-top:43px; 
+    padding-right: 2%; 
+    padding-bottom:5%;
+}
+
+mat-card{
+    background-color: rgb(236, 236, 236);
+    padding-right: 2%;
+    /* max-height: 550px; */
+    overflow: auto;
+}
+
+.tui-full-calendar-weekday-schedule-title{
+    display: block !important;
+}

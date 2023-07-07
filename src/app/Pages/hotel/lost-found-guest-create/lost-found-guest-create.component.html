@@ -1,0 +1,132 @@
+<div class="content-div">
+  <mat-card >
+   
+ <mat-card-title> 
+  <div class="row">
+
+<div class="col-10">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+      <li class="breadcrumb-item" aria-current="page">Platform Setup</li>
+      <li class="breadcrumb-item active" aria-current="page"><a style="cursor:pointer;color:#3F51B5" (click)="go_previous()">Lost & Found</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Register Item</li>
+    </ol>
+  </nav>
+</div>
+
+  <!-- <div class="row" *ngIf="this.getLostFoundData[0].approval_flag!='P'"> -->
+    <!-- <div class="col-10"></div> -->
+<div *ngIf="id!=0">
+    <div class="col-2 text-success mt-2" *ngIf="this.getLostFoundData[0]?.approval_flag=='Y' && id!=0">Approved</div> 
+    <div class="col-2 text-danger  mt-2" *ngIf="this.getLostFoundData[0]?.approval_flag=='N' && id!=0">Rejected</div>
+  <!-- </div> -->
+</div>
+ </div>
+ 
+
+  
+<!-- <strong> <mat-icon style="vertical-align:-6px">local_phone</mat-icon> Communications</strong> -->
+ </mat-card-title> <hr>
+ <div class="row">
+  <div class="col-2">
+    <input type="radio" name="lost_found" (change)="getFilter()" [(ngModel)]="category" id="lost_found" value="L"> &nbsp; <label for="">Lost</label> 
+  </div>
+  <div class="col-2">
+    <input type="radio" name="lost_found" (change)="getFilter()" [(ngModel)]="category" id="lost_found" value="F"> &nbsp; <label for="">Found</label>
+  </div>
+</div>
+<hr>
+<div id="formID">
+
+
+<div *ngIf="category=='L'">
+ <strong *ngIf="id==0">Register a new Lost Item</strong>
+ <form [formGroup]="lostForm">
+  <div class="row mt-3">
+    <div class="col-4">
+      <label for="">Date</label>
+      <input type="date" name="dateReported" id="dateReported" min="{{last}}" max="{{date}}" formControlName="dateReported" class="form-control">
+    </div>
+    <div class="col-8">
+      <label for="">Item</label>
+      <input type="name" name="item" id="item" formControlName="item" class="form-control">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label for="">Description ({{lostForm.controls.description.value.length}}/1000)</label>
+      <textarea name="description" id="description" maxlength="1000" class="form-control" formControlName="description" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label for="">Remarks ({{lostForm.controls.remarks.value.length}}/1000)</label>
+      <textarea name="remarks" id="remarks" maxlength="1000" class="form-control" formControlName="remarks" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+  <div *ngIf="id!=0">
+  <div  *ngIf="this.getLostFoundData[0]?.approval_flag=='P' && id!=0" class="row mt-2">
+    <div class="col-8"></div>
+    <div class="col-2 float-end">
+      <button class="btn btn-success" mat-raised-button (click)="lost_found_approve('Y')">Approve</button>
+    </div>
+    <div class="col-2 float-end">
+      <button class="btn btn-danger" mat-raised-button (click)="lost_found_approve('N')">Reject</button>
+    </div>
+  </div>
+</div>
+  <!-- <div class="row" *ngIf="this.getLostFoundData[0].approval_flag!='P'">
+    <div class="col-10"></div>
+    <div class="col-1 text-success" *ngIf="this.getLostFoundData[0].approval_flag=='Y'">Approved</div>
+    <div class="col-1 text-danger" *ngIf="this.getLostFoundData[0].approval_flag=='N'">Rejected</div>
+  </div> -->
+ </form>
+</div>
+<div *ngIf="category=='F'">
+  <strong *ngIf="id==0">Register a new Found Item</strong>
+  <form [formGroup]="foundForm">
+    <div class="row mt-3">
+      <div class="col-4">
+        <label for="">Date</label>
+        <input type="date" name="dateReported" min="{{last}}" max="{{date}}" id="dateReported" formControlName="dateReported" class="form-control">
+      </div>
+      <div class="col-8">
+        <label for="">Item</label>
+        <input type="name" name="item" id="item" formControlName="item" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label for="">Description ({{foundForm.controls.description.value.length}}/1000)</label>
+        <textarea name="description" id="description" maxlength="1000" class="form-control" formControlName="description" cols="30" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label for="">Remarks ({{foundForm.controls.remarks.value.length}}/1000)</label>
+        <textarea name="remarks" maxlength="1000" id="remarks" class="form-control" formControlName="remarks" cols="30" rows="5"></textarea>
+      </div>
+    </div>
+    <div *ngIf="id!=0">
+    <div *ngIf="this.getLostFoundData[0].approval_flag=='P'" class="row mt-2"></div>
+      <div class="col-8"></div>
+      <div class="col-2 float-end">
+        <button class="btn btn-success" mat-raised-button (click)="lost_found_approve('Y')">Approve</button>
+      </div>
+      <div class="col-2 float-end">
+        <button class="btn btn-danger" mat-raised-button (click)="lost_found_approve('N')">Reject</button>
+      </div>
+    </div>
+  
+   </form>
+</div>
+</div>
+
+ </mat-card>
+ </div>
+
+ <div >
+  <button class="fab-main" matTooltip="Back" mat-mini-fab (click)="go_previous()"> <mat-icon>arrow_back</mat-icon> </button>
+
+    </div>

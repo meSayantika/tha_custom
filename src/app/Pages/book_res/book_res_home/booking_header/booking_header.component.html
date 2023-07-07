@@ -1,0 +1,29 @@
+<p>
+  <mat-toolbar color="warn">
+    <button (click)="sidebarShow = !sidebarShow"  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>THA Booking and Reservation</span>
+    <span class="example-spacer"></span>
+   
+  </mat-toolbar>
+</p>
+<div class="sidebar-slider" [class.sidebar-slide-in]="sidebarShow">
+  <div
+      class="sidebar-close"
+      (click)="sidebarShow = !sidebarShow" 
+  >
+      <mat-icon>close</mat-icon>
+  </div>
+  <div class="sidebar-content">
+      
+      <div>Home</div>
+      <div>Directory</div>
+      <div>FAQ</div>
+      <div>About Us</div>
+      <div>Privacy Policy</div>
+      <div>Terms & Conditions</div>
+     
+      <div>Contact Us</div>
+  </div>
+</div>

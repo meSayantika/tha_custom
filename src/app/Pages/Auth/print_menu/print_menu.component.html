@@ -1,0 +1,80 @@
+
+
+
+<!-- <div id="printSection_d">
+  dsfs fsdf sddgdftyrtyrtyutyu
+</div>
+<button (click)="printBtn('printSection_d')">Print Main Content</button> -->
+
+
+<div *ngIf="inProgress" style="text-align:center; margin-top:20px;">
+  <div class="spinner-border"></div>
+</div>
+
+
+<div *ngIf="!inProgress" class="menuListMain">
+<div class="tab-container">
+  <!-- <ul class="nav nav-tabs">
+    <li class="nav-item" *ngFor="let key of getKeys(masterData.msg)">
+      <a (click)="fillContent(key)" class="nav-link {{activeTab===key ? 'active' : ''}}">{{menuNames[key]}}</a>
+    </li>       
+  </ul> -->
+    <div class="tab-container">
+    <ng-container *ngFor="let meal of getKeys(masterData.msg); let i=index">
+      <div id="printSection_{{i}}">
+    <div class="mainTopImg">
+    <h2>{{menuNames[meal]}}</h2>
+    <img src="https://customapi.shoplocal-lagunabeach.com/1_1_B_sectionHouse_Specialities_breakfast_2.jpg" class="coverMain_Img" alt="">
+    </div>
+    <div>
+    <div class="menuListCat" *ngFor="let foodPattern of getKeys(masterData.msg[meal])">
+
+    <div class="img_container">
+    <!-- <img [src]="url+masterData.msg[meal][foodPattern].cover_img"/> -->
+    <img [src]="url+masterData.msg[meal][foodPattern].sec_img"/>
+    <!-- <img [src]="url+masterData.msg[meal][foodPattern].top_img"/> -->
+    </div>
+    <h3>{{foodPattern}}</h3>
+
+
+    <div class="table_content">
+    <!-- <table class="table">
+    <thead>
+    <tr>
+    <th class="td_1st">Hotel</th>
+    <th class="td_2nd">Item</th>
+    <th class="td_3rd">Item Desc</th>
+    <th class="td_4th">Price</th>
+    <th class="td_5th">Note</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tData of masterData.msg[meal][foodPattern].res">
+    <td>{{tData.hotel_id}}</td>
+    <td>{{tData.item_name}}</td>
+    <td>{{tData.item_desc}}</td>
+    <td>{{tData.item_price}}</td>
+    <td>{{tData.item_note}}</td>
+    </tr>
+    </tbody>
+    </table> -->
+    <ng-container *ngFor="let tData of masterData.msg[meal][foodPattern].res">
+    <h4>{{tData.item_name}}</h4>
+    <p>{{tData.item_desc}}</p>
+    <p class="price"><strong>${{tData.item_price}}</strong></p>
+  </ng-container>
+    </div>
+    
+    </div>
+    </div>
+  </div>
+    <!-- <a href="javascript:void(0);" onclick="printPageArea('wrapper')">Print Full Content</a> -->
+				<!-- <button (click)="printPageArea('printSection_{{i}}')">Print Main Content</button> -->
+        <button (click)="printPageArea('printSection_'+i)" class="printBtn">Print Menu</button>
+    </ng-container>
+    </div>
+</div>
+</div>  
+
+
+

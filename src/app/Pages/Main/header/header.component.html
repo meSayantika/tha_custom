@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+  <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+ </button> -->
+ <!-- <span>My App</span> -->
+ <img src="assets/images/thalogo.png" height="30" width="30" style="background-color:white;border-radius: 8px;">&nbsp;&nbsp;
+ <span class="example-spacer">The Hotel Assistant Concierge</span>
+ 
+
+ <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+</button> -->
+<small class="float-end" style="margin-left:72%">
+  <button mat-icon-button [matMenuTriggerFor]="notify">
+  <mat-icon matBadge="15" matBadgeColor="warn">notifications_active</mat-icon></button>
+  <!-- <h6>Notification</h6> -->
+  <mat-menu #notify="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+    <!-- Include text description of the icon's meaning for screen-readers -->
+    <!-- <span class="cdk-visually-hidden">
+      Example with a home icon with overlaid badge showing the number 15
+    </span> -->
+ </small>
+</mat-toolbar>
+<mat-progress-bar *ngIf="loading"  mode="indeterminate" color="accent"></mat-progress-bar>
+
+
+<div id="mySidenav" class="sidenav">
+  <button mat-icon-button class="closebtn" (click)="closeNav()">
+  <mat-icon> close </mat-icon>  
+  </button>
+  <a>{{this.heading}}</a> <br>
+<div class="px-5">
+  <span [innerHTML]="info" class="show"></span> 
+
+</div>
+</div>

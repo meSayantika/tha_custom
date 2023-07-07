@@ -1,0 +1,187 @@
+
+<app-msg-template *ngIf="con_faq=='Y' || hot_faq=='Y' || saf_faq=='Y'"></app-msg-template>
+<div class="content-div"  *ngIf="con_faq=='N' && hot_faq=='N' && saf_faq=='N'">
+  <mat-card >
+   
+ <mat-card-title> 
+  <div class="row">
+    <div class="col-11">
+      <nav aria-label="breadcrumb">
+        <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="go_home()">
+          <mat-icon>keyboard_backspace</mat-icon>
+        </button>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page">Platform Setup</li>
+          <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+          
+        </ol>
+    
+      </nav>
+    </div>
+    <div class="col-1 mt-3">
+      <mat-icon style="cursor:pointer;color:gray" (click)="viewInfo()"  matTooltip="Info.">info</mat-icon>
+
+    </div>
+  </div>
+  
+
+<!-- <strong> <mat-icon style="vertical-align:-6px">local_phone</mat-icon> Communications</strong> -->
+ </mat-card-title> <hr>
+ <div class="row mt-3 p-3">
+  <label for="">Select Type</label>
+  <select name="faqType" [(ngModel)]="faqType" (change)="get_qsn()" class="form-control">
+    <option value="">Select one</option>
+    <option value="C">Concierge FAQ & Tips</option>
+    <option value="H">Hotel FAQ</option>
+    <option value="S">Safety FAQ</option>
+  </select>
+ </div>
+ <div class="row" *ngIf="faqType=='C'">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="FAQ">
+     
+<ng-container [ngTemplateOutlet]="myTemplate"></ng-container>
+
+    </mat-tab>
+    <mat-tab label="Tips"> 
+      <ng-template mat-tab-label>
+        <div class="row">
+          <div class="col-8">
+            Tips
+          </div>
+          <div class="col-2">
+
+
+          </div>
+        </div>
+        
+
+      </ng-template>
+      <div class="row">
+        <div class="col-11">
+
+        </div>
+        <div class="col-1">
+          <mat-icon style="cursor:pointer;color:gray" (click)="viewInfo()"  matTooltip="Info.">info</mat-icon>
+  
+        </div>
+      </div>
+    
+
+      <form [formGroup]="tipForm">
+        <div formArrayName="tipStruct">
+          <div *ngFor="let v of tipget?.controls; let i=index">
+     <div formGroupName="{{i}}">
+      <div class="row mt-3">
+          
+        <div [ngClass]="faqget.length>1?'col-9':'col-10'"></div>
+        <div [ngClass]="faqget.length>1?'col-3':'col-2'">
+          <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"
+            (click)="addTip(0)">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+          <button *ngIf="faqget.length>1" mat-icon-button color="accent" aria-label="Example icon button with a menu icon"
+            (click)="removeTip(i)">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+     <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12">
+            <label for="">Title</label>
+            <input type="text" class="form-control" formControlName="tip_title">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label for="">Description</label>
+            
+            <textarea name="ans" formControlName="tip_desc" id="" cols="30" rows="10" class="form-control"></textarea>
+          </div>
+        </div>
+       
+      </div>
+      <!-- <div class="col-6">
+        To update your Safety FAQ's follow these instructione 1. Select the FAQ you want to EDIT from the drop down list 2. Both the Question and Answer will appear in the boxes below 3. Click on EDIT to make the changes
+    
+        4. Type your amendments 5. To add a NEW FAQ use "Create a NEW Question" 6. Enter both the Question and the Answer into the respective box 7. Use the CLEAR button to delete anything you've written B. When you're happy with what you've entered click ADD 9. Once you've reviewed all your changes click on SAVE 10 Finally check on the live page to make sure the changes have taken place Always delete your cache memory before reviewing any changes.
+      </div> -->
+     </div>  
+     </div>
+     </div>
+    </div>
+    </form>
+    <div class="row mt-3">
+      <div class="col-2 float-end">
+        <button mat-raised-button class="btn btn-success" (click)="submitTip()">Save</button>
+       </div>
+    </div>  
+    
+    </mat-tab>
+  </mat-tab-group>
+</div>
+  <div class="row" *ngIf="faqType=='H' || faqType=='S'">
+    <div class="col-12">
+      <ng-container [ngTemplateOutlet]="myTemplate"></ng-container>
+
+    </div>
+</div>
+ </mat-card>
+
+ 
+ <ng-template #myTemplate> 
+ 
+  <form [formGroup]="faqForm">
+    <div formArrayName="faqStruct">
+      <div *ngFor="let v of faqget?.controls; let i=index">
+ <div formGroupName="{{i}}">
+  <div class="row mt-3">
+      
+    <div [ngClass]="faqget.length>1?'col-9':'col-10'"></div>
+    <div [ngClass]="faqget.length>1?'col-3':'col-2'">
+      <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon"
+        (click)="addFaq(0, '', '')">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+      <button *ngIf="faqget.length>1" mat-icon-button color="accent" aria-label="Example icon button with a menu icon"
+        (click)="removeFaq(i)">
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+ <div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <label for="">Question ({{question?.length ? question.length :0}}/1000)</label>
+        <input type="text" class="form-control" formControlName="qsn" [(ngModel)]="question" maxlength="1000">
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col-12">
+        <label for="">Answer ({{answer?.length ? answer.length :0}}/1000)</label>
+         <textarea name="ans" formControlName="ans" [(ngModel)]="answer" id=""  maxlength="1000" cols="5" rows="3" class="form-control"></textarea>
+      </div>
+    </div>
+   
+  </div>
+  <!-- <div class="col-6">
+    To update your Safety FAQ's follow these instructione 1. Select the FAQ you want to EDIT from the drop down list 2. Both the Question and Answer will appear in the boxes below 3. Click on EDIT to make the changes
+
+    4. Type your amendments 5. To add a NEW FAQ use "Create a NEW Question" 6. Enter both the Question and the Answer into the respective box 7. Use the CLEAR button to delete anything you've written B. When you're happy with what you've entered click ADD 9. Once you've reviewed all your changes click on SAVE 10 Finally check on the live page to make sure the changes have taken place Always delete your cache memory before reviewing any changes.
+  </div> -->
+ </div>  
+ </div>
+ </div>
+</div>
+</form>
+<div class="row mt-3">
+  <div class="col-2 float-end">
+    <button mat-raised-button class="btn btn-success" (click)="submitFaq()">Save</button>
+   </div>
+</div>
+</ng-template>
+ </div>

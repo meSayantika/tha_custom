@@ -1,0 +1,286 @@
+<div class="content-div">
+  
+  <mat-card>
+    
+    
+   <mat-card-title >
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a style="cursor:pointer;color:#3F51B5" (click)="go_home()">Fun Directory</a></li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Create Events</li>
+      </ol>
+    </nav>
+     <!-- <strong>   <mat-icon>receipt</mat-icon>  Create Messages </strong> -->
+ </mat-card-title>
+ <hr> <br>
+ <mat-card-content> 
+   
+   <form [formGroup]="msgForm">
+   <!--  <div class="row">
+      <div class="col-4">
+        <select name="" formControlName="type" id="" [(ngModel)]="category" (change)="getCat()" class="form-control">
+          <option value="">Select category</option>
+          <option value="R">Restaurant</option>
+          <option value="S">Service</option>
+        </select>
+      </div>
+      <div class="col-8">
+        
+          <select name="" formControlName="rest_serve" id=""  [(ngModel)]="rest_serve" class="form-control">
+            <option value="">Select category</option>
+            <option *ngFor="let g of getVenues" value="{{g.id}}">{{g.name}}</option>
+          </select>
+        
+      </div> 
+    </div>
+     <br >
+     <hr >-->
+     <div class="row mt-4">
+       <div class="col-12">
+        <label for="">Event title</label>
+        <input type="text" formControlName="event_title" class="form-control">
+       </div>
+      <!-- {{selectedVIPs}} -->
+     </div>
+     <div class="row mt-4">
+      <div class="col-8">
+        <label for="">Upload Image</label>
+        <input type="file" (change)="event_image_change($event)" class="form-control" name="msg_img" id="" formControlName="msg_img">
+        <button hidden  id="logo_crop" (click)="open_crop_modal()" ></button>
+
+      </div>
+      <div class="col-3 mt-4">
+        <button mat-raised-button class="btn btn-danger col-12" (click)="openstockmodal()">Select from gallery</button>
+      </div>
+      <div class="col-1 mt-4">
+        <button mat-mini-fab color="accent" matTooltip="Preview image" *ngIf="spstockImg" (click)="openDialog('imgPrev',spstockImg)" aria-label="Example icon button with a menu icon">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+      </div>
+    </div>
+     <div class="row mt-4">
+       <div class="col-12">
+        <label for="">Genre</label>
+        <input type="text" formControlName="genre" class="form-control">
+       </div>
+     </div>
+     <div class="row mt-4">
+       <div class="col-4">
+        <label for="">Website URL</label>
+        <input type="text" formControlName="website" class="form-control">
+       </div>
+       <div class="col-4">
+        <label for="">Video URL</label>
+        <input type="text" formControlName="video" class="form-control">
+       </div>
+       <div class="col-4">
+        <label for="">Ticket URL</label>
+        <input type="text" formControlName="ticket" class="form-control">
+       </div>
+     </div>
+     <div class="row mt-4">
+      <div class="col-12">
+        <label for="">
+          Description
+        </label>
+        <textarea name="" formControlName="about" class="form-control" id="" cols="30" rows="10"></textarea>
+      </div>
+     </div>
+  
+     <div >
+    <div class="row mt-4">
+      <div class="col-6">
+   <input type="radio" [(ngModel)]="interval" formControlName="rept" name="rept" id="" value="onc">     <label >Add Once</label>
+      </div>
+      <div class="col-6">
+        <input type="radio" [(ngModel)]="interval" formControlName="rept" name="rept" id=""  value="rpt">     <label >Add Repetitively</label>
+
+      </div>
+    </div>
+   
+     <div class="row mt-4" *ngIf="interval=='rpt'">
+       <div class="col-12">
+         <label for="">Schedule Message</label>
+         <select name="fire_msg" [(ngModel)]="msg_time" class="form-control" formControlName="fire_msg" id="">
+           <option value="">Choose Category</option>
+           <option value="D">Daily</option>
+           <option value="W">Weekly</option>
+           <!-- <option value="M">Monthly</option> -->
+         
+         </select>
+ 
+       </div>
+       
+     </div>
+     <div class="row mt-4" *ngIf="interval=='onc'">
+       
+         <div class="col-12">
+           <label for="">Date</label>
+           <input type="datetime-local" name="once_dt" formControlName="once_dt" class="form-control" id="">
+         </div>
+      
+       
+     </div>
+     <div class="row mt-4" *ngIf="msg_time=='D' && interval!='onc'">
+       <div class="col-12">
+         <label for="">Time</label>
+         <input type="time" name="daily_time" formControlName="daily_time" class="form-control" id="">
+       </div>
+     </div>
+       <div class="row mt-4" *ngIf="msg_time=='W'  && interval!='onc' ">
+         <div class="col-6">
+           <label for="">Select Day</label>
+           <select name="weekly_day" class="form-control" formControlName="weekly_day" id="">
+             <option value="1">Monday</option>
+             <option value="2">Tuesday</option>
+             <option value="3">Wednesday</option>
+             <option value="4">Thursday</option>
+             <option value="5">Friday</option>
+             <option value="6">Saturday</option>
+             <option value="7">Sunday</option>
+           </select>
+         </div>
+         <div class="col-6">
+           <label for="">Time</label>
+           <input type="time" name="weekly_time" formControlName="weekly_time" class="form-control" id="">
+        
+         </div>
+       </div>
+       <div class="row mt-4" *ngIf="interval=='rpt' ">
+         <div class="col-6">
+           <label for="">Start</label>
+          <input type="date" name="start_date" formControlName="start_date" class="form-control" id="">
+         </div>
+         <div class="col-6">
+           <label for="">End</label>
+           <input type="date" name="end_date" formControlName="end_date" class="form-control" id="">
+        
+         </div>
+       </div>
+      
+      </div>
+   <div class="row mt-4">
+    <div class="col-6">
+      <label for="">Background Color</label>
+      <input type="color" class="form-control" name="bgCol" formControlName="bgCol" id="">
+    </div>
+    <div class="col-6">
+      <label for="">Text Color</label>
+      <input type="color" class="form-control" name="txtCol" formControlName="txtCol" id="">
+    </div>
+   </div>
+ </form> 
+ <!-- <div class="specialMenuImg">
+                              
+   <div class="imgSectionSpecial"><a style="cursor: pointer;" (click)="openDialog('imgPrev',spstockImg)"><img  src="{{spstockImg}}"/></a></div>
+   
+ </div> -->
+ <div class="row mt-5 mt-3 pt-5">
+   <div class="col-4"></div>
+   <div class="col-6"></div>
+ 
+   <div class="col-1 ml-5" style="margin-left:7%">
+     <button mat-raised-button class=" btn btn-success" (click)="sendMessage()">Submit</button>
+   </div>
+ </div>
+ </mat-card-content>
+  </mat-card>
+ </div>
+ <div class="modal cropModulContent" id="id02" style="margin-left:25%;">
+         
+   <div class="modal-dialog">
+ 
+     <div class="modal-content modal_contentCustom">
+ 
+         <!-- Modal body -->
+ <div class="modal-body">
+ <div class="main_Brouse mainImgBrowse">
+   <div class="titleImgBrowse">
+     <h2>Choose Image</h2>
+     <div id="myBtnContainer" class="dropDownImg">
+     <select #cats (change)="getStockimageonselectcategory(cats.value)">
+       <option value="">Show all</option>
+       <option *ngFor="let cat of category_name" value="{{cat.id}}">{{cat.name}}</option>
+     <!-- <option onclick="filterSelection('all')"> Show all</option>
+     <option onclick="filterSelection('nature')"> Nature</option>
+     <option onclick="filterSelection('cars')"> Cars</option>
+     <option onclick="filterSelection('people')"> People</option> -->
+     </select>
+  
+   </div>
+     </div>
+ 
+ 
+ 
+ 
+   <!-- Portfolio Gallery Grid -->
+   <div class="row_Brouse">
+     <!-- class="column_Brouse nature" -->
+     <div  class="column_Brouse nature"   *ngFor="let stock of st_img;let i=index">
+       <div class="content_Brouse" >
+     
+         <!-- <img src="/assets/images/mountains.jpg" alt="Mountains" style="width:100%"> -->
+        <!-- {{apiurlset +'stock/' + stock.img_path}} -->
+         <img [src]="apiurlset+'stock/' + stock.img_path"   alt="" (click)="selectedimage(i,stock.img_path,stock.img_catg,st_img.length)" id="image_{{i}}">
+       </div>
+     </div>
+ 
+   </div>
+ 
+   <!-- END MAIN -->
+   </div>
+ </div>
+ <div class="modal-footer">
+ <button type="button" mat-raised-button class="btn btn-success"  (click)="save_it('close')">Close</button> &nbsp;
+ <button type="button" mat-raised-button class="btn btn-danger"  (click)="save_it('save')">Save Changes</button>
+ 
+ </div>
+ 
+ 
+   </div>
+ 
+ </div>
+ 
+ </div>
+ 
+ <div class="modal cropModulContent" id="id01" tabindex="-1" role="dialog" style="margin-left:25%">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content modal_contentCustom">
+     
+       <div class="modal-body">
+         <ul class="cropBtnTop">
+           <li><i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i></li>
+ <li>                <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i></li>
+       <!-- <li>                <button class="cropCloseBtn" (click)="close_modal_on_crop()">&times;</button></li> -->
+       
+ </ul>
+ 
+          
+           <image-cropper [hidden]="hide" [imageChangedEvent]="img_cover"
+           [maintainAspectRatio]="true" 
+         
+           [onlyScaleDown]="false" 
+          
+           [cropperMaxWidth]="crop_width"
+           [cropperMaxHeight]="crop_height"
+           
+           
+           (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+           (cropperReady)="cropperReady($event)"
+           (loadImageFailed)="loadImageFailed()"
+           [style.display]="showCropper ? null: 'none'" [transform]="transform">
+         </image-cropper>
+       </div>
+       <div class="modal-footer cropFooter">
+         <button class="btn btn-danger"   
+           (click)="click_it()">Save</button>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+ <div class="fab-main">
+   <button matTooltip="Back" mat-mini-fab (click)="go_prev_page()"> <mat-icon>arrow_back</mat-icon> </button>
+ 
+     </div>

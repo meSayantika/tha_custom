@@ -1,0 +1,56 @@
+<mat-toolbar color="primary">
+ 
+ <!-- <span>My App</span> -->
+ <span class="example-spacer"></span>
+
+ <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+</button> -->
+    <small > The Hotel Assistant Concierge</small> &nbsp; 
+    <!-- <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span> -->
+<div class="float-end" style="margin-left:75%" *ngIf="quant!=0">
+    <circle-progress
+    [percent]="quant"
+    [radius]="18"
+    [outerStrokeWidth]="4"
+    [innerStrokeWidth]="2"
+    [outerStrokeColor]="'#FFFFFF'"
+    [innerStrokeColor]="'#FFFFFF'"
+    [animation]="true"
+    [animationDuration]="300"
+    titleFontSize="16"
+    [titleColor]="'#FFFFFF'"
+unitsFontSize="0"
+
+subtitleFontSize="8"
+[backgroundColor]="quant>25?(quant>50?(quant>75?'#78C000':'#0bdce0'):'#FDB900'):'#FF6347'"
+style="cursor:pointer;"
+    (click)="viewProg()"
+    matTooltip="{{quant | number: '1.0-0'}}% complete. Click to check progress details..."
+  ></circle-progress>
+  </div>
+</mat-toolbar>
+<mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
+
+<!-- <button data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." > get</button> -->
+
+<ng-template #popContent >
+    <ng-container *ngFor="let item of progressList">
+       
+        {{item.title}} <mat-icon *ngIf="item.count_dt==0" style="color:rgb(179, 141, 3);vertical-align:-6px; font-size:20px">error</mat-icon> <mat-icon  *ngIf="item.count_dt>0" style="color:green;vertical-align:-6px; font-size:20px">check_circle</mat-icon> 
+   
+    </ng-container>
+  
+</ng-template>
+    <ng-template #popTitle> <b>  Progress: </b></ng-template>
+
+
+    <div id="mySidenav" class="sidenav">
+      <button mat-icon-button class="closebtn" (click)="closeNav()">
+      <mat-icon> close </mat-icon>  
+      </button>
+      <a>{{this.heading}}</a> <br>
+    <div class="px-5">
+      <span [innerHTML]="info" class="show"></span> 
+
+    </div>
+    </div>

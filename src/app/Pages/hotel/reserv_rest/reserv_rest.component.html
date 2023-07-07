@@ -1,0 +1,56 @@
+<div class="content-div">
+  <mat-card>
+    <div class="row">
+      <div class="col-6">
+        <h2><strong><mat-icon>calendar_today</mat-icon>&nbsp;&nbsp;Calender</strong></h2>
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label class="titleCustom">Select Restaurant / Service </label>
+        <select #select_venue (change)="getCalData(select_venue.value)" class="form-select" >
+            <option value="">Select one</option>
+            <option *ngFor="let x of getVenues let i=index;" value="{{x.id}}" >{{x.name}}</option>
+       
+          </select>
+      </div>
+    </div>
+
+    <div class="___btnControls">
+      <div class="today_btn">
+        <button mat-stroked-button (click)="this.cal.today()">Today</button>
+      </div>
+      <div class="prev_next">
+        <button mat-icon-button (click)="moveNext('P')">
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <button mat-icon-button (click)="moveNext('N')">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+
+      </div>
+      <div class="date__name">
+        <!-- <small>{{getDate | date:'MMMM'}}, {{getDate | date:'YYYY'}}</small> -->
+        <small>{{getDate | date:'MMMM'}}, {{getDate | date:'YYYY'}}</small>
+      </div>
+      <!-- <div class="displayMode">
+        <button mat-stroked-button [matMenuTriggerFor]="menu">
+        <small> {{btnName.name}} </small> 
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let mode of displaymode" (click)="btnName = mode">
+            <span>{{mode.name}}</span>
+            <mat-icon class="menuIcon text-success" *ngIf="btnName.id == mode.id">done</mat-icon>
+          </button>
+        </mat-menu>
+      </div> -->
+
+    </div>
+    <div class="calendar__container">
+      <div #calendar></div>
+    </div>
+
+  </mat-card>

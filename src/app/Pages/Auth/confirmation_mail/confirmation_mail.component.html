@@ -1,0 +1,91 @@
+<div class="mainContainer">
+  <div class="content-div">
+    <mat-card>
+      <mat-card-title style="padding-top:22px">
+        <h5><b><i class="fa fa-wpforms"></i> Restaurant - Menu Approval</b></h5>
+      </mat-card-title>
+      <mat-card-content>
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <p>
+                <br>You have viewed your Digital Menu by scanning the QR Code contained in our confirmation email!<br>
+                <br>If all of the menu content is correct and meets with your overall approval, then please signify this
+                by completing the Approval Form.<br>
+                <br>However if there are any errors or omissions then please identify those issues in the form and they
+                will be corrected immediately by our technical support team.<br>
+                <br>When those issues have been completed you'll receive the confirmation email again.<br>
+                <br><strong>Once you've provided us with your final approval, your Menu will go LIVE.</strong><br>
+              </p>
+              <ng-container *ngIf="img_url.length > 0">
+                <div class="row mt-2" *ngFor="let img of img_url">
+                  <label for=""><b><u>{{img.res_srv_name}}:</u></b></label><br>
+                  <div class="col-6">
+                    <label for="">Dynamic Menu</label><br>
+                    <img src="{{img_path+'/'+img.dynamic_img}}" height="100" width="100" class="qr_img">
+                    </div>
+                    <div class="col-6">
+                      <label for="">V Card Menu</label><br>
+                    <img src="{{img_path+'/'+img.v_card_img}}" height="100" width="100" class="qr_img">
+                  </div>
+                </div>
+              </ng-container>
+
+            </div>
+            <div class="col-6">
+              <h3>Digitial Restaurant Menu </h3>
+              <div class="row">
+                <div class="col-6 form-group">
+                  <label>Restaurant Name:</label>
+                  <input type="text" id="rest" name="rest" class="form-control" readonly value={{restaurant_name}}>
+                </div>
+
+                <div class="col-6 form-group">
+                  <label>Name of person:</label>
+                  <input type="text" id="contact" name="contact" class="form-control" readonly value="{{name}}">
+
+                </div>
+              </div>
+              <br>Please signify your approval or request an update of the Menu:<br>
+              <form>
+                <input type="radio" id="html" name="fav_language" value="0" (change)="changestatus(0)">
+                <label for="html">I have reviewed my MENU platform, and I APPROVE</label><br><br>
+                <input type="radio" id="css" name="fav_language" value="1" (change)="changestatus(1)">
+                <label for="javascript">I have checked my MENU Platform, and would like to request an
+                  update:</label><br><br>
+
+              </form>
+              Which Menu/s require an update?<br>
+              <form class="form-inline">
+                <div *ngFor="let mnc of menuchoiceData">
+                  <label class="container">{{mnc.menu_name}}
+                    <input type="checkbox" name="menu_chk_dt[]" id="{{mnc.menu_name}}" value="{{mnc.menu_id}}" #check1
+                      [disabled]='enable1'>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+
+              </form><br>
+
+
+              <div class="rowCustomFour">
+                <div class="fieldSecFull">
+                  <label for="vehicle2"> Please describe what requires updating for each Menu.</label>
+                  <textarea rows="6" cols="60" [disabled]="enable1" id="text" maxlength="50" class="formCssTextArea"
+                    (input)="prevent_null($event)" (keypress)="prevent_null($event)" (change)="prevent_null($event)"
+                    required [(ngModel)]="textarea"></textarea>
+
+                </div>
+              </div>
+              <!-- {{this.bind}} -->
+              <button mat-raised-button class="btn-btn-success" type="submit" [disabled]="bind"
+                (click)="getvalue()">Submit </button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div id="snackbar1"></div>

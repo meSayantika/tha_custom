@@ -1,0 +1,66 @@
+<div class="content-div">
+  <mat-card>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb ">
+        <li class="breadcrumb-item"><a style="cursor:pointer" (click)="go_home()">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Platform Setup</li>
+        <li class="breadcrumb-item"><a style="cursor:pointer" (click)="go_prev_page()">Report Emergency</a></li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Create Messages</li>
+      </ol>
+    </nav>
+   <!-- <mat-card-title >
+      <strong>   <mat-icon style="vertical-align:-7px">offline_bolt</mat-icon>  Create Emergency Report </strong> 
+ </mat-card-title> -->
+ <hr> <br>
+ <mat-card-content> 
+  <form [formGroup]="emForm">
+    <div class="row">
+      <div class="col-4">
+        <label for="">Record Date</label>
+         <input type="date" class="form-control" readonly formControlName="record_date"  name="record_date" [max]="date">
+      </div>
+      <div class="col-8">
+        <label for="">Guest </label>
+        <!-- <select name="guest_group_id" formControlName="guest_group_id" id="" class="form-control">
+          <option value="">Select Group</option>
+          <option value="1">Group</option>
+        </select> -->
+        <select name="" id="" formControlName="guest_group_id"  class="form-control">
+          <option value="">Select Guest</option>
+          <option *ngFor="let guest_group_id of getUserData" value="{{guest_group_id.id}}">{{guest_group_id.user_name}} (Room:{{guest_group_id.room_no}}) ({{guest_group_id.user_type=='G' ? 'Group' : guest_group_id.user_type=='V' ? 'VIP' : guest_group_id.user_type=='E' ? 'Employee' : 'Normal'}}) ({{guest_group_id.check_in | date: 'dd/MM/yyyy'}}-{{guest_group_id.check_out | date: 'dd/MM/yyyy'}})</option>
+        </select>
+      </div><br>
+      <div class="col-12 mt-2">
+        <label for="">Status</label>
+        <select name="repo_status" formControlName="repo_status" id="" class="form-control">
+          <option value="">Select Status</option>
+          <option value="P">Pending</option>
+          <option value="S">Solved</option>
+          <option value="F">Forwared</option>
+        </select>
+      </div>
+    </div> <br>
+    <div class="row mt-4">
+      <div class="col-12">
+        <label for="">Message Body ({{msg_body.length}}/1000)</label>
+        <textarea name="message_body" formControlName="message_body" readonly [(ngModel)]="msg_body" id="" maxlength="1000" cols="30" rows="8" class="form-control"></textarea>
+      </div>
+    </div> <br>
+    <div class="row mt-4">
+      <div class="col-12">
+        <label for="">Action Taken ({{msg_action.length}}/1000)</label>
+        <textarea name="action_taken" formControlName="action_taken"  [(ngModel)]="msg_action" id="" maxlength="1000" cols="30" rows="8" class="form-control"></textarea>
+      </div>
+    </div> <br>
+  </form>
+  <div class="text-center">
+    <button mat-raised-button class="btn btn-success" (click)="submit_emergency()">Submit</button>
+  </div>
+  </mat-card-content>
+  </mat-card>
+
+  <div class="fab-main">
+    <button matTooltip="Back" mat-mini-fab (click)="go_prev_page()"> <mat-icon>arrow_back</mat-icon> </button>
+  
+      </div>
